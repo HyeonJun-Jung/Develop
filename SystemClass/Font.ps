@@ -1,0 +1,52 @@
+////////////////////////////////////////////////////////////////////////////////
+// Filename: font.ps
+////////////////////////////////////////////////////////////////////////////////
+
+
+/////////////
+// GLOBALS //
+/////////////
+Texture2D shaderTexture;
+SamplerState SampleType;
+
+cbuffer PixelBuffer
+{
+    float4 pixelColor;
+};
+
+
+//////////////
+// TYPEDEFS //
+//////////////
+struct PixelInputType
+{
+    float4 position : SV_POSITION;
+    float2 tex : TEXCOORD0;
+};
+
+////////////////////////////////////////////////////////////////////////////////
+// Pixel Shader
+////////////////////////////////////////////////////////////////////////////////
+float4 FontPixelShader(PixelInputType input) : SV_TARGET
+{
+    float4 color;
+	
+	
+    // 이 위치에서 텍스처 픽셀을 샘플링합니다.
+    color = shaderTexture.Sample(SampleType, input.tex);
+	
+    // 텍스처 픽셀의 컬러가 검은색이라면 픽셀을 투명하게 처리합니다.
+    if(color.r == 0.0f)
+    {
+        color.a = 0.0f;
+    }
+	
+    else
+    // 컬러가 검은색이 아니라면 글꼴의 픽셀이므로 픽셀 색상을 이용하여 그립니다.
+    {
+        color.a = 1.0f;
+        color = color * pixelColor;
+    }
+
+    return color;
+}

@@ -1,0 +1,46 @@
+
+/////////////
+// GLOBALS //
+/////////////
+Texture2D shaderTexture;
+SamplerState SampleType;
+Texture2D reflectionTexture;
+
+//////////////
+// TYPEDEFS //
+//////////////
+
+struct PixelInputType
+{
+    float4 position : SV_POSITION;
+    float2 tex : TEXCOORD0;
+    float3 normal : NORMAL;
+    float4 reflectionPosition : TEXCOORD1;
+};
+
+////////////////////////////////////////////////////////////////////////////////
+// Pixel Shader
+////////////////////////////////////////////////////////////////////////////////
+float4 ReflectionPixelShader(PixelInputType input) : SV_TARGET
+{
+    float4 textureColor;
+    float2 reflectTexCoord;
+    float4 reflectionColor;
+    float4 color;
+
+
+    // 이 위치의 텍스쳐의 픽셀값을 샘플링합니다.
+    textureColor = shaderTexture.Sample(SampleType, input.tex);
+
+    // 반사 텍스쳐에 투영될 좌표를 계산합니다.
+    reflectTexCoord.x = input.reflectionPosition.x / input.reflectionPosition.w / 2.0f + 0.5f;
+    reflectTexCoord.y = -input.reflectionPosition.y / input.reflectionPosition.w / 2.0f + 0.5f;
+
+    // 투영시킨 텍스쳐 좌표를 이용하여 반사 텍스쳐의 픽셀을 샘플링합니다.
+    reflectionColor = reflectionTexture.Sample(SampleType, reflectTexCoord);
+
+    // 두 텍스쳐 사이에 선형 보간을 하여 혼합 효과를 줍니다.
+    color = lerp(textureColor, reflectionColor, 0.9f);
+
+    return color;
+}
