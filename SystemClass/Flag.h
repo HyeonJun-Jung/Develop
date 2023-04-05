@@ -16,3 +16,10 @@ enum Camera_Rotation_Dir
 	RT_LEFT,
 	RT_RIGHT
 };
+
+enum Resource_Type
+{
+	RT_Model,
+	RT_Terrain,
+	RT_Water
+};

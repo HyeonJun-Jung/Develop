@@ -14,15 +14,14 @@ using namespace DirectX;
 
 #include "..\AssimpTest\SafeRelease.hpp"
 
-struct VERTEX {
+struct VERTEXTYPE {
     XMFLOAT3 position;
     XMFLOAT2 texcoord;
     XMFLOAT3 normal;
     XMFLOAT3 tangent;
     XMFLOAT3 binormal;
-
-    XMFLOAT4 BoneIds = XMFLOAT4(0.0f, 0.0f, 0.0f, 0.0f);
     XMFLOAT4 BoneWeights = XMFLOAT4(0.0f, 0.0f, 0.0f, 0.0f);
+    XMUINT4 BoneIds = XMUINT4(0, 0, 0, 0);
 };
 
 
@@ -38,12 +37,12 @@ struct Texture {
 
 class Mesh {
 public:
-    std::vector<VERTEX> vertices_;
+    std::vector<VERTEXTYPE> vertices_;
     std::vector<UINT> indices_;
     std::vector<Texture> textures_;
     ID3D11Device *dev_;
 
-    Mesh(ID3D11Device *dev, const std::vector<VERTEX>& vertices, const std::vector<UINT>& indices, const std::vector<Texture>& textures) :
+    Mesh(ID3D11Device *dev, const std::vector<VERTEXTYPE>& vertices, const std::vector<UINT>& indices, const std::vector<Texture>& textures) :
             vertices_(vertices),
             indices_(indices),
             textures_(textures),
@@ -54,7 +53,7 @@ public:
     }
 
     void RenderBuffers(ID3D11DeviceContext* devcon) {
-        UINT stride = sizeof(VERTEX);
+        UINT stride = sizeof(VERTEXTYPE);
         UINT offset = 0;
 
         devcon->IASetVertexBuffers(0, 1, &VertexBuffer_, &stride, &offset);
@@ -69,7 +68,7 @@ public:
     }
 
     void Draw(ID3D11DeviceContext *devcon) {
-        UINT stride = sizeof(VERTEX);
+        UINT stride = sizeof(VERTEXTYPE);
         UINT offset = 0;
 
         devcon->IASetVertexBuffers(0, 1, &VertexBuffer_, &stride, &offset);
@@ -80,13 +79,6 @@ public:
         {
             devcon->PSSetShaderResources(i, 1, &textures_[i].texture);
         }
-        /*
-            devcon->PSSetShaderResources(0, 1, &textures_[0].texture);
-            devcon->PSSetShaderResources(1, 1, &textures_[1].texture);
-            devcon->PSSetShaderResources(2, 1, &textures_[2].texture);
-            devcon->PSSetShaderResources(3, 1, &textures_[3].texture);
-            devcon->PSSetShaderResources(4, 1, &textures_[4].texture);
-        */
 
         devcon->DrawIndexed(static_cast<UINT>(indices_.size()), 0, 0);
     }
@@ -106,7 +98,7 @@ private:
 
         D3D11_BUFFER_DESC vbd;
         vbd.Usage = D3D11_USAGE_DEFAULT;
-        vbd.ByteWidth = static_cast<UINT>(sizeof(VERTEX) * vertices_.size());
+        vbd.ByteWidth = static_cast<UINT>(sizeof(VERTEXTYPE) * vertices_.size());
         vbd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
         vbd.CPUAccessFlags = 0;
         vbd.MiscFlags = 0;
@@ -132,6 +124,7 @@ private:
         initData.pSysMem = &indices_[0];
         initData.SysMemPitch = 0;
         initData.SysMemSlicePitch = 0;
+
 
         hr = dev->CreateBuffer(&ibd, &initData, &IndexBuffer_);
         if (FAILED(hr)) {

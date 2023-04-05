@@ -24,6 +24,10 @@ private:
 		XMFLOAT3 position;
 		XMFLOAT2 texture;
 		XMFLOAT3 normal;
+		XMFLOAT3 tangent;
+		XMFLOAT3 binormal;
+		XMFLOAT4 BoneIds;
+		XMINT4 BoneWeights;
 	};
 
 	struct ModelType
@@ -69,6 +73,8 @@ private:
 	ModelType* m_model = nullptr;
 	TextureClass* m_Texture = nullptr;
 	ModelLoader* m_ModelLoader = nullptr;
+
+	float m_AniamtionTime;
 
 	XMMATRIX m_RotationMatrix;
 	XMMATRIX m_ScaleMatrix;

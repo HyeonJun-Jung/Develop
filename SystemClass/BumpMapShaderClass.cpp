@@ -35,12 +35,24 @@ void BumpMapShaderClass::Shutdown()
 	return;
 }
 
-bool BumpMapShaderClass::Render(ID3D11DeviceContext* deviceContext, int indexCount, XMMATRIX worldMatrix, XMMATRIX viewMatrix,
-	XMMATRIX projectionMatrix, ID3D11ShaderResourceView** texture, XMFLOAT3 lightDirection, XMFLOAT4 ambientColor,
-	XMFLOAT4 diffuseColor, XMFLOAT3 cameraPosition, XMFLOAT4 specularColor, float specularPower)
+bool BumpMapShaderClass::Render(ID3D11DeviceContext* deviceContext, XMFLOAT3 lightDirection, XMFLOAT4 ambientColor, XMFLOAT4 diffuseColor, XMFLOAT3 cameraPosition, XMFLOAT4 specularColor, float specularPower)
 {
-	if (!SetShaderParameters(deviceContext, worldMatrix, viewMatrix, projectionMatrix, texture, lightDirection, ambientColor, diffuseColor,
-		cameraPosition, specularColor, specularPower))
+	if (!SetShaderParameters(deviceContext, lightDirection, ambientColor, diffuseColor, cameraPosition, specularColor, specularPower))
+	{
+		return false;
+	}
+
+	RenderShader(deviceContext);
+
+	return true;
+}
+
+bool BumpMapShaderClass::Render(ID3D11DeviceContext* deviceContext, int indexCount, XMMATRIX worldMatrix, XMMATRIX viewMatrix,
+	XMMATRIX projectionMatrix, ID3D11ShaderResourceView** texture, XMFLOAT3 cameraPosition, XMFLOAT4 ambientColor,
+	XMFLOAT4 diffuseColor, XMFLOAT3 lightDirection, XMFLOAT4 specularColor, float specularPower)
+{
+	if (!SetShaderParameters(deviceContext, worldMatrix, viewMatrix, projectionMatrix, texture, cameraPosition, ambientColor, diffuseColor,
+		lightDirection, specularColor, specularPower))
 	{
 		return false;
 	}
@@ -49,6 +61,7 @@ bool BumpMapShaderClass::Render(ID3D11DeviceContext* deviceContext, int indexCou
 
 	return true;
 }
+
 
 bool BumpMapShaderClass::InitializeShader(ID3D11Device* device, HWND hwnd, WCHAR* vsFilename, WCHAR* psFilename)
 {
@@ -107,6 +120,62 @@ bool BumpMapShaderClass::InitializeShader(ID3D11Device* device, HWND hwnd, WCHAR
 		return false;
 	}
 
+	/*
+	ID3D11ShaderReflection* pReflector = nullptr;
+	D3DReflect(vertexShaderBuffer->GetBufferPointer(), vertexShaderBuffer->GetBufferSize(), IID_ID3D11ShaderReflection, (void**)&pReflector);
+
+	// Shader Refection
+	D3D11_SHADER_DESC shaderDesc;
+	pReflector->GetDesc(&shaderDesc);
+
+	/// Input Layout Reflection
+	// Shader Input Layout..
+	std::vector<D3D11_INPUT_ELEMENT_DESC> inputLayoutDesc;
+	for (unsigned inputIndex = 0; inputIndex < shaderDesc.InputParameters; inputIndex++)
+	{
+		D3D11_SIGNATURE_PARAMETER_DESC paramDesc;
+		pReflector->GetInputParameterDesc(inputIndex, &paramDesc);
+
+		// Shader Input Data를 기반으로 생성..
+		D3D11_INPUT_ELEMENT_DESC elementDesc;
+		elementDesc.SemanticName = paramDesc.SemanticName;
+		elementDesc.SemanticIndex = paramDesc.SemanticIndex;
+		elementDesc.InputSlot = 0;
+		elementDesc.AlignedByteOffset = D3D11_APPEND_ALIGNED_ELEMENT;
+		elementDesc.InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
+		elementDesc.InstanceDataStepRate = 0;
+
+		// Shader Data 기반으로 DXGI format 설정..
+		if (paramDesc.Mask == 1)
+		{
+			if (paramDesc.ComponentType == D3D_REGISTER_COMPONENT_UINT32) elementDesc.Format = DXGI_FORMAT_R32_UINT;
+			else if (paramDesc.ComponentType == D3D_REGISTER_COMPONENT_SINT32) elementDesc.Format = DXGI_FORMAT_R32_SINT;
+			else if (paramDesc.ComponentType == D3D_REGISTER_COMPONENT_FLOAT32) elementDesc.Format = DXGI_FORMAT_R32_FLOAT;
+		}
+		else if (paramDesc.Mask <= 3)
+		{
+			if (paramDesc.ComponentType == D3D_REGISTER_COMPONENT_UINT32) elementDesc.Format = DXGI_FORMAT_R32G32_UINT;
+			else if (paramDesc.ComponentType == D3D_REGISTER_COMPONENT_SINT32) elementDesc.Format = DXGI_FORMAT_R32G32_SINT;
+			else if (paramDesc.ComponentType == D3D_REGISTER_COMPONENT_FLOAT32) elementDesc.Format = DXGI_FORMAT_R32G32_FLOAT;
+		}
+		else if (paramDesc.Mask <= 7)
+		{
+			if (paramDesc.ComponentType == D3D_REGISTER_COMPONENT_UINT32) elementDesc.Format = DXGI_FORMAT_R32G32B32_UINT;
+			else if (paramDesc.ComponentType == D3D_REGISTER_COMPONENT_SINT32) elementDesc.Format = DXGI_FORMAT_R32G32B32_SINT;
+			else if (paramDesc.ComponentType == D3D_REGISTER_COMPONENT_FLOAT32) elementDesc.Format = DXGI_FORMAT_R32G32B32_FLOAT;
+		}
+		else if (paramDesc.Mask <= 15)
+		{
+			if (paramDesc.ComponentType == D3D_REGISTER_COMPONENT_UINT32) elementDesc.Format = DXGI_FORMAT_R32G32B32A32_UINT;
+			else if (paramDesc.ComponentType == D3D_REGISTER_COMPONENT_SINT32) elementDesc.Format = DXGI_FORMAT_R32G32B32A32_SINT;
+			else if (paramDesc.ComponentType == D3D_REGISTER_COMPONENT_FLOAT32) elementDesc.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
+		}
+
+		// 현 InputLayout 데이터 삽입..
+		inputLayoutDesc.push_back(elementDesc);
+	}
+	*/
+
 	// 정점 입력 레이아웃 구조체를 설정합니다.
 	// 이 설정은 ModelClass와 셰이더의 VertexType 구조와 일치해야합니다.
 	D3D11_INPUT_ELEMENT_DESC polygonLayout[7];
@@ -160,7 +229,8 @@ bool BumpMapShaderClass::InitializeShader(ID3D11Device* device, HWND hwnd, WCHAR
 
 	polygonLayout[6].SemanticName = "BLENDINDICES";
 	polygonLayout[6].SemanticIndex = 0;
-	polygonLayout[6].Format = DXGI_FORMAT_R16G16B16A16_UINT;
+	polygonLayout[6].Format = DXGI_FORMAT_R32G32B32A32_UINT;
+	//polygonLayout[6].Format = DXGI_FORMAT_R8G8B8A8_UINT;
 	polygonLayout[6].InputSlot = 0;
 	polygonLayout[6].AlignedByteOffset = D3D11_APPEND_ALIGNED_ELEMENT;
 	polygonLayout[6].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
@@ -206,6 +276,7 @@ bool BumpMapShaderClass::InitializeShader(ID3D11Device* device, HWND hwnd, WCHAR
 	{
 		return false;
 	}
+
 
 	// 정점 셰이더에 있는 행렬 상수 버퍼의 구조체를 작성합니다.
 	D3D11_BUFFER_DESC matrixBufferDesc;
@@ -275,13 +346,13 @@ void BumpMapShaderClass::ShutdownShader()
 		m_cameraBuffer = 0;
 	}
 
+	
 	// 행렬 상수 버퍼를 해제합니다.
 	if (m_matrixBuffer)
 	{
 		m_matrixBuffer->Release();
 		m_matrixBuffer = 0;
 	}
-
 	// 샘플러 상태를 해제한다.
 	if (m_sampleState)
 	{
@@ -325,8 +396,8 @@ void BumpMapShaderClass::OutputShaderErrorMessage(ID3D10Blob* errorMessage, HWND
 }
 
 bool BumpMapShaderClass::SetShaderParameters(ID3D11DeviceContext* deviceContext, XMMATRIX worldMatrix, XMMATRIX viewMatrix,
-	XMMATRIX projectionMatrix, ID3D11ShaderResourceView** texture, XMFLOAT3 lightDirection, XMFLOAT4 ambientColor,
-	XMFLOAT4 diffuseColor, XMFLOAT3 cameraPosition, XMFLOAT4 specularColor, float specularPower)
+	XMMATRIX projectionMatrix, ID3D11ShaderResourceView** texture, XMFLOAT3 cameraPosition, XMFLOAT4 ambientColor,
+	XMFLOAT4 diffuseColor, XMFLOAT3 lightDirection, XMFLOAT4 specularColor, float specularPower)
 {
 	// 행렬을 transpose하여 셰이더에서 사용할 수 있게 합니다
 	worldMatrix = XMMatrixTranspose(worldMatrix);
@@ -358,8 +429,6 @@ bool BumpMapShaderClass::SetShaderParameters(ID3D11DeviceContext* deviceContext,
 	deviceContext->VSSetConstantBuffers(bufferNumber, 1, &m_matrixBuffer);
 
 
-
-
 	// 쓸 수 있도록 카메라 상수 버퍼를 잠급니다.
 	if (FAILED(deviceContext->Map(m_cameraBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource)))
 	{
@@ -381,12 +450,6 @@ bool BumpMapShaderClass::SetShaderParameters(ID3D11DeviceContext* deviceContext,
 
 	// 이제 업데이트 된 값으로 버텍스 쉐이더에서 카메라 상수 버퍼를 설정합니다.
 	deviceContext->VSSetConstantBuffers(bufferNumber, 1, &m_cameraBuffer);
-
-
-
-
-
-
 
 	// 픽셀 셰이더에서 셰이더 텍스처 리소스를 설정합니다.
 	//deviceContext->PSSetShaderResources(0, 1, &texture);
@@ -418,6 +481,100 @@ bool BumpMapShaderClass::SetShaderParameters(ID3D11DeviceContext* deviceContext,
 	return true;
 }
 
+bool BumpMapShaderClass::SetShaderParameters(ID3D11DeviceContext* deviceContext, XMFLOAT3 cameraPosition,
+	XMFLOAT4 ambientColor, XMFLOAT4 diffuseColor, XMFLOAT3 lightDirection, XMFLOAT4 specularColor, float specularPower)
+{
+	// 상수 버퍼의 내용을 쓸 수 있도록 잠급니다.
+	D3D11_MAPPED_SUBRESOURCE mappedResource;
+
+	// 쓸 수 있도록 카메라 상수 버퍼를 잠급니다.
+	if (FAILED(deviceContext->Map(m_cameraBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource)))
+	{
+		return false;
+	}
+
+	// 상수 버퍼의 데이터에 대한 포인터를 가져옵니다.
+	CameraBufferType* dataPtr3 = (CameraBufferType*)mappedResource.pData;
+
+	// 카메라 위치를 상수 버퍼에 복사합니다.
+	dataPtr3->cameraPosition = cameraPosition;
+	dataPtr3->padding = 0.0f;
+
+	// 카메라 상수 버퍼를 잠금 해제합니다.
+	deviceContext->Unmap(m_cameraBuffer, 0);
+
+	// 버텍스 쉐이더에서 카메라 상수 버퍼의 위치를 ​​설정합니다.
+	unsigned int bufferNumber = 1;
+
+	// 이제 업데이트 된 값으로 버텍스 쉐이더에서 카메라 상수 버퍼를 설정합니다.
+	deviceContext->VSSetConstantBuffers(bufferNumber, 1, &m_cameraBuffer);
+
+
+
+
+	// light constant buffer를 잠글 수 있도록 기록한다.
+	if (FAILED(deviceContext->Map(m_lightBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource)))
+	{
+		return false;
+	}
+
+	// 상수 버퍼의 데이터에 대한 포인터를 가져옵니다.
+	LightBufferType* dataPtr2 = (LightBufferType*)mappedResource.pData;
+
+	// 조명 변수를 상수 버퍼에 복사합니다.
+	dataPtr2->ambientColor = ambientColor;
+	dataPtr2->diffuseColor = diffuseColor;
+	dataPtr2->lightDirection = lightDirection;
+	dataPtr2->specularColor = specularColor;
+	dataPtr2->specularPower = specularPower;
+
+	// 상수 버퍼의 잠금을 해제합니다.
+	deviceContext->Unmap(m_lightBuffer, 0);
+
+	// 픽셀 쉐이더에서 광원 상수 버퍼의 위치를 설정합니다.
+	bufferNumber = 0;
+
+	// 마지막으로 업데이트 된 값으로 픽셀 쉐이더에서 광원 상수 버퍼를 설정합니다.
+	deviceContext->PSSetConstantBuffers(bufferNumber, 1, &m_lightBuffer);
+
+	return true;
+}
+
+
+bool BumpMapShaderClass::SetMatrixBuffer(ID3D11DeviceContext* deviceContext, XMMATRIX worldMatrix, XMMATRIX viewMatrix, XMMATRIX projectionMatrix)
+{
+	// 행렬을 transpose하여 셰이더에서 사용할 수 있게 합니다
+	worldMatrix = XMMatrixTranspose(worldMatrix);
+	viewMatrix = XMMatrixTranspose(viewMatrix);
+	projectionMatrix = XMMatrixTranspose(projectionMatrix);
+
+	// 상수 버퍼의 내용을 쓸 수 있도록 잠급니다.
+	D3D11_MAPPED_SUBRESOURCE mappedResource;
+	if (FAILED(deviceContext->Map(m_matrixBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource)))
+	{
+		return false;
+	}
+
+	// 상수 버퍼의 데이터에 대한 포인터를 가져옵니다.
+	MatrixBufferType* dataPtr = (MatrixBufferType*)mappedResource.pData;
+
+	// 상수 버퍼에 행렬을 복사합니다.
+	dataPtr->world = worldMatrix;
+	dataPtr->view = viewMatrix;
+	dataPtr->projection = projectionMatrix;
+
+	// 상수 버퍼의 잠금을 풉니다.
+	deviceContext->Unmap(m_matrixBuffer, 0);
+
+	// 정점 셰이더에서의 상수 버퍼의 위치를 설정합니다.
+	unsigned int bufferNumber = 0;
+
+	// 마지막으로 정점 셰이더의 상수 버퍼를 바뀐 값으로 바꿉니다.
+	deviceContext->VSSetConstantBuffers(bufferNumber, 1, &m_matrixBuffer);
+
+	return true;
+}
+
 void BumpMapShaderClass::RenderShader(ID3D11DeviceContext* deviceContext, int indexCount)
 {
 	// Set the vertex input layout.
@@ -434,4 +591,17 @@ void BumpMapShaderClass::RenderShader(ID3D11DeviceContext* deviceContext, int in
 	// deviceContext->DrawIndexed(indexCount, 0, 0);
 
 	return;
+}
+
+void BumpMapShaderClass::RenderShader(ID3D11DeviceContext* devcon)
+{
+	// Set the vertex input layout.
+	devcon->IASetInputLayout(m_layout);
+
+	// Set the vertex and pixel shaders that will be used to render this triangle.
+	devcon->VSSetShader(m_vertexShader, NULL, 0);
+	devcon->PSSetShader(m_pixelShader, NULL, 0);
+
+	// Set the sampler state in the pixel shader.
+	devcon->PSSetSamplers(0, 1, &m_sampleState);
 }

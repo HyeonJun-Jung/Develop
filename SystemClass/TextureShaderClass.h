@@ -7,10 +7,11 @@
 #include <DirectXMath.h>
 #include <d3dcompiler.h>
 #include <fstream>
+#include "Shader.h"
 using namespace std;
 using namespace DirectX;
 
-class TextureShaderClass
+class TextureShaderClass : public Shader
 {
 private:
 	struct MatrixBufferType

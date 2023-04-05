@@ -13,7 +13,7 @@ TextureClass::~TextureClass()
 {
 }
 
-bool TextureClass::Initialize(ID3D11Device* device, WCHAR* filename)
+bool TextureClass::Initialize(ID3D11Device* device, const WCHAR* filename)
 {
     // 텍스처를 파일로부터 읽어온다
     if (FAILED(CreateDDSTextureFromFile(device, filename, nullptr, &m_texture)))

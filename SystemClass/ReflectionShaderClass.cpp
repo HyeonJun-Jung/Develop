@@ -204,8 +204,6 @@ bool ReflectionShaderClass::InitializeShader(ID3D11Device* device, HWND hwnd, WC
 	}
 
 	return true;
-
-	return true;
 }
 
 void ReflectionShaderClass::ShutdownShader()

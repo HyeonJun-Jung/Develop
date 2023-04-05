@@ -25,7 +25,7 @@ public:
 	//Tga파일 사용 시
 	//bool Initialize(ID3D11Device*, ID3D11DeviceContext*, char*);		
 
-	bool Initialize(ID3D11Device*, WCHAR*);
+	bool Initialize(ID3D11Device*, const WCHAR*);
 	void Shutdown();
 
 	ID3D11ShaderResourceView* GetTexture();

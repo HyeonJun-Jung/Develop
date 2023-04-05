@@ -11,6 +11,7 @@ ModelClass::ModelClass()
 	m_RotationMatrix = XMMatrixIdentity();
 	m_ScaleMatrix = XMMatrixIdentity();
 	m_TranslateMatrix = XMMatrixIdentity();
+
 }
 
 
@@ -216,8 +217,16 @@ void ModelClass::ReleaseTexture()
 	}
 }
 
+bool ModelClass::LoadModelFromFbx(HWND hwnd, ID3D11Device* dev, ID3D11DeviceContext* devcon, char* filename)
+{
+	ModelLoader _ModelLoader;
+	_ModelLoader.Load(hwnd, dev, devcon, 0, filename);
+	return true;
+}
+
 bool ModelClass::LoadModelFromtxt(char* filename)
 {
+
 	// ¸ðµ¨ ÆÄÀÏÀ» ¿±´Ï´Ù.
 	ifstream fin;
 	fin.open(filename);

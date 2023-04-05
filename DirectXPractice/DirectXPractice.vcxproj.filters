@@ -1,0 +1,1258 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="SystemClass">
+      <UniqueIdentifier>{4860f9d7-9602-443d-b858-b7a02282e132}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\InputClass">
+      <UniqueIdentifier>{e1df5a9b-d32b-472d-9c01-6f216190a11d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\GraphicsClass">
+      <UniqueIdentifier>{3156a248-df0c-4718-b7b1-05dac62e18fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\GraphicsClass\D3DClass">
+      <UniqueIdentifier>{6846979b-7917-4b61-af71-32badc853219}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\GraphicsClass\CameraClass">
+      <UniqueIdentifier>{398b37b6-3cc5-45b3-9947-8ae89ce26c28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\DDSTextureLoader">
+      <UniqueIdentifier>{73e3042b-8a52-4db1-8832-b06e8637f0c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\FpsClass">
+      <UniqueIdentifier>{048eccba-0899-4b69-b6cf-41b273eaeb38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\CpuClass">
+      <UniqueIdentifier>{1144be15-b1d7-4ca4-b3c1-ccdb9c99083b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\TimerClass">
+      <UniqueIdentifier>{eb99a582-da56-43d6-89ca-c9e7c4584953}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\GraphicsClass\FrustumClass">
+      <UniqueIdentifier>{16d35486-b16f-49e8-9ac7-1da0ac2ba75f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\PositionClass">
+      <UniqueIdentifier>{c4492bc1-99b7-466b-8aba-672fd301ccb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AssimpTest">
+      <UniqueIdentifier>{a164ea45-1185-47ab-a39e-a0a5f1a74eaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\GraphicsClass\Shader">
+      <UniqueIdentifier>{c5d4949f-bea7-4676-87a0-5ff0269ecea9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\GraphicsClass\Shader\TextureShaderClass">
+      <UniqueIdentifier>{1f2513b1-cd47-4794-b2b1-89a7b4f2aa8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\GraphicsClass\Shader\BumpMapShaderClass">
+      <UniqueIdentifier>{b24133c3-84e4-4b49-b368-b3d8f0c7e8bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\GraphicsClass\Shader\LightShaderClass">
+      <UniqueIdentifier>{1432d81f-548b-4f23-b9c3-7a48c7332d7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\GraphicsClass\Shader\LightShaderClass\LightClass">
+      <UniqueIdentifier>{48f58c94-3b43-4c06-98d8-ed91f0801009}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\GraphicsClass\Shader\ReflectionShaderClass">
+      <UniqueIdentifier>{12f9c226-9bdf-44a6-bb8c-3077e3d7d020}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\RenderTextureClass">
+      <UniqueIdentifier>{c42892e0-d85d-482c-b9b5-85fb33d21568}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\Manager">
+      <UniqueIdentifier>{7e66f02a-f123-42e7-a475-27ec1303729c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\Manager\ResourceManager">
+      <UniqueIdentifier>{b77bfeff-26a2-42b8-b377-c94b0e077a61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\Manager\ImguiManager">
+      <UniqueIdentifier>{8ec06b6f-9b59-4a59-b36f-b91dbca58840}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\Manager\ResourceManager\ModelManager">
+      <UniqueIdentifier>{99561a39-1884-43b3-848c-2b8dae4c6dd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\Manager\ImguiManager\Imgui">
+      <UniqueIdentifier>{c281e5a0-abd1-4178-bf27-f7883f318416}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AssimpModel">
+      <UniqueIdentifier>{933feb0c-da37-465d-9a2f-e2a610522949}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="fbxsdk">
+      <UniqueIdentifier>{a9bcf2b0-738e-4844-ae30-09ded856dd70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\GraphicsClass\Resources">
+      <UniqueIdentifier>{0e5cabfe-6b8f-471b-a023-83fda38cf1eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\GraphicsClass\Resources\Terrain">
+      <UniqueIdentifier>{52bf72bc-6a53-463e-8be7-0848af782b1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\GraphicsClass\Shader\TerrainShaderClass">
+      <UniqueIdentifier>{c3549264-cf7b-4a7f-b587-7e145825bc4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\GraphicsClass\Resources\Terrain\QuadtreeClass">
+      <UniqueIdentifier>{a5ed52ba-4e0c-43db-bf1d-263e07493f2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\GraphicsClass\Resources\Terrain\SkydomeClass">
+      <UniqueIdentifier>{c5b22d9b-c5a3-41f4-a961-968050216810}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\GraphicsClass\Shader\SkydomeShaderClass">
+      <UniqueIdentifier>{ac1bdd08-dba5-4bca-ba00-63ef2f649039}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\GraphicsClass\Resources\Model">
+      <UniqueIdentifier>{577cb4fc-587f-4129-9d35-242c91b2e16a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\GraphicsClass\Resources\Model\TextureClass">
+      <UniqueIdentifier>{74f9511d-c127-49ca-813a-b72a8b68b60b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\GraphicsClass\Resources\Model\BitmapClass">
+      <UniqueIdentifier>{83378501-0907-4e83-b8c4-ed1659fb1cb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\GraphicsClass\Resources\Model\TextClass">
+      <UniqueIdentifier>{b4e6c29b-6b92-4c72-a550-4961fb639432}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\GraphicsClass\Resources\Model\TextClass\FontClass">
+      <UniqueIdentifier>{491ca1b1-76f8-4178-bcd4-bf0e91ec8fc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\GraphicsClass\Resources\Model\TextClass\FontShaderClass">
+      <UniqueIdentifier>{be0d24b8-95b7-4ff9-9581-115a061bc845}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\GraphicsClass\Resources\Model\ModelListClass">
+      <UniqueIdentifier>{cb721798-e1d7-431d-b967-04135b965eeb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\GraphicsClass\Resources\Model\SkinnedModel">
+      <UniqueIdentifier>{766441ae-4076-49c5-adde-72032006e46e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\GraphicsClass\Resources\Model\WModel">
+      <UniqueIdentifier>{93446f52-2e3b-41c4-912c-c8848c58479f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\Manager\SceneManager">
+      <UniqueIdentifier>{47b1fa06-291a-4d47-b3cf-3cf778ec9853}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\hlsl">
+      <UniqueIdentifier>{d54780e4-00b1-4ecd-b68e-5b23c1cdfefc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\GraphicsClass\Shader\TerrainShaderClass\TerrainReflectionShaderClass">
+      <UniqueIdentifier>{2f1dd9a1-1ebd-4016-821f-3a5416a1183c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\GraphicsClass\Shader\WaterShaderClass">
+      <UniqueIdentifier>{9fb0a838-03a1-4c66-a0b3-f5382937b341}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\GraphicsClass\Resources\Obb">
+      <UniqueIdentifier>{b27b916e-c045-454a-92a4-fbfd04c9badf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\Manager\ShaderManager">
+      <UniqueIdentifier>{a3f132fd-420b-4f35-acbc-b0823558682d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\Manager\SceneManager\Scene">
+      <UniqueIdentifier>{a23d5290-8b04-4e8a-b176-be4cbd4866f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\GraphicsClass\Shader\ColorShaderClass">
+      <UniqueIdentifier>{8d8d4f41-53d4-46a3-b433-b761874006c5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\main.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\InputClass.cpp">
+      <Filter>SystemClass\InputClass</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\Colorshaderclass.cpp">
+      <Filter>SystemClass\GraphicsClass\Shader\ColorShaderClass</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\GraphicsClass.cpp">
+      <Filter>SystemClass\GraphicsClass</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\D3DClass.cpp">
+      <Filter>SystemClass\GraphicsClass\D3DClass</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\ModelClass.cpp">
+      <Filter>SystemClass\GraphicsClass\Resources\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\SystemClass.cpp">
+      <Filter>SystemClass</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\CameraClass.cpp">
+      <Filter>SystemClass\GraphicsClass\CameraClass</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\TextureShaderClass.cpp">
+      <Filter>SystemClass\GraphicsClass\Shader\TextureShaderClass</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\TextureClass.cpp">
+      <Filter>SystemClass\GraphicsClass\Resources\Model\TextureClass</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\LightShaderClass.cpp">
+      <Filter>SystemClass\GraphicsClass\Shader\LightShaderClass</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\DDSTextureLoader.cpp">
+      <Filter>SystemClass\DDSTextureLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\LightClass.cpp">
+      <Filter>SystemClass\GraphicsClass\Shader\LightShaderClass\LightClass</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\BitmapClass.cpp">
+      <Filter>SystemClass\GraphicsClass\Resources\Model\BitmapClass</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\TextClass.cpp">
+      <Filter>SystemClass\GraphicsClass\Resources\Model\TextClass</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\FontClass.cpp">
+      <Filter>SystemClass\GraphicsClass\Resources\Model\TextClass\FontClass</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\FontShaderClass.cpp">
+      <Filter>SystemClass\GraphicsClass\Resources\Model\TextClass\FontShaderClass</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\FpsClass.cpp">
+      <Filter>SystemClass\FpsClass</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\CpuClass.cpp">
+      <Filter>SystemClass\CpuClass</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\TimerClass.cpp">
+      <Filter>SystemClass\TimerClass</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\FrustumClass.cpp">
+      <Filter>SystemClass\GraphicsClass\FrustumClass</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\ModelListClass.cpp">
+      <Filter>SystemClass\GraphicsClass\Resources\Model\ModelListClass</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\PositionClass.cpp">
+      <Filter>SystemClass\PositionClass</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\AssimpTest\TextureLoader.cpp">
+      <Filter>AssimpTest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\BumpMapShaderClass.cpp">
+      <Filter>SystemClass\GraphicsClass\Shader\BumpMapShaderClass</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\RenderTextureClass.cpp">
+      <Filter>SystemClass\RenderTextureClass</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\ReflectionShaderClass.cpp">
+      <Filter>SystemClass\GraphicsClass\Shader\ReflectionShaderClass</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\Imgui\imgui.cpp">
+      <Filter>SystemClass\Manager\ImguiManager\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\Imgui\imgui_draw.cpp">
+      <Filter>SystemClass\Manager\ImguiManager\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\Imgui\imgui_impl_dx11.cpp">
+      <Filter>SystemClass\Manager\ImguiManager\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\Imgui\imgui_impl_win32.cpp">
+      <Filter>SystemClass\Manager\ImguiManager\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\Imgui\imgui_tables.cpp">
+      <Filter>SystemClass\Manager\ImguiManager\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\Imgui\imgui_widgets.cpp">
+      <Filter>SystemClass\Manager\ImguiManager\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\ResourceManager.cpp">
+      <Filter>SystemClass\Manager\ResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\ImguiManager.cpp">
+      <Filter>SystemClass\Manager\ImguiManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\AssimpModel.cpp">
+      <Filter>AssimpModel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\AssimpTest\ModelLoader.cpp">
+      <Filter>AssimpTest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\TerrainClass.cpp">
+      <Filter>SystemClass\GraphicsClass\Resources\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\TerrainShaderClass.cpp">
+      <Filter>SystemClass\GraphicsClass\Shader\TerrainShaderClass</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\QuadtreeClass.cpp">
+      <Filter>SystemClass\GraphicsClass\Resources\Terrain\QuadtreeClass</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\SkydomeClass.cpp">
+      <Filter>SystemClass\GraphicsClass\Resources\Terrain\SkydomeClass</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\SkydomeShaderClass.cpp">
+      <Filter>SystemClass\GraphicsClass\Shader\SkydomeShaderClass</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\SkinnedModel.cpp">
+      <Filter>SystemClass\GraphicsClass\Resources\Model\SkinnedModel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\ShaderManager.cpp">
+      <Filter>SystemClass\Manager\ShaderManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\ModelManager.cpp">
+      <Filter>SystemClass\Manager\ResourceManager\ModelManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\WModel.cpp">
+      <Filter>SystemClass\GraphicsClass\Resources\Model\WModel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\TerrainReflectionShaderClass.cpp">
+      <Filter>SystemClass\GraphicsClass\Shader\TerrainShaderClass\TerrainReflectionShaderClass</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\WaterShaderClass.cpp">
+      <Filter>SystemClass\GraphicsClass\Shader\WaterShaderClass</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\Obb.cpp">
+      <Filter>SystemClass\GraphicsClass\Resources\Obb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\Shader.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\SystemClass\InputClass.h">
+      <Filter>SystemClass\InputClass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\Colorshaderclass.h">
+      <Filter>SystemClass\GraphicsClass\Shader\ColorShaderClass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\GraphicsClass.h">
+      <Filter>SystemClass\GraphicsClass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\D3DClass.h">
+      <Filter>SystemClass\GraphicsClass\D3DClass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\ModelClass.h">
+      <Filter>SystemClass\GraphicsClass\Resources\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\SystemClass.h">
+      <Filter>SystemClass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\CameraClass.h">
+      <Filter>SystemClass\GraphicsClass\CameraClass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DxDefine.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\stdafx.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\targetver.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AlignedAllocationPolicy.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\TextureShaderClass.h">
+      <Filter>SystemClass\GraphicsClass\Shader\TextureShaderClass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\TextureClass.h">
+      <Filter>SystemClass\GraphicsClass\Resources\Model\TextureClass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\LightShaderClass.h">
+      <Filter>SystemClass\GraphicsClass\Shader\LightShaderClass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\DDSTextureLoader.h">
+      <Filter>SystemClass\DDSTextureLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\LightClass.h">
+      <Filter>SystemClass\GraphicsClass\Shader\LightShaderClass\LightClass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\BitmapClass.h">
+      <Filter>SystemClass\GraphicsClass\Resources\Model\BitmapClass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\TextClass.h">
+      <Filter>SystemClass\GraphicsClass\Resources\Model\TextClass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\FontClass.h">
+      <Filter>SystemClass\GraphicsClass\Resources\Model\TextClass\FontClass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\FontShaderClass.h">
+      <Filter>SystemClass\GraphicsClass\Resources\Model\TextClass\FontShaderClass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\FpsClass.h">
+      <Filter>SystemClass\FpsClass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\CpuClass.h">
+      <Filter>SystemClass\CpuClass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\TimerClass.h">
+      <Filter>SystemClass\TimerClass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\FrustumClass.h">
+      <Filter>SystemClass\GraphicsClass\FrustumClass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\ModelListClass.h">
+      <Filter>SystemClass\GraphicsClass\Resources\Model\ModelListClass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\PositionClass.h">
+      <Filter>SystemClass\PositionClass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\AssimpTest\Mesh.h">
+      <Filter>AssimpTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\AssimpTest\TextureLoader.h">
+      <Filter>AssimpTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\BumpMapShaderClass.h">
+      <Filter>SystemClass\GraphicsClass\Shader\BumpMapShaderClass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\Flag.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\RenderTextureClass.h">
+      <Filter>SystemClass\RenderTextureClass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\ReflectionShaderClass.h">
+      <Filter>SystemClass\GraphicsClass\Shader\ReflectionShaderClass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\Imgui\imconfig.h">
+      <Filter>SystemClass\Manager\ImguiManager\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\Imgui\imgui.h">
+      <Filter>SystemClass\Manager\ImguiManager\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\Imgui\imgui_impl_dx11.h">
+      <Filter>SystemClass\Manager\ImguiManager\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\Imgui\imgui_impl_win32.h">
+      <Filter>SystemClass\Manager\ImguiManager\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\Imgui\imgui_internal.h">
+      <Filter>SystemClass\Manager\ImguiManager\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\Imgui\imstb_rectpack.h">
+      <Filter>SystemClass\Manager\ImguiManager\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\Imgui\imstb_textedit.h">
+      <Filter>SystemClass\Manager\ImguiManager\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\Imgui\imstb_truetype.h">
+      <Filter>SystemClass\Manager\ImguiManager\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\ResourceManager.h">
+      <Filter>SystemClass\Manager\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\ImguiManager.h">
+      <Filter>SystemClass\Manager\ImguiManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\Singleton.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\AssimpModel.h">
+      <Filter>AssimpModel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\AssimpTest\ModelLoader.h">
+      <Filter>AssimpTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\ModelStructure.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\arch\fbxalloc.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\arch\fbxarch.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\arch\fbxdebug.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\arch\fbxnew.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\arch\fbxstdcompliant.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\arch\fbxtypes.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\base\fbxarray.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\base\fbxbitset.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\base\fbxcharptrset.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\base\fbxcontainerallocators.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\base\fbxdynamicarray.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\base\fbxfile.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\base\fbxfolder.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\base\fbxhashmap.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\base\fbxintrusivelist.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\base\fbxmap.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\base\fbxmemorypool.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\base\fbxmultimap.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\base\fbxpair.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\base\fbxredblacktree.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\base\fbxset.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\base\fbxstatus.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\base\fbxstring.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\base\fbxstringlist.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\base\fbxtime.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\base\fbxtimecode.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\base\fbxutils.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\fbxclassid.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\fbxconnectionpoint.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\fbxdatatypes.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\fbxemitter.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\fbxevent.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\fbxeventhandler.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\fbxlistener.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\fbxloadingstrategy.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\fbxmanager.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\fbxmodule.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\fbxobject.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\fbxperipheral.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\fbxplugin.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\fbxplugincontainer.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\fbxproperty.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\fbxpropertydef.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\fbxpropertyhandle.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\fbxpropertypage.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\fbxpropertytypes.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\fbxquery.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\fbxqueryevent.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\fbxscopedloadingdirectory.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\fbxscopedloadingfilename.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\fbxstream.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\fbxsymbol.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\fbxsystemunit.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\fbxxref.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\math\fbxaffinematrix.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\math\fbxdualquaternion.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\math\fbxmath.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\math\fbxmatrix.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\math\fbxquaternion.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\math\fbxtransforms.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\math\fbxvector2.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\math\fbxvector4.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\sync\fbxatomic.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\sync\fbxclock.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\sync\fbxsync.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\core\sync\fbxthread.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\fbxsdk_def.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\fbxsdk_nsbegin.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\fbxsdk_nsend.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\fbxsdk_version.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\fileio\collada\fbxcolladaanimationelement.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\fileio\collada\fbxcolladaelement.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\fileio\collada\fbxcolladaiostream.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\fileio\collada\fbxcolladanamespace.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\fileio\collada\fbxcolladatokens.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\fileio\collada\fbxcolladautils.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\fileio\collada\fbxreadercollada14.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\fileio\collada\fbxwritercollada14.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\fileio\fbx\fbxio.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\fileio\fbx\fbxreaderfbx5.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\fileio\fbx\fbxreaderfbx6.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\fileio\fbx\fbxreaderfbx7.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\fileio\fbx\fbxwriterfbx5.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\fileio\fbx\fbxwriterfbx6.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\fileio\fbx\fbxwriterfbx7.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\fileio\fbxbase64coder.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\fileio\fbxexporter.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\fileio\fbxexternaldocreflistener.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\fileio\fbxfiletokens.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\fileio\fbxglobalcamerasettings.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\fileio\fbxgloballightsettings.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\fileio\fbxglobalsettings.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\fileio\fbxgobo.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\fileio\fbximporter.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\fileio\fbxiobase.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\fileio\fbxiopluginregistry.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\fileio\fbxiosettings.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\fileio\fbxiosettingspath.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\fileio\fbxprogress.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\fileio\fbxreader.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\fileio\fbxstatistics.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\fileio\fbxstatisticsfbx.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\fileio\fbxwriter.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\animation\fbxanimcurve.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\animation\fbxanimcurvebase.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\animation\fbxanimcurvefilters.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\animation\fbxanimcurvenode.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\animation\fbxanimevalclassic.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\animation\fbxanimevalstate.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\animation\fbxanimevaluator.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\animation\fbxanimlayer.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\animation\fbxanimstack.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\animation\fbxanimutilities.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\constraint\fbxcharacter.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\constraint\fbxcharacternodename.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\constraint\fbxcharacterpose.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\constraint\fbxconstraint.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\constraint\fbxconstraintaim.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\constraint\fbxconstraintcustom.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\constraint\fbxconstraintparent.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\constraint\fbxconstraintposition.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\constraint\fbxconstraintrotation.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\constraint\fbxconstraintscale.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\constraint\fbxconstraintsinglechainik.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\constraint\fbxconstraintutils.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\constraint\fbxcontrolset.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\constraint\fbxhik2fbxcharacter.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\fbxaudio.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\fbxaudiolayer.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\fbxaxissystem.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\fbxcollection.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\fbxcollectionexclusive.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\fbxcontainer.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\fbxcontainertemplate.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\fbxdisplaylayer.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\fbxdocument.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\fbxdocumentinfo.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\fbxenvironment.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\fbxgroupname.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\fbxlibrary.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\fbxmediaclip.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\fbxobjectfilter.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\fbxobjectmetadata.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\fbxobjectscontainer.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\fbxpose.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\fbxreference.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\fbxscene.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\fbxselectionnode.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\fbxselectionset.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\fbxtakeinfo.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\fbxthumbnail.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\fbxvideo.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\geometry\fbxblendshape.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\geometry\fbxblendshapechannel.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\geometry\fbxcache.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\geometry\fbxcachedeffect.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\geometry\fbxcamera.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\geometry\fbxcamerastereo.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\geometry\fbxcameraswitcher.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\geometry\fbxcluster.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\geometry\fbxdeformer.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\geometry\fbxgenericnode.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\geometry\fbxgeometry.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\geometry\fbxgeometrybase.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\geometry\fbxgeometryweightedmap.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\geometry\fbxlayer.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\geometry\fbxlayercontainer.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\geometry\fbxlight.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\geometry\fbxlimitsutilities.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\geometry\fbxline.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\geometry\fbxlodgroup.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\geometry\fbxmarker.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\geometry\fbxmesh.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\geometry\fbxnode.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\geometry\fbxnodeattribute.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\geometry\fbxnull.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\geometry\fbxnurbs.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\geometry\fbxnurbscurve.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\geometry\fbxnurbssurface.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\geometry\fbxopticalreference.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\geometry\fbxpatch.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\geometry\fbxproceduralgeometry.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\geometry\fbxshape.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\geometry\fbxskeleton.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\geometry\fbxskin.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\geometry\fbxsubdeformer.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\geometry\fbxsubdiv.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\geometry\fbxtrimnurbssurface.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\geometry\fbxvertexcachedeformer.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\geometry\fbxweightedmapping.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\shading\fbxbindingoperator.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\shading\fbxbindingsentryview.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\shading\fbxbindingtable.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\shading\fbxbindingtablebase.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\shading\fbxbindingtableentry.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\shading\fbxconstantentryview.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\shading\fbxentryview.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\shading\fbxfiletexture.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\shading\fbximplementation.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\shading\fbximplementationfilter.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\shading\fbximplementationutils.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\shading\fbxlayeredtexture.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\shading\fbxlayerentryview.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\shading\fbxoperatorentryview.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\shading\fbxproceduraltexture.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\shading\fbxpropertyentryview.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\shading\fbxsemanticentryview.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\shading\fbxshadingconventions.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\shading\fbxsurfacelambert.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\shading\fbxsurfacematerial.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\shading\fbxsurfacephong.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\scene\shading\fbxtexture.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\utils\fbxclonemanager.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\utils\fbxdeformationsevaluator.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\utils\fbxembeddedfilesaccumulator.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\utils\fbxgeometryconverter.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\utils\fbxmanipulators.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\utils\fbxmaterialconverter.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\utils\fbxnamehandler.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\utils\fbxprocessor.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\utils\fbxprocessorshaderdependency.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\utils\fbxprocessorxref.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\utils\fbxprocessorxrefuserlib.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\utils\fbxrenamingstrategy.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\utils\fbxrenamingstrategybase.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\utils\fbxrenamingstrategyfbx5.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\utils\fbxrenamingstrategyfbx6.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\utils\fbxrenamingstrategyfbx7.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\utils\fbxrenamingstrategyutilities.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\utils\fbxrootnodeutility.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\utils\fbxscenecheckutility.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Program Files\Autodesk\FBX\FBX SDK\2019.0\include\fbxsdk\utils\fbxusernotification.h">
+      <Filter>fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\TerrainClass.h">
+      <Filter>SystemClass\GraphicsClass\Resources\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\TerrainShaderClass.h">
+      <Filter>SystemClass\GraphicsClass\Shader\TerrainShaderClass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\QuadtreeClass.h">
+      <Filter>SystemClass\GraphicsClass\Resources\Terrain\QuadtreeClass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\SkydomeClass.h">
+      <Filter>SystemClass\GraphicsClass\Resources\Terrain\SkydomeClass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\SkydomeShaderClass.h">
+      <Filter>SystemClass\GraphicsClass\Shader\SkydomeShaderClass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\SkinnedModel.h">
+      <Filter>SystemClass\GraphicsClass\Resources\Model\SkinnedModel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\ShaderManager.h">
+      <Filter>SystemClass\Manager\ShaderManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\ModelManager.h">
+      <Filter>SystemClass\Manager\ResourceManager\ModelManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\WModel.h">
+      <Filter>SystemClass\GraphicsClass\Resources\Model\WModel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\TerrainReflectionShaderClass.h">
+      <Filter>SystemClass\GraphicsClass\Shader\TerrainShaderClass\TerrainReflectionShaderClass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\WaterShaderClass.h">
+      <Filter>SystemClass\GraphicsClass\Shader\WaterShaderClass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\Obb.h">
+      <Filter>SystemClass\GraphicsClass\Resources\Obb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\Shader.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\SystemClass\Bumpmap.ps">
+      <Filter>헤더 파일\hlsl</Filter>
+    </None>
+    <None Include="..\SystemClass\Bumpmap.vs">
+      <Filter>헤더 파일\hlsl</Filter>
+    </None>
+    <None Include="..\SystemClass\Color.ps">
+      <Filter>헤더 파일\hlsl</Filter>
+    </None>
+    <None Include="..\SystemClass\Color.vs">
+      <Filter>헤더 파일\hlsl</Filter>
+    </None>
+    <None Include="..\SystemClass\Font.ps">
+      <Filter>헤더 파일\hlsl</Filter>
+    </None>
+    <None Include="..\SystemClass\Font.vs">
+      <Filter>헤더 파일\hlsl</Filter>
+    </None>
+    <None Include="..\SystemClass\light.ps">
+      <Filter>헤더 파일\hlsl</Filter>
+    </None>
+    <None Include="..\SystemClass\light.vs">
+      <Filter>헤더 파일\hlsl</Filter>
+    </None>
+    <None Include="..\SystemClass\Reflection.ps">
+      <Filter>헤더 파일\hlsl</Filter>
+    </None>
+    <None Include="..\SystemClass\Reflection.vs">
+      <Filter>헤더 파일\hlsl</Filter>
+    </None>
+    <None Include="..\SystemClass\Texture.ps">
+      <Filter>헤더 파일\hlsl</Filter>
+    </None>
+    <None Include="..\SystemClass\Texture.vs">
+      <Filter>헤더 파일\hlsl</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="..\SystemClass\Terrain_vs.hlsl">
+      <Filter>헤더 파일\hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="..\SystemClass\Terrain_ps.hlsl">
+      <Filter>헤더 파일\hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="..\SystemClass\skydome_ps.hlsl">
+      <Filter>헤더 파일\hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="..\SystemClass\skydome_vs.hlsl">
+      <Filter>헤더 파일\hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="..\SystemClass\TerrainReflection_vs.hlsl">
+      <Filter>헤더 파일\hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="..\SystemClass\TerrainReflection_ps.hlsl">
+      <Filter>헤더 파일\hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="..\SystemClass\water_ps.hlsl">
+      <Filter>헤더 파일\hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="..\SystemClass\water_vs.hlsl">
+      <Filter>헤더 파일\hlsl</Filter>
+    </FxCompile>
+  </ItemGroup>
+</Project>

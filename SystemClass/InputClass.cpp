@@ -220,7 +220,7 @@ void InputClass::GetMouseLocation(int& mouseX, int& mouseY)
 
 bool InputClass::IsCameraRotationRight()
 {
-    if (m_mouseState.rgbButtons[0] & 0x80)
+    if (m_mouseState.rgbButtons[1] & 0x80)
     {
         if (m_mouseState.lX > 0)
             return true;
@@ -231,7 +231,7 @@ bool InputClass::IsCameraRotationRight()
 
 bool InputClass::IsCameraRotationLeft()
 {
-    if (m_mouseState.rgbButtons[0] & 0x80)
+    if (m_mouseState.rgbButtons[1] & 0x80)
     {
         if (m_mouseState.lX < 0)
             return true;
@@ -242,7 +242,7 @@ bool InputClass::IsCameraRotationLeft()
 
 bool InputClass::IsCameraRotationUp()
 {
-    if (m_mouseState.rgbButtons[0] & 0x80)
+    if (m_mouseState.rgbButtons[1] & 0x80)
     {
         if (m_mouseState.lY < 0)
             return true;
@@ -253,7 +253,7 @@ bool InputClass::IsCameraRotationUp()
 
 bool InputClass::IsCameraRotationDown()
 {
-    if (m_mouseState.rgbButtons[0] & 0x80)
+    if (m_mouseState.rgbButtons[1] & 0x80)
     {
         if (m_mouseState.lY > 0)
             return true;

@@ -46,7 +46,7 @@ float4 BumpMapPixelShader(PixelInputType input) : SV_TARGET
     float4 specularIntensity;
     float3 reflection;
     float4 specular;
-
+    
     // emmisive map ¿¡¼­ ¹ß±¤ ÇÈ¼¿À» »ùÇÃ¸µÇÕ´Ï´Ù.
     emmisiveColor = shaderTextures[4].Sample(SampleType, input.tex);
 
@@ -112,7 +112,7 @@ float4 BumpMapPixelShader(PixelInputType input) : SV_TARGET
     {
         color = emmisiveColor;
     }
-
+    
     return color;
 
 }

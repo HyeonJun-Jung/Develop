@@ -11,6 +11,7 @@
 #include <DirectXMath.h>
 #include <d3dcompiler.h>
 #include <fstream>
+#include "Shader.h"
 using namespace std;
 using namespace DirectX;
 
@@ -19,7 +20,7 @@ using namespace DirectX;
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: LightShaderClass
 ////////////////////////////////////////////////////////////////////////////////
-class LightShaderClass
+class LightShaderClass : public Shader
 {
 private:
 	struct MatrixBufferType

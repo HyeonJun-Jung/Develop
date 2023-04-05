@@ -22,21 +22,29 @@ class D3DClass;
 class CameraClass;
 class ModelClass;
 class LightClass;
-class LightShaderClass;
-
-class TextureShaderClass;
 class BitmapClass;
 class TextClass;
+class WModel;
 
 class FrustumClass;
 class ModelListClass;
 
 class ModelLoader;
-class BumpMapShaderClass;
 
+class BumpMapShaderClass;
 class ReflectionShaderClass;
+class LightShaderClass;
+class TextureShaderClass;
+class ColorShaderClass;
+
 class RenderTextureClass;
 
+class TerrainClass;
+class TerrainShaderClass;
+class TerrainReflectionShaderClass;
+class SkydomeClass;
+class SkydomeShaderClass;
+class WaterShaderClass;
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -50,36 +58,50 @@ public:
     ~GraphicsClass();
 
     bool Initialize(int, int, HWND);
+    bool InitializeShader(HWND);
+    bool InitializeModel(int, int, HWND);
     void Shutdown();
     bool Frame(float fDeltaTime);
     bool Render();
+    bool RenderImGui();
     bool RenderScene();
-    bool RenderToTexture();
-
-    CameraClass* GetCamera();
+    bool RenderReflectionToTexture();
+    bool RenderRefractionToTexture();
 
 private:
-    D3DClass* m_Direct3D = nullptr;
+    FrustumClass* m_Frustum = nullptr;
     HWND* m_Hwnd = nullptr;
-    CameraClass* m_Camera = nullptr;
+
+
+private:
     ModelClass* m_Model = nullptr;
+    ModelClass* m_FloorModel = nullptr;
+    LightClass* m_Light = nullptr;
+    TextClass* m_Text = nullptr;
+    BitmapClass* m_Bitmap = nullptr;
+    ModelLoader* m_ModelLoader = nullptr;
+    RenderTextureClass* m_ReflectionRenderTexture = nullptr;
+    RenderTextureClass* m_RefractionRenderTexture = nullptr;
+    TerrainClass* m_Terrain = nullptr;
+    ModelListClass* m_ModelList = nullptr;
+    SkydomeClass* m_Skydome = nullptr;
+    WModel* m_Wmodel;
+
+
+private:
+    ReflectionShaderClass* m_ReflectionShader = nullptr;
+    TextureShaderClass* m_TextureShader = nullptr;
     LightShaderClass* m_LightShader = nullptr;
     BumpMapShaderClass* m_BumpMapShader = nullptr;
-    LightClass* m_Light = nullptr;
+    ColorShaderClass* m_ColorShader = nullptr;
+    TerrainShaderClass* m_TerrainShader = nullptr;
+    TerrainReflectionShaderClass* m_TerrainReflectionShader = nullptr;
+    SkydomeShaderClass* m_SkydomeShader = nullptr;
+    WaterShaderClass* m_WaterShader = nullptr;
+    float m_waterHeight = 0;
+    float m_waterTranslation = 0;
 
-    BitmapClass* m_Bitmap = nullptr;
-    TextureShaderClass* m_TextureShader = nullptr;
 
-    TextClass* m_Text = nullptr;
-
-    FrustumClass* m_Frustum = nullptr;
-    ModelListClass* m_ModelList = nullptr;
-
-    ModelLoader* m_ModelLoader = nullptr;
-    ModelClass* m_FloorModel = nullptr;
-
-    ReflectionShaderClass* m_ReflectionShader = nullptr;
-    RenderTextureClass* m_RenderTexture = nullptr;
 
     float m_fDeltaTime;
 };

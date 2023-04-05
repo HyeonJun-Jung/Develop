@@ -16,15 +16,17 @@
 #include<d3dcommon.h>
 #include<d3d11.h>
 #include<DirectXMath.h>
+#include "Singleton.h"
 using namespace DirectX;
 
-class D3DClass
+class D3DClass : public Singleton<D3DClass>
 {
 public:
     D3DClass();
     D3DClass(const D3DClass&);
     ~D3DClass();
 
+public:
     bool Initialize(int, int, bool, HWND, bool, float, float);
     void Shutdown();
 
@@ -47,6 +49,11 @@ public:
 
     void TurnOnAlphaBlending();
     void TurnOffAlphaBlending();
+
+    void TurnOnCulling();
+    void TurnOffCulling();
+    
+    void ResetViewport();
 
     void SetBackBufferRenderTarget();
 
@@ -71,6 +78,8 @@ private:
     ID3D11DepthStencilState* m_depthDisabledStencilState = nullptr;
     ID3D11BlendState* m_alphaEnableBlendingState = nullptr;
     ID3D11BlendState* m_alphaDisableBlendingState = nullptr;
+    ID3D11RasterizerState* m_rasterStateNoCulling = nullptr;
+    D3D11_VIEWPORT m_viewport;
 
 };
 

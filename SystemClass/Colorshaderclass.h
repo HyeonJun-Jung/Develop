@@ -10,14 +10,15 @@
 #include <DirectXMath.h>
 #include <d3dcompiler.h>
 #include <fstream>
+#include "Shader.h"
+
 using namespace DirectX;
 using namespace std;
-
 
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: ColorShaderClass
 ////////////////////////////////////////////////////////////////////////////////
-class ColorShaderClass
+class ColorShaderClass : public Shader
 {
 private:
 	struct MatrixBufferType

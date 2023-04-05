@@ -1,4 +1,7 @@
 #include "D3DClass.h"
+
+D3DClass* D3DClass::m_Instance = nullptr;
+
 D3DClass::D3DClass()
 {
     m_swapChain = 0;
@@ -320,20 +323,35 @@ bool D3DClass::Initialize(int screenWidth, int screenHeight, bool vsync, HWND hw
         return false;
     }
 
+    // 배면 컬링을 하지 않는 레스터 상태 생성
+    rasterDesc.CullMode = D3D11_CULL_NONE;
+    rasterDesc.DepthBias = 0;
+    rasterDesc.DepthBiasClamp = 0.0f;
+    rasterDesc.DepthClipEnable = true;
+    rasterDesc.FillMode = D3D11_FILL_SOLID;
+    rasterDesc.FrontCounterClockwise = false;
+    rasterDesc.MultisampleEnable = false;
+    rasterDesc.ScissorEnable = false;
+    rasterDesc.SlopeScaledDepthBias = 0.0f;
+
+    result = m_device->CreateRasterizerState(&rasterDesc, &m_rasterStateNoCulling);
+    if (FAILED(result))
+        return false;
+
     // 래스터화기 상태를 설정합니다.
     m_deviceContext->RSSetState(m_rasterState);
 
     // 렌더링을 위한 뷰포트를 설정합니다.
-    D3D11_VIEWPORT viewport;
-    viewport.Width = (float)screenWidth;
-    viewport.Height = (float)screenHeight;
-    viewport.MinDepth = 0.0f;
-    viewport.MaxDepth = 1.0f;
-    viewport.TopLeftX = 0.0f;
-    viewport.TopLeftY = 0.0f;
+    m_viewport;
+    m_viewport.Width = (float)screenWidth;
+    m_viewport.Height = (float)screenHeight;
+    m_viewport.MinDepth = 0.0f;
+    m_viewport.MaxDepth = 1.0f;
+    m_viewport.TopLeftX = 0.0f;
+    m_viewport.TopLeftY = 0.0f;
 
     // 뷰포트를 생성합니다.
-    m_deviceContext->RSSetViewports(1, &viewport);  
+    m_deviceContext->RSSetViewports(1, &m_viewport);
     
     // 투영 행렬을 설정합니다.
     float fieldOfView, screenAspect;
@@ -399,7 +417,6 @@ bool D3DClass::Initialize(int screenWidth, int screenHeight, bool vsync, HWND hw
     blendStateDescription.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
     blendStateDescription.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
     blendStateDescription.RenderTarget[0].RenderTargetWriteMask = 0x0f;
-
     // Create the blend state using the description.
     result = m_device->CreateBlendState(&blendStateDescription, &m_alphaEnableBlendingState);
     if (FAILED(result))
@@ -450,6 +467,12 @@ void D3DClass::Shutdown()
     {
         m_rasterState->Release();
         m_rasterState = 0;
+    }
+
+    if (m_rasterStateNoCulling)
+    {
+        m_rasterStateNoCulling->Release();
+        m_rasterStateNoCulling = 0;
     }
 
     if (m_depthStencilView)
@@ -611,6 +634,22 @@ void D3DClass::TurnOffAlphaBlending()
     blendFactor[3] = 0.0f;
 
     m_deviceContext->OMSetBlendState(m_alphaDisableBlendingState, blendFactor, 0xffffffff);
+}
+
+void D3DClass::TurnOnCulling()
+{
+    m_deviceContext->RSSetState(m_rasterState);
+}
+
+void D3DClass::TurnOffCulling()
+{
+    m_deviceContext->RSSetState(m_rasterStateNoCulling);
+}
+
+void D3DClass::ResetViewport()
+{
+    // 뷰포트를 재설정합니다.
+    m_deviceContext->RSSetViewports(1, &m_viewport);
 }
 
 void D3DClass::SetBackBufferRenderTarget()

@@ -8,20 +8,21 @@
 //////////////
 #include <DirectXMath.h>
 #include "Flag.h"
-
+#include "Singleton.h"
 using namespace DirectX;
 
 
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: CameraClass
 ////////////////////////////////////////////////////////////////////////////////
-class CameraClass
+class CameraClass : public Singleton<CameraClass>
 {
 public:
 	CameraClass();
 	CameraClass(const CameraClass&);
 	~CameraClass();
 
+public:
 	XMFLOAT3 GetCameraForwardDirection();
 	XMFLOAT3 GetCameraRightDirection();
 
@@ -47,6 +48,9 @@ private:
 
 	XMFLOAT3 m_up;
 	XMFLOAT3 m_lookAt;
+
+	XMVECTOR m_UpVector;
+	XMVECTOR m_LookAtVector;
 
 	XMMATRIX m_viewMatrix;
 	XMMATRIX m_reflectionViewMatrix;

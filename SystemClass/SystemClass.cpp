@@ -7,9 +7,8 @@
 #include "PositionClass.h"
 #include "CameraClass.h"
 #include "Flag.h"
-#include "Imgui/imgui.h"
-#include "Imgui/imgui_impl_dx11.h"
-#include "Imgui/imgui_impl_win32.h"
+
+#include "..\stdafx.h"
 
 SystemClass::SystemClass()
 {
@@ -43,6 +42,8 @@ bool SystemClass::Frame()
 
     m_Position->SetFrameTime(m_Timer->GetTime());
 
+  
+
     /*
     bool KeyDown = m_Input->IsLeftArrowPressed();
     m_Position->TurnLeft(KeyDown);
@@ -53,55 +54,53 @@ bool SystemClass::Frame()
 
     if (m_Input->IsCameraRotationLeft())
     {
-        m_Camera->CameraRotation(RT_LEFT);
+        CameraClass::GetSingleton()->CameraRotation(RT_LEFT);
     }
 
     if (m_Input->IsCameraRotationRight())
     {
-        m_Camera->CameraRotation(RT_RIGHT);
+        CameraClass::GetSingleton()->CameraRotation(RT_RIGHT);
     }
 
     if (m_Input->IsCameraRotationUp())
     {
-        m_Camera->CameraRotation(RT_UP);
+        CameraClass::GetSingleton()->CameraRotation(RT_UP);
     }
 
     if (m_Input->IsCameraRotationDown())
     {
-        m_Camera->CameraRotation(RT_DOWN);
+        CameraClass::GetSingleton()->CameraRotation(RT_DOWN);
     }
 
     if (m_Input->IsCameraZoomIn())
     {
-        m_Camera->CameraMove(MD_FRONT);
+        CameraClass::GetSingleton()->CameraMove(MD_FRONT);
     }
 
     if (m_Input->IsCameraZoomOut())
     {
-        m_Camera->CameraMove(MD_BACK);
+        CameraClass::GetSingleton()->CameraMove(MD_BACK);
     }
     
     if (m_Input->IsCameraMoveLeft())
     {
-        m_Camera->CameraMove(MD_LEFT);
+        CameraClass::GetSingleton()->CameraMove(MD_LEFT);
     }
 
     if (m_Input->IsCameraMoveRight())
     {
-        m_Camera->CameraMove(MD_RIGHT);
+        CameraClass::GetSingleton()->CameraMove(MD_RIGHT);
     }
 
 
     m_Graphics->Frame(m_Timer->GetTime());
 
-    return m_Graphics->Render();
 }
 
 void SystemClass::Run()
 {
     MSG msg;
     bool result;
-
 
     // 메세지 구조체를 초기화합니다.
     ZeroMemory(&msg, sizeof(MSG));
@@ -213,7 +212,7 @@ bool SystemClass::Initialize()
     }
 
     // Camera 객체를 받아옵니다.
-    m_Camera = m_Graphics->GetCamera();
+   // m_Camera = m_Graphics->GetCamera();
     
 
     // Fps 객체를 생성합니다.

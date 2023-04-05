@@ -12,6 +12,13 @@ private:
         XMMATRIX projection;
     };
 
+    struct LightBufferType
+    {
+        XMFLOAT4 lightDiffuseColor;
+        XMFLOAT3 lightDirection;
+        float colorTextureBrightness;
+    };
+
     struct ReflectionBufferType
     {
         XMMATRIX reflectionMatrix;

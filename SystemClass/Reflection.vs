@@ -48,10 +48,10 @@ PixelInputType ReflectionVertexShader(VertexInputType input)
     // 픽셀 셰이더에 넘길 텍스쳐 좌표를 저장합니다.
     output.tex = input.tex;
 
-    // 반사 투영 월드 행렬을 생성합니다.
+    // 반사 투영 월드 행렬을 생성합니다.   
     reflectProjectWorld = mul(reflectionMatrix, projectionMatrix);
-    reflectProjectWorld = mul(worldMatrix, reflectProjectWorld);
-
+    reflectProjectWorld = mul(worldMatrix, reflectProjectWorld);    
+ 
     // reflectProjectWorld 행렬에 비추어 입력 위치를 계산합니다.
     output.reflectionPosition = mul(input.position, reflectProjectWorld);
 

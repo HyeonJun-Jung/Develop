@@ -18,7 +18,8 @@ using namespace std;
 #include <d3d11.h>
 #include <d3dcompiler.h>
 #include <directxmath.h>
-#include "DDSTextureLoader.h"	//DDS 颇老 贸府
+
+#include "SystemClass/DDSTextureLoader.h"	//DDS 颇老 贸府
 using namespace DirectX;
 
 ///////////////////////////
