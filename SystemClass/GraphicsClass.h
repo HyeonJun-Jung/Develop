@@ -62,6 +62,7 @@ public:
     bool InitializeModel(int, int, HWND);
     void Shutdown();
     bool Frame(float fDeltaTime);
+    bool Update(float fDeltaTime);
     bool Render();
     bool RenderImGui();
     bool RenderScene();

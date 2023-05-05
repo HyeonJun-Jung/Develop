@@ -112,26 +112,8 @@
     <Filter Include="SystemClass\GraphicsClass\Resources\Model">
       <UniqueIdentifier>{577cb4fc-587f-4129-9d35-242c91b2e16a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SystemClass\GraphicsClass\Resources\Model\TextureClass">
-      <UniqueIdentifier>{74f9511d-c127-49ca-813a-b72a8b68b60b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SystemClass\GraphicsClass\Resources\Model\BitmapClass">
-      <UniqueIdentifier>{83378501-0907-4e83-b8c4-ed1659fb1cb4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SystemClass\GraphicsClass\Resources\Model\TextClass">
-      <UniqueIdentifier>{b4e6c29b-6b92-4c72-a550-4961fb639432}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SystemClass\GraphicsClass\Resources\Model\TextClass\FontClass">
-      <UniqueIdentifier>{491ca1b1-76f8-4178-bcd4-bf0e91ec8fc2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SystemClass\GraphicsClass\Resources\Model\TextClass\FontShaderClass">
-      <UniqueIdentifier>{be0d24b8-95b7-4ff9-9581-115a061bc845}</UniqueIdentifier>
-    </Filter>
     <Filter Include="SystemClass\GraphicsClass\Resources\Model\ModelListClass">
       <UniqueIdentifier>{cb721798-e1d7-431d-b967-04135b965eeb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SystemClass\GraphicsClass\Resources\Model\SkinnedModel">
-      <UniqueIdentifier>{766441ae-4076-49c5-adde-72032006e46e}</UniqueIdentifier>
     </Filter>
     <Filter Include="SystemClass\GraphicsClass\Resources\Model\WModel">
       <UniqueIdentifier>{93446f52-2e3b-41c4-912c-c8848c58479f}</UniqueIdentifier>
@@ -148,9 +130,6 @@
     <Filter Include="SystemClass\GraphicsClass\Shader\WaterShaderClass">
       <UniqueIdentifier>{9fb0a838-03a1-4c66-a0b3-f5382937b341}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SystemClass\GraphicsClass\Resources\Obb">
-      <UniqueIdentifier>{b27b916e-c045-454a-92a4-fbfd04c9badf}</UniqueIdentifier>
-    </Filter>
     <Filter Include="SystemClass\Manager\ShaderManager">
       <UniqueIdentifier>{a3f132fd-420b-4f35-acbc-b0823558682d}</UniqueIdentifier>
     </Filter>
@@ -159,6 +138,36 @@
     </Filter>
     <Filter Include="SystemClass\GraphicsClass\Shader\ColorShaderClass">
       <UniqueIdentifier>{8d8d4f41-53d4-46a3-b433-b761874006c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\Manager\TerrainManager">
+      <UniqueIdentifier>{f46fdd38-4a0f-4a91-9348-0a674cc6acdd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\GraphicsClass\Resources\Model\WModel\SkinnedModel">
+      <UniqueIdentifier>{766441ae-4076-49c5-adde-72032006e46e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\GraphicsClass\Resources\Model\StaticModel">
+      <UniqueIdentifier>{7db16ecb-126d-44f5-a1f4-e124bce142ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\GraphicsClass\Resources\Model\DynamicModel">
+      <UniqueIdentifier>{74fd85ce-5e40-46ab-86d3-60b8a485ed5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\GraphicsClass\Resources\BitmapClass">
+      <UniqueIdentifier>{83378501-0907-4e83-b8c4-ed1659fb1cb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\GraphicsClass\Resources\TextClass">
+      <UniqueIdentifier>{b4e6c29b-6b92-4c72-a550-4961fb639432}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\GraphicsClass\Resources\TextClass\FontClass">
+      <UniqueIdentifier>{491ca1b1-76f8-4178-bcd4-bf0e91ec8fc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\GraphicsClass\Resources\TextClass\FontShaderClass">
+      <UniqueIdentifier>{be0d24b8-95b7-4ff9-9581-115a061bc845}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\GraphicsClass\Resources\TextureClass">
+      <UniqueIdentifier>{74f9511d-c127-49ca-813a-b72a8b68b60b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\GraphicsClass\Resources\Model\Obb">
+      <UniqueIdentifier>{b27b916e-c045-454a-92a4-fbfd04c9badf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -190,7 +199,7 @@
       <Filter>SystemClass\GraphicsClass\Shader\TextureShaderClass</Filter>
     </ClCompile>
     <ClCompile Include="..\SystemClass\TextureClass.cpp">
-      <Filter>SystemClass\GraphicsClass\Resources\Model\TextureClass</Filter>
+      <Filter>SystemClass\GraphicsClass\Resources\TextureClass</Filter>
     </ClCompile>
     <ClCompile Include="..\SystemClass\LightShaderClass.cpp">
       <Filter>SystemClass\GraphicsClass\Shader\LightShaderClass</Filter>
@@ -202,16 +211,16 @@
       <Filter>SystemClass\GraphicsClass\Shader\LightShaderClass\LightClass</Filter>
     </ClCompile>
     <ClCompile Include="..\SystemClass\BitmapClass.cpp">
-      <Filter>SystemClass\GraphicsClass\Resources\Model\BitmapClass</Filter>
+      <Filter>SystemClass\GraphicsClass\Resources\BitmapClass</Filter>
     </ClCompile>
     <ClCompile Include="..\SystemClass\TextClass.cpp">
-      <Filter>SystemClass\GraphicsClass\Resources\Model\TextClass</Filter>
+      <Filter>SystemClass\GraphicsClass\Resources\TextClass</Filter>
     </ClCompile>
     <ClCompile Include="..\SystemClass\FontClass.cpp">
-      <Filter>SystemClass\GraphicsClass\Resources\Model\TextClass\FontClass</Filter>
+      <Filter>SystemClass\GraphicsClass\Resources\TextClass\FontClass</Filter>
     </ClCompile>
     <ClCompile Include="..\SystemClass\FontShaderClass.cpp">
-      <Filter>SystemClass\GraphicsClass\Resources\Model\TextClass\FontShaderClass</Filter>
+      <Filter>SystemClass\GraphicsClass\Resources\TextClass\FontShaderClass</Filter>
     </ClCompile>
     <ClCompile Include="..\SystemClass\FpsClass.cpp">
       <Filter>SystemClass\FpsClass</Filter>
@@ -289,7 +298,7 @@
       <Filter>SystemClass\GraphicsClass\Shader\SkydomeShaderClass</Filter>
     </ClCompile>
     <ClCompile Include="..\SystemClass\SkinnedModel.cpp">
-      <Filter>SystemClass\GraphicsClass\Resources\Model\SkinnedModel</Filter>
+      <Filter>SystemClass\GraphicsClass\Resources\Model\WModel\SkinnedModel</Filter>
     </ClCompile>
     <ClCompile Include="..\SystemClass\ShaderManager.cpp">
       <Filter>SystemClass\Manager\ShaderManager</Filter>
@@ -307,10 +316,13 @@
       <Filter>SystemClass\GraphicsClass\Shader\WaterShaderClass</Filter>
     </ClCompile>
     <ClCompile Include="..\SystemClass\Obb.cpp">
-      <Filter>SystemClass\GraphicsClass\Resources\Obb</Filter>
+      <Filter>SystemClass\GraphicsClass\Resources\Model\Obb</Filter>
     </ClCompile>
     <ClCompile Include="..\SystemClass\Shader.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\DynamicModel.cpp">
+      <Filter>SystemClass\GraphicsClass\Resources\Model\DynamicModel</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -351,7 +363,7 @@
       <Filter>SystemClass\GraphicsClass\Shader\TextureShaderClass</Filter>
     </ClInclude>
     <ClInclude Include="..\SystemClass\TextureClass.h">
-      <Filter>SystemClass\GraphicsClass\Resources\Model\TextureClass</Filter>
+      <Filter>SystemClass\GraphicsClass\Resources\TextureClass</Filter>
     </ClInclude>
     <ClInclude Include="..\SystemClass\LightShaderClass.h">
       <Filter>SystemClass\GraphicsClass\Shader\LightShaderClass</Filter>
@@ -363,16 +375,16 @@
       <Filter>SystemClass\GraphicsClass\Shader\LightShaderClass\LightClass</Filter>
     </ClInclude>
     <ClInclude Include="..\SystemClass\BitmapClass.h">
-      <Filter>SystemClass\GraphicsClass\Resources\Model\BitmapClass</Filter>
+      <Filter>SystemClass\GraphicsClass\Resources\BitmapClass</Filter>
     </ClInclude>
     <ClInclude Include="..\SystemClass\TextClass.h">
-      <Filter>SystemClass\GraphicsClass\Resources\Model\TextClass</Filter>
+      <Filter>SystemClass\GraphicsClass\Resources\TextClass</Filter>
     </ClInclude>
     <ClInclude Include="..\SystemClass\FontClass.h">
-      <Filter>SystemClass\GraphicsClass\Resources\Model\TextClass\FontClass</Filter>
+      <Filter>SystemClass\GraphicsClass\Resources\TextClass\FontClass</Filter>
     </ClInclude>
     <ClInclude Include="..\SystemClass\FontShaderClass.h">
-      <Filter>SystemClass\GraphicsClass\Resources\Model\TextClass\FontShaderClass</Filter>
+      <Filter>SystemClass\GraphicsClass\Resources\TextClass\FontShaderClass</Filter>
     </ClInclude>
     <ClInclude Include="..\SystemClass\FpsClass.h">
       <Filter>SystemClass\FpsClass</Filter>
@@ -1167,7 +1179,7 @@
       <Filter>SystemClass\GraphicsClass\Shader\SkydomeShaderClass</Filter>
     </ClInclude>
     <ClInclude Include="..\SystemClass\SkinnedModel.h">
-      <Filter>SystemClass\GraphicsClass\Resources\Model\SkinnedModel</Filter>
+      <Filter>SystemClass\GraphicsClass\Resources\Model\WModel\SkinnedModel</Filter>
     </ClInclude>
     <ClInclude Include="..\SystemClass\ShaderManager.h">
       <Filter>SystemClass\Manager\ShaderManager</Filter>
@@ -1185,10 +1197,13 @@
       <Filter>SystemClass\GraphicsClass\Shader\WaterShaderClass</Filter>
     </ClInclude>
     <ClInclude Include="..\SystemClass\Obb.h">
-      <Filter>SystemClass\GraphicsClass\Resources\Obb</Filter>
+      <Filter>SystemClass\GraphicsClass\Resources\Model\Obb</Filter>
     </ClInclude>
     <ClInclude Include="..\SystemClass\Shader.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\DynamicModel.h">
+      <Filter>SystemClass\GraphicsClass\Resources\Model\DynamicModel</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -230,7 +230,6 @@ bool BumpMapShaderClass::InitializeShader(ID3D11Device* device, HWND hwnd, WCHAR
 	polygonLayout[6].SemanticName = "BLENDINDICES";
 	polygonLayout[6].SemanticIndex = 0;
 	polygonLayout[6].Format = DXGI_FORMAT_R32G32B32A32_UINT;
-	//polygonLayout[6].Format = DXGI_FORMAT_R8G8B8A8_UINT;
 	polygonLayout[6].InputSlot = 0;
 	polygonLayout[6].AlignedByteOffset = D3D11_APPEND_ALIGNED_ELEMENT;
 	polygonLayout[6].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;

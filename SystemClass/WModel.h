@@ -17,9 +17,14 @@ public:
 	bool LoadWModel(string ModelDir);
 	void ReleaseModel();
 
-	bool Render(ID3D11DeviceContext* devcon, float fDeltatime);
+	virtual bool Render();
+	virtual bool Update(float fDeltaTime);
 
 	bool SetShader(BumpMapShaderClass* Shader);
+
+	void SetPosition(float PositionX, float PositionY, float PositionZ);
+	void SetScale(float ScaleX, float ScaleY, float ScaleZ);
+	void SetRotation(float RotationX, float RotationY, float RotationZ);
 
 	void PlayAnimation(int AnimationIndex);
 	void StopAnimation();
@@ -31,7 +36,7 @@ public:
 private:
 	SkinnedModel* m_Skinnedmodel = nullptr;
 
-	BumpMapShaderClass* m_Shader = nullptr;
+	BumpMapShaderClass* m_Shader;
 
 	// WorldMatrix ¿ä¼Ò        
 	WMType m_WMType;

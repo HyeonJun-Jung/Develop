@@ -150,6 +150,7 @@
     <ClCompile Include="..\SystemClass\CpuClass.cpp" />
     <ClCompile Include="..\SystemClass\D3DClass.cpp" />
     <ClCompile Include="..\SystemClass\DDSTextureLoader.cpp" />
+    <ClCompile Include="..\SystemClass\DynamicModel.cpp" />
     <ClCompile Include="..\SystemClass\FontClass.cpp" />
     <ClCompile Include="..\SystemClass\FontShaderClass.cpp" />
     <ClCompile Include="..\SystemClass\FpsClass.cpp" />
@@ -438,6 +439,7 @@
     <ClInclude Include="..\SystemClass\CpuClass.h" />
     <ClInclude Include="..\SystemClass\D3DClass.h" />
     <ClInclude Include="..\SystemClass\DDSTextureLoader.h" />
+    <ClInclude Include="..\SystemClass\DynamicModel.h" />
     <ClInclude Include="..\SystemClass\Flag.h" />
     <ClInclude Include="..\SystemClass\FontClass.h" />
     <ClInclude Include="..\SystemClass\FontShaderClass.h" />

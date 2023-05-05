@@ -186,8 +186,7 @@ bool GraphicsClass::InitializeShader(HWND hwnd)
 
     ImguiManager::GetSingleton()->Initialize(hwnd, D3DClass::GetSingleton()->GetDevice(), D3DClass::GetSingleton()->GetDeviceContext());
 
-    if (!m_Wmodel->SetShader(m_BumpMapShader))
-        return false;
+    
 
     return true;
 }
@@ -244,11 +243,13 @@ bool GraphicsClass::InitializeModel(int screenWidth, int screenHeight, HWND hwnd
     if (!m_Wmodel)
         return false;
 
-    string WmodelFileName = "../SystemClass/data/Jumping.fbx";
+    string WmodelFileName = "../SystemClass/data/Standard Walk.fbx";
 
     if (!m_Wmodel->LoadWModel(WmodelFileName))
         return false;
 
+    if (!m_Wmodel->SetShader(m_BumpMapShader))
+        return false;
 
     m_FloorModel = new ModelClass;
     if (!m_FloorModel)
@@ -393,22 +394,6 @@ void GraphicsClass::Shutdown()
         delete m_Model;
         m_Model = 0;
     }
-    /*
-    // m_Camera 객체 반환
-    if (m_Camera)
-    {
-        delete m_Camera;
-        m_Camera = 0;
-    }
-
-    // D3D 객체를 반환합니다.
-    if (m_Direct3D)
-    {
-        m_Direct3D->Shutdown();
-        delete m_Direct3D;
-        m_Direct3D = 0;
-    }
-    */
 
     // Set the height of the water.
     m_waterHeight = 3.5f;
@@ -424,6 +409,8 @@ bool GraphicsClass::Frame(float fDeltaTime)
 {
     m_fDeltaTime = fDeltaTime;
 
+    
+
     // Update the position of the water to simulate motion.
     m_waterTranslation += 0.001f;
     if (m_waterTranslation > 1.0f)
@@ -431,13 +418,23 @@ bool GraphicsClass::Frame(float fDeltaTime)
         m_waterTranslation -= 1.0f;
     }
 
-  //  m_ModelLoader->UpdateAnimation(fDeltaTime * 10);
+    if (!Update(fDeltaTime))
+        return false;
 
-    Render();
+    if (!Render())
+        return false;
 
     
 
     return true;
+}
+
+bool GraphicsClass::Update(float fDeltaTime)
+{
+    if (!m_Wmodel->Update(fDeltaTime))
+    {
+        return false;
+    }
 }
 
 bool GraphicsClass::Render()
@@ -545,8 +542,7 @@ bool GraphicsClass::RenderReflectionToTexture()
 }
 
 bool GraphicsClass::RenderRefractionToTexture()
-{
-    
+{   
     XMMATRIX WorldMatrix, ViewMatrix, ProjectionMatrix;
 
     m_RefractionRenderTexture->SetRenderTarget(D3DClass::GetSingleton()->GetDeviceContext());
@@ -667,7 +663,7 @@ bool GraphicsClass::RenderScene()
 
      m_Wmodel->PlayAnimation(0);
 
-    if (!m_Wmodel->Render(D3DClass::GetSingleton()->GetDeviceContext(), m_fDeltaTime))
+    if (!m_Wmodel->Render())
     {
         return false;
     }
@@ -678,21 +674,8 @@ bool GraphicsClass::RenderScene()
     {
         return false;
     }
-    
-    
-        /*
-        worldMatrix = XMMatrixRotationY(rotation);
 
-        // 모델 버텍스와 인덱스 버퍼를 그래픽 파이프 라인에 배치하여 렌더링 합니다.
-        m_Model->Render(D3DClass::GetSingleton()->GetDeviceContext());
 
-        // Render the model with the texture shader.
-        if (!m_TextureShader->Render(D3DClass::GetSingleton()->GetDeviceContext(), m_Model->GetIndexCount(), worldMatrix, viewMatrix,
-            projectionMatrix, m_Model->GetTexture()))
-        {
-            return false;
-        }
-        */
     D3DClass::GetSingleton()->GetWorldMatrix(worldMatrix);
     worldMatrix = XMMatrixTranslation(240.0f, 3.5f, 250.0f);
 
@@ -701,12 +684,6 @@ bool GraphicsClass::RenderScene()
     CameraClass::GetSingleton()->GetReflectionViewMatrix(ReflectionMatrix);
 
     m_FloorModel->Render(D3DClass::GetSingleton()->GetDeviceContext());   
-    
-    /*
-    if (!m_ReflectionShader->Render(D3DClass::GetSingleton()->GetDeviceContext(), m_FloorModel->GetIndexCount(), worldMatrix, viewMatrix, projectionMatrix,
-        m_FloorModel->GetTexture(), m_RefractionRenderTexture->GetShaderResourceView(), ReflectionMatrix))
-        return false;
-       */
 
     if (!m_WaterShader->Render(D3DClass::GetSingleton()->GetDeviceContext(), m_FloorModel->GetIndexCount(), worldMatrix, viewMatrix,
         projectionMatrix, ReflectionMatrix, m_ReflectionRenderTexture->GetShaderResourceView(),

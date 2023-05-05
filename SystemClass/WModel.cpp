@@ -38,7 +38,14 @@ bool WModel::LoadWModel(string ModelDir)
 	return true;
 }
 
-bool WModel::Render(ID3D11DeviceContext* devcon, float fDeltatime)
+bool WModel::Render()
+{	
+	m_Skinnedmodel->Render(D3DClass::GetSingleton()->GetDeviceContext());
+
+	return true;
+}
+
+bool WModel::Update(float fDeltaTime)
 {
 	/// <summary>
 	///	상수 버퍼 세팅
@@ -56,25 +63,25 @@ bool WModel::Render(ID3D11DeviceContext* devcon, float fDeltatime)
 	XMMATRIX viewMatrix; CameraClass::GetSingleton()->GetViewMatrix(viewMatrix);
 	XMMATRIX projectionMatrix; D3DClass::GetSingleton()->GetProjectionMatrix(projectionMatrix);
 
-	
+
 
 	if (PlayAni != -1)
 	{
 		vector<Animation>* AniList = m_Skinnedmodel->GetAnimationList();
 		Animation* animation = &(*AniList)[PlayAni];
-		PlayTime = fmod(PlayTime + fDeltatime * animation->TicksPerSecond, animation->Duration);
-		//m_Skinnedmodel->UpdateBoneFinalMatrix(PlayAni, PlayTime, BoneFinalTransform);	
+		PlayTime = fmod(PlayTime + fDeltaTime * animation->TicksPerSecond, animation->Duration);
+		m_Skinnedmodel->UpdateBoneFinalMatrix(PlayAni, PlayTime, BoneFinalTransform);
 
-		
+		/*
 		worldMatrix = m_Skinnedmodel->GetRootNodeTransform(PlayAni, PlayTime, m_Skinnedmodel->GetRootNode());
-		
+
 		int BoneNum = m_Skinnedmodel->GetBoneNum();
 		for (int i = 0; i < BoneNum; i++)
 		{
 			BoneFinalTransform[i] = XMMatrixIdentity();
 
 		}
-		
+		*/
 	}
 	else
 	{
@@ -85,17 +92,12 @@ bool WModel::Render(ID3D11DeviceContext* devcon, float fDeltatime)
 		}
 	}
 
-	if (!m_Shader->SetMatrixBuffer(devcon, worldMatrix, viewMatrix, projectionMatrix))
+	if (!m_Shader->SetMatrixBuffer(D3DClass::GetSingleton()->GetDeviceContext(), worldMatrix, viewMatrix, projectionMatrix))
 		return false;
 
 	if (!SetBoneTransform())
 		return false;
 
-	
-	m_Skinnedmodel->Render(D3DClass::GetSingleton()->GetDeviceContext());
-
-
-	return true;
 }
 
 bool WModel::SetShader(BumpMapShaderClass* Shader)
@@ -156,3 +158,23 @@ void WModel::ReleaseModel()
 	m_Skinnedmodel = nullptr;
 }
 
+void WModel::SetPosition(float PositionX, float PositionY, float PositionZ)
+{
+	m_WMType.Transx = PositionX;
+	m_WMType.Transy = PositionY;
+	m_WMType.Transz = PositionZ;
+}
+
+void WModel::SetScale(float ScaleX, float ScaleY, float ScaleZ)
+{
+	m_WMType.ScaleX = ScaleX;
+	m_WMType.ScaleY = ScaleY;
+	m_WMType.ScaleZ = ScaleZ;
+}
+
+void WModel::SetRotation(float RotationX, float RotationY, float RotationZ)
+{
+	m_WMType.RotationX = RotationX;
+	m_WMType.RotationY = RotationY;
+	m_WMType.RotationZ = RotationZ;
+}
