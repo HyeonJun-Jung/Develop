@@ -112,9 +112,6 @@
     <Filter Include="SystemClass\GraphicsClass\Resources\Model">
       <UniqueIdentifier>{577cb4fc-587f-4129-9d35-242c91b2e16a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SystemClass\GraphicsClass\Resources\Model\ModelListClass">
-      <UniqueIdentifier>{cb721798-e1d7-431d-b967-04135b965eeb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="SystemClass\GraphicsClass\Resources\Model\WModel">
       <UniqueIdentifier>{93446f52-2e3b-41c4-912c-c8848c58479f}</UniqueIdentifier>
     </Filter>
@@ -168,6 +165,12 @@
     </Filter>
     <Filter Include="SystemClass\GraphicsClass\Resources\Model\Obb">
       <UniqueIdentifier>{b27b916e-c045-454a-92a4-fbfd04c9badf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\GraphicsClass\FrustumClass\ModelListClass">
+      <UniqueIdentifier>{cb721798-e1d7-431d-b967-04135b965eeb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\GraphicsClass\Resources\Model\DynamicModel\01. Player">
+      <UniqueIdentifier>{02e58f9b-d43f-46ca-bad9-f0142e90be45}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -235,7 +238,7 @@
       <Filter>SystemClass\GraphicsClass\FrustumClass</Filter>
     </ClCompile>
     <ClCompile Include="..\SystemClass\ModelListClass.cpp">
-      <Filter>SystemClass\GraphicsClass\Resources\Model\ModelListClass</Filter>
+      <Filter>SystemClass\GraphicsClass\FrustumClass\ModelListClass</Filter>
     </ClCompile>
     <ClCompile Include="..\SystemClass\PositionClass.cpp">
       <Filter>SystemClass\PositionClass</Filter>
@@ -324,6 +327,12 @@
     <ClCompile Include="..\SystemClass\DynamicModel.cpp">
       <Filter>SystemClass\GraphicsClass\Resources\Model\DynamicModel</Filter>
     </ClCompile>
+    <ClCompile Include="..\SystemClass\StaticModel.cpp">
+      <Filter>SystemClass\GraphicsClass\Resources\Model\StaticModel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\Player.cpp">
+      <Filter>SystemClass\GraphicsClass\Resources\Model\DynamicModel\01. Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\SystemClass\InputClass.h">
@@ -399,7 +408,7 @@
       <Filter>SystemClass\GraphicsClass\FrustumClass</Filter>
     </ClInclude>
     <ClInclude Include="..\SystemClass\ModelListClass.h">
-      <Filter>SystemClass\GraphicsClass\Resources\Model\ModelListClass</Filter>
+      <Filter>SystemClass\GraphicsClass\FrustumClass\ModelListClass</Filter>
     </ClInclude>
     <ClInclude Include="..\SystemClass\PositionClass.h">
       <Filter>SystemClass\PositionClass</Filter>
@@ -1204,6 +1213,12 @@
     </ClInclude>
     <ClInclude Include="..\SystemClass\DynamicModel.h">
       <Filter>SystemClass\GraphicsClass\Resources\Model\DynamicModel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\StaticModel.h">
+      <Filter>SystemClass\GraphicsClass\Resources\Model\StaticModel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\Player.h">
+      <Filter>SystemClass\GraphicsClass\Resources\Model\DynamicModel\01. Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

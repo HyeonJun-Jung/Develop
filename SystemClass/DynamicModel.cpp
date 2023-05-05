@@ -1,6 +1,6 @@
 #include "DynamicModel.h"
 
-bool DynamicModel::Render(ID3D11DeviceContext* devcon, float fDeltatime)
+bool DynamicModel::Render()
 {
 
     return true;

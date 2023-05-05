@@ -170,6 +170,7 @@
     <ClCompile Include="..\SystemClass\ModelListClass.cpp" />
     <ClCompile Include="..\SystemClass\ModelManager.cpp" />
     <ClCompile Include="..\SystemClass\Obb.cpp" />
+    <ClCompile Include="..\SystemClass\Player.cpp" />
     <ClCompile Include="..\SystemClass\PositionClass.cpp" />
     <ClCompile Include="..\SystemClass\QuadtreeClass.cpp" />
     <ClCompile Include="..\SystemClass\ReflectionShaderClass.cpp" />
@@ -180,6 +181,7 @@
     <ClCompile Include="..\SystemClass\SkinnedModel.cpp" />
     <ClCompile Include="..\SystemClass\SkydomeClass.cpp" />
     <ClCompile Include="..\SystemClass\SkydomeShaderClass.cpp" />
+    <ClCompile Include="..\SystemClass\StaticModel.cpp" />
     <ClCompile Include="..\SystemClass\SystemClass.cpp" />
     <ClCompile Include="..\SystemClass\TerrainClass.cpp" />
     <ClCompile Include="..\SystemClass\TerrainReflectionShaderClass.cpp" />
@@ -463,6 +465,7 @@
     <ClInclude Include="..\SystemClass\ModelManager.h" />
     <ClInclude Include="..\SystemClass\ModelStructure.h" />
     <ClInclude Include="..\SystemClass\Obb.h" />
+    <ClInclude Include="..\SystemClass\Player.h" />
     <ClInclude Include="..\SystemClass\PositionClass.h" />
     <ClInclude Include="..\SystemClass\QuadtreeClass.h" />
     <ClInclude Include="..\SystemClass\ReflectionShaderClass.h" />
@@ -474,6 +477,7 @@
     <ClInclude Include="..\SystemClass\SkinnedModel.h" />
     <ClInclude Include="..\SystemClass\SkydomeClass.h" />
     <ClInclude Include="..\SystemClass\SkydomeShaderClass.h" />
+    <ClInclude Include="..\SystemClass\StaticModel.h" />
     <ClInclude Include="..\SystemClass\SystemClass.h" />
     <ClInclude Include="..\SystemClass\TerrainClass.h" />
     <ClInclude Include="..\SystemClass\TerrainReflectionShaderClass.h" />

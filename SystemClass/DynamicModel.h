@@ -4,7 +4,11 @@
 class DynamicModel : public WModel
 {
 public:
-	bool Render(ID3D11DeviceContext* devcon, float fDeltatime);
+	DynamicModel();
+	DynamicModel(const DynamicModel& mode);
+	~DynamicModel();
+
+	bool Render();
 	bool Update(float fDeltaTime);
 
 };
