@@ -13,7 +13,7 @@ ImguiManager::~ImguiManager()
     ImGui::DestroyContext();
 }
 
-void ImguiManager::Initialize(HWND hwnd, ID3D11Device* device, ID3D11DeviceContext* devicecontext)
+bool ImguiManager::Initialize(HWND hwnd, ID3D11Device* device, ID3D11DeviceContext* devicecontext)
 {
     this->hwnd = hwnd;
     this->device = device;
@@ -28,7 +28,7 @@ void ImguiManager::Initialize(HWND hwnd, ID3D11Device* device, ID3D11DeviceConte
     ImGui_ImplDX11_Init(device, devicecontext);
     ImGui::StyleColorsDark();
 
-
+    return true;
     
 }
 

@@ -23,8 +23,8 @@
 #include "ModelManager.h"
 #include "WModel.h"
 #include "WaterShaderClass.h"
+#include "ShaderManager.h"
 
-#include "fbxsdk.h"
 
 GraphicsClass::GraphicsClass()
 {
@@ -55,14 +55,18 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
         return false;
     }
 
-    CameraClass::GetSingleton()->SetPosition(-10.0f, 0.0f, -30.0f);
-    CameraClass::GetSingleton()->Render();
+    if (!ImguiManager::GetSingleton()->Initialize(hwnd, D3DClass::GetSingleton()->GetDevice(), D3DClass::GetSingleton()->GetDeviceContext()))
+        return false;
+
+    if (!ShaderManager::GetSingleton()->Initialize())
+        return false;
     
     // 카메라 포지션 설정
     CameraClass::GetSingleton()->SetPosition(0.f, 0.f, -10.0f);
-    //m_Camera->SetPosition(0.0f, 0.0f, -10.f);
+
     // 카메라 회전 설정
     CameraClass::GetSingleton()->SetRotation(0.0f, 0.0f, 0.0f);
+    CameraClass::GetSingleton()->Render();
 
     InitializeShader(hwnd);
     InitializeModel(screenWidth, screenHeight, hwnd);
@@ -72,25 +76,11 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 
 bool GraphicsClass::InitializeShader(HWND hwnd)
 {
-    ///////////////////////
+   ///////////////////////
    ///////////////////////
    //////   Shader  //////
    ///////////////////////
-   ///////////////////////
-
-   // m_LightShader 객체 생성
-    m_LightShader = new LightShaderClass;
-    if (!m_LightShader)
-    {
-        return false;
-    }
-
-    // m_LightShader 객체 초기화
-    if (!m_LightShader->Initialize(D3DClass::GetSingleton()->GetDevice(), hwnd))
-    {
-        MessageBox(hwnd, L"Could not intialize the Light Shader object.", L"Error", MB_OK);
-        return false;
-    }
+   ///////////////////////    
 
     // m_BumpMapShader 객체 생성
     m_BumpMapShader = new BumpMapShaderClass;
@@ -106,16 +96,8 @@ bool GraphicsClass::InitializeShader(HWND hwnd)
         return false;
     }
 
-    // m_ColorShader 객체 초기화
-    m_ColorShader = new ColorShaderClass;
-    if (!m_ColorShader)
-        return false;
+    ShaderManager::GetSingleton()->InsertShader(RT_Model, m_BumpMapShader);
 
-    if (!m_ColorShader->Initialize(D3DClass::GetSingleton()->GetDevice(), hwnd))
-    {
-        MessageBox(hwnd, L"Could not intialize the Bump Map Shader object.", L"Error", MB_OK);
-        return false;
-    }
 
     m_TerrainShader = new TerrainShaderClass;
     if (!m_TerrainShader)
@@ -124,12 +106,17 @@ bool GraphicsClass::InitializeShader(HWND hwnd)
     if (!m_TerrainShader->Initialize(D3DClass::GetSingleton()->GetDevice(), hwnd))
         return false;
 
+    ShaderManager::GetSingleton()->InsertShader(RT_Terrain, m_TerrainShader);
+
+
     m_TerrainReflectionShader = new TerrainReflectionShaderClass;
     if (!m_TerrainReflectionShader)
         return false;
 
     if (!m_TerrainReflectionShader->Initialize(D3DClass::GetSingleton()->GetDevice(), hwnd))
         return false;
+
+    ShaderManager::GetSingleton()->InsertShader(RT_TerrainReflect, m_TerrainReflectionShader);
 
     m_SkydomeShader = new SkydomeShaderClass;
     if (!m_SkydomeShader)
@@ -140,42 +127,7 @@ bool GraphicsClass::InitializeShader(HWND hwnd)
         return false;
     }
 
-    string ModelDir = "../SystemClass/data/Standard Walk.fbx";
-
-    if (!ModelManager::GetSingleton()->LoadModel(ModelDir, hwnd, D3DClass::GetSingleton()->GetDevice(), D3DClass::GetSingleton()->GetDeviceContext()))
-        return false;
-
-
-
-    // m_TextureShader 객체 생성
-    m_TextureShader = new TextureShaderClass;
-    if (!m_TextureShader)
-    {
-        return false;
-    }
-
-    // m_TextureShader 객체 초기화
-    if (!m_TextureShader->Initialize(D3DClass::GetSingleton()->GetDevice(), hwnd))
-    {
-        return false;
-    }
-
-
-
-
-
-    // m_ReflectionShader 객체 생성
-    m_ReflectionShader = new ReflectionShaderClass;
-    if (!m_ReflectionShader)
-    {
-        return false;
-    }
-
-    // m_ReflectionShader 객체 초기화
-    if (!m_ReflectionShader->Initialize(D3DClass::GetSingleton()->GetDevice(), hwnd))
-    {
-        return false;
-    }
+    ShaderManager::GetSingleton()->InsertShader(RT_SkyDome, m_SkydomeShader); 
 
     m_WaterShader = new WaterShaderClass;
     if (!m_WaterShader)
@@ -183,10 +135,6 @@ bool GraphicsClass::InitializeShader(HWND hwnd)
 
     if (!m_WaterShader->Initialize(D3DClass::GetSingleton()->GetDevice(), hwnd))
         return false;
-
-    ImguiManager::GetSingleton()->Initialize(hwnd, D3DClass::GetSingleton()->GetDevice(), D3DClass::GetSingleton()->GetDeviceContext());
-
-    
 
     return true;
 }
@@ -199,25 +147,12 @@ bool GraphicsClass::InitializeModel(int screenWidth, int screenHeight, HWND hwnd
     {
         return false;
     }
-
-    XMMATRIX baseMatrix; CameraClass::GetSingleton()->GetViewMatrix(baseMatrix);
+   
     // m_Text 객체 초기화
+    XMMATRIX baseMatrix; CameraClass::GetSingleton()->GetViewMatrix(baseMatrix);
+
     if (!m_Text->Initialize(D3DClass::GetSingleton()->GetDevice(), D3DClass::GetSingleton()->GetDeviceContext(), hwnd, screenWidth, screenHeight, baseMatrix))
     {
-        return false;
-    }
-
-    // m_Model 객체 생성
-    m_Model = new ModelClass;
-    if (!m_Model)
-        return false;
-
-    WCHAR textureFilename[] = L"../SystemClass/data/seafloor2.dds";
-    char ModelFilename[] = "../SystemClass/data/test.txt";
-    // m_Model 객체 초기화
-    if (!m_Model->Initialize(hwnd, D3DClass::GetSingleton()->GetDevice(), D3DClass::GetSingleton()->GetDeviceContext(), ModelFilename, textureFilename))
-    {
-        MessageBox(hwnd, L"Could not intialize the model object.", L"Error", MB_OK);
         return false;
     }
 
@@ -245,10 +180,7 @@ bool GraphicsClass::InitializeModel(int screenWidth, int screenHeight, HWND hwnd
 
     string WmodelFileName = "../SystemClass/data/Standard Walk.fbx";
 
-    if (!m_Wmodel->LoadWModel(WmodelFileName))
-        return false;
-
-    if (!m_Wmodel->SetShader(m_BumpMapShader))
+    if (!m_Wmodel->Initialize(WmodelFileName))
         return false;
 
     m_FloorModel = new ModelClass;
@@ -335,34 +267,11 @@ void GraphicsClass::Shutdown()
         m_Frustum = 0;
     }
 
-    if (m_ModelList)
-    {
-        m_ModelList->Shutdown();
-        delete m_ModelList;
-        m_ModelList = 0;
-    }
-
     if (m_Text)
     {
         m_Text->Shutdown();
         delete m_Text;
         m_Text = 0;
-    }
-
-    // m_Bitmap 객체 반환
-    if (m_Bitmap)
-    {
-        m_Bitmap->Shutdown();
-        delete m_Bitmap;
-        m_Bitmap = 0;
-    }
-
-    // m_TextureShader 객체 반환
-    if (m_TextureShader)
-    {
-        m_TextureShader->Shutdown();
-        delete m_TextureShader;
-        m_TextureShader = 0;
     }
 
     if (m_BumpMapShader)
@@ -377,22 +286,6 @@ void GraphicsClass::Shutdown()
     {
         delete m_Light;
         m_Light = 0;
-    }
-
-    // m_LightShader 객체 반환
-    if (m_LightShader)
-    {
-        m_LightShader->Shutdown();
-        delete m_LightShader;
-        m_LightShader = 0;
-    }
-
-    // m_Model 객체 반환
-    if (m_Model)
-    {
-        m_Model->Shutdown();
-        delete m_Model;
-        m_Model = 0;
     }
 
     // Set the height of the water.
@@ -439,6 +332,7 @@ bool GraphicsClass::Update(float fDeltaTime)
 
 bool GraphicsClass::Render()
 {  
+    /*
     if (!RenderReflectionToTexture())
     {
         return false;
@@ -448,7 +342,7 @@ bool GraphicsClass::Render()
     {
         return false;
     }
-
+    */
     if (!RenderScene())
     {
         return false;
@@ -503,10 +397,9 @@ bool GraphicsClass::RenderReflectionToTexture()
     D3DClass::GetSingleton()->TurnZBufferOff();
     D3DClass::GetSingleton()->TurnOffCulling();
 
-    m_Skydome->Render(D3DClass::GetSingleton()->GetDeviceContext());
+    m_Skydome->Render();
     if (!m_SkydomeShader->Render(D3DClass::GetSingleton()->GetDeviceContext(), m_Skydome->GetIndexCount(), SkyWorldMatrix, ReflectionMatrix, ProjectionMatrix,
         m_Skydome->GetApexColor(), m_Skydome->GetCenterColor()))
-
     {
         return false;
     }
@@ -515,26 +408,13 @@ bool GraphicsClass::RenderReflectionToTexture()
     D3DClass::GetSingleton()->TurnOnCulling();
     
     XMFLOAT4 ClipPlane = XMFLOAT4(0.0f, 1.0f, 0.0f, -3.5);
-    m_Terrain->Render(D3DClass::GetSingleton()->GetDeviceContext());
+    m_Terrain->Render();
 
 
     if(!m_TerrainReflectionShader->Render(D3DClass::GetSingleton()->GetDeviceContext(), m_Terrain->GetIndexCount(), WorldMatrix, ReflectionMatrix, ProjectionMatrix, m_Terrain->GetTexture(),
          m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(), m_Light->GetDirection(), ClipPlane))
          return false;
 
-
-
-     // WorldMatrix = XMMatrixRotationY(rotation);    
-     /*
-     // Put the model vertex and index buffers on the graphics pipeline to prepare them for drawing.
-     m_Model->Render(D3DClass::GetSingleton()->GetDeviceContext());
-
-     // Render the model using the texture shader and the reflection view matrix.
-     m_TextureShader->Render(D3DClass::GetSingleton()->GetDeviceContext(), m_Model->GetIndexCount(), WorldMatrix, ReflectionMatrix,
-         ProjectionMatrix, m_Model->GetTexture());
-         */
-
-    
 
     D3DClass::GetSingleton()->SetBackBufferRenderTarget();
     D3DClass::GetSingleton()->ResetViewport();
@@ -555,7 +435,7 @@ bool GraphicsClass::RenderRefractionToTexture()
 
     XMFLOAT4 ClipPlane = XMFLOAT4(0.0f, -1.0f, 0.0f, 3.5 + 0.1);
 
-    m_Terrain->Render(D3DClass::GetSingleton()->GetDeviceContext());
+    m_Terrain->Render();
 
     if (!m_TerrainReflectionShader->Render(D3DClass::GetSingleton()->GetDeviceContext(), m_Terrain->GetIndexCount(), WorldMatrix, ViewMatrix, ProjectionMatrix, m_Terrain->GetTexture(),
         m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(), m_Light->GetDirection(), ClipPlane))
@@ -598,7 +478,7 @@ bool GraphicsClass::RenderScene()
     ////// 2D 렌더링 //////
     ///////////////////////
     ///////////////////////
-
+    
     // 모든 2D 렌더링을 시작하기 위해 Z버퍼를 끕니다.
     D3DClass::GetSingleton()->TurnZBufferOff();
 
@@ -607,7 +487,7 @@ bool GraphicsClass::RenderScene()
 
     XMFLOAT3 CameraPosition = CameraClass::GetSingleton()->GetPosition();
     XMFLOAT3 LookAt = CameraClass::GetSingleton()->GetLookAt();
-
+    /*
     if (!m_Text->SetCameraPosition(CameraPosition.x, CameraPosition.y, CameraPosition.z, D3DClass::GetSingleton()->GetDeviceContext()))
     {
         return false;
@@ -623,14 +503,14 @@ bool GraphicsClass::RenderScene()
     {
         return false;
     }
-
+    */
     // 텍스트를 렌더링 후 다시 알파블렌딩을 끕니다.
     D3DClass::GetSingleton()->TurnOffAlphaBlending();
 
 
     // 모든 2D 렌더링이 완료되었으면 다시 Z버퍼를 킵니다.
     D3DClass::GetSingleton()->TurnZBufferOn();
-
+    
 
 
 
@@ -639,19 +519,12 @@ bool GraphicsClass::RenderScene()
     ////// 3D 렌더링 //////
     ///////////////////////
     ///////////////////////
-    
     XMMATRIX SkyWorldMatrix = XMMatrixTranslation(CameraPosition.x, CameraPosition.y, CameraPosition.z);
 
     D3DClass::GetSingleton()->TurnZBufferOff();
     D3DClass::GetSingleton()->TurnOffCulling();
 
-    m_Skydome->Render(D3DClass::GetSingleton()->GetDeviceContext());
-    if (!m_SkydomeShader->Render(D3DClass::GetSingleton()->GetDeviceContext(), m_Skydome->GetIndexCount(), SkyWorldMatrix, viewMatrix, projectionMatrix,
-        m_Skydome->GetApexColor(), m_Skydome->GetCenterColor()))
-
-    {
-        return false;
-    }
+    m_Skydome->Render();
 
     D3DClass::GetSingleton()->TurnZBufferOn();
     D3DClass::GetSingleton()->TurnOnCulling();
@@ -668,12 +541,14 @@ bool GraphicsClass::RenderScene()
         return false;
     }
     
-    m_Terrain->Render(D3DClass::GetSingleton()->GetDeviceContext());
     if (!m_TerrainShader->Render(D3DClass::GetSingleton()->GetDeviceContext(), m_Terrain->GetIndexCount(), worldMatrix, viewMatrix, projectionMatrix, m_Terrain->GetTexture(),
-                                   m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(), m_Light->GetDirection()))
+        m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(), m_Light->GetDirection()))
     {
         return false;
     }
+    
+    m_Terrain->Render();
+    
 
 
     D3DClass::GetSingleton()->GetWorldMatrix(worldMatrix);

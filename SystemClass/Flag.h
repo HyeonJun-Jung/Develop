@@ -21,5 +21,7 @@ enum Resource_Type
 {
 	RT_Model,
 	RT_Terrain,
-	RT_Water
+	RT_Water,
+	RT_TerrainReflect,
+	RT_SkyDome
 };

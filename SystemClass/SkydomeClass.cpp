@@ -1,5 +1,7 @@
 #include "SkydomeClass.h"
-
+#include "ShaderManager.h"
+#include "D3DClass.h"
+#include "CameraClass.h"
 SkydomeClass::SkydomeClass()
 {
 }
@@ -14,7 +16,9 @@ SkydomeClass::~SkydomeClass()
 
 bool SkydomeClass::Initialize(ID3D11Device* dev)
 {
-	const char * SkydoomFileName = "../SystemClass/data/Terrain/skydome.txt";
+	const char * SkydoomFileName = "../SystemClass/data/Terrain/skydome.txt";	
+
+	m_RT = RT_SkyDome;
 
 	if (!LoadSkydoom(SkydoomFileName))
 		return false;
@@ -25,10 +29,36 @@ bool SkydomeClass::Initialize(ID3D11Device* dev)
 	return true;
 }
 
-void SkydomeClass::Render(ID3D11DeviceContext* devcon)
+bool SkydomeClass::Render()
 {
-	RenderBuffer(devcon);
+
+	DynamicModel::Render();
+
+	XMFLOAT3 CameraPos = CameraClass::GetSingleton()->GetPosition();
+	XMMATRIX WorldMatrix = XMMatrixTranslation(CameraPos.x, CameraPos.y, CameraPos.z);
+	
+	XMMATRIX ViewMatrix; CameraClass::GetSingleton()->GetViewMatrix(ViewMatrix);
+	XMMATRIX ProjectionMatrix; D3DClass::GetSingleton()->GetProjectionMatrix(ProjectionMatrix);
+	ShaderManager::GetSingleton()->SetMatrixBuffer(WorldMatrix, ViewMatrix, ProjectionMatrix);
+	
+	//ShaderManager::GetSingleton()->SetWorldMatrix(WorldMatrix);
+	ShaderManager::GetSingleton()->SetGradientBuffer(m_ApexColor, m_CenterColor);
+
+
+	RenderBuffer(D3DClass::GetSingleton()->GetDeviceContext());
+
+	D3DClass::GetSingleton()->GetDeviceContext()->DrawIndexed(m_IndexCount, 0, 0);
+
+	return true;
 }
+
+bool SkydomeClass::Update(float fDeltaTime)
+{
+	DynamicModel::Update(fDeltaTime);
+
+	return true;
+}
+
 
 void SkydomeClass::ShutDown()
 {	
@@ -178,6 +208,7 @@ void SkydomeClass::RenderBuffer(ID3D11DeviceContext* devcon)
 	devcon->IASetIndexBuffer(m_IndexBuffer, DXGI_FORMAT_R32_UINT, 0);
 
 	devcon->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
 }
 
 

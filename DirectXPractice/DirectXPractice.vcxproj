@@ -75,8 +75,8 @@
     <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\Program Files\Autodesk\FBX\FBX SDK\2019.0\include;C:\Users\Administrator\source\repos\DirectXPractice\SystemClass\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Program Files\Autodesk\FBX\FBX SDK\2019.0\lib\vs2015\x64\debug;C:\Users\Administrator\source\repos\DirectXPractice\SystemClass\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)\SystemClass\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\SystemClass\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -112,14 +112,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Program Files\Autodesk\FBX\FBX SDK\2019.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>assimp-vc143-mtd.lib;libfbxsdk-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Program Files\Autodesk\FBX\FBX SDK\2019.0\lib\vs2015\x64\debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>assimp-vc143-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -143,6 +143,7 @@
     <ClCompile Include="..\SystemClass\AssimpModel.cpp" />
     <ClCompile Include="..\SystemClass\AssimpTest\ModelLoader.cpp" />
     <ClCompile Include="..\SystemClass\AssimpTest\TextureLoader.cpp" />
+    <ClCompile Include="..\SystemClass\BaseModel.cpp" />
     <ClCompile Include="..\SystemClass\BitmapClass.cpp" />
     <ClCompile Include="..\SystemClass\BumpMapShaderClass.cpp" />
     <ClCompile Include="..\SystemClass\CameraClass.cpp" />
@@ -164,8 +165,10 @@
     <ClCompile Include="..\SystemClass\Imgui\imgui_tables.cpp" />
     <ClCompile Include="..\SystemClass\Imgui\imgui_widgets.cpp" />
     <ClCompile Include="..\SystemClass\InputClass.cpp" />
+    <ClCompile Include="..\SystemClass\Layer.cpp" />
     <ClCompile Include="..\SystemClass\LightClass.cpp" />
     <ClCompile Include="..\SystemClass\LightShaderClass.cpp" />
+    <ClCompile Include="..\SystemClass\MainScene.cpp" />
     <ClCompile Include="..\SystemClass\ModelClass.cpp" />
     <ClCompile Include="..\SystemClass\ModelListClass.cpp" />
     <ClCompile Include="..\SystemClass\ModelManager.cpp" />
@@ -176,6 +179,8 @@
     <ClCompile Include="..\SystemClass\ReflectionShaderClass.cpp" />
     <ClCompile Include="..\SystemClass\RenderTextureClass.cpp" />
     <ClCompile Include="..\SystemClass\ResourceManager.cpp" />
+    <ClCompile Include="..\SystemClass\Scene.cpp" />
+    <ClCompile Include="..\SystemClass\SceneManager.cpp" />
     <ClCompile Include="..\SystemClass\Shader.cpp" />
     <ClCompile Include="..\SystemClass\ShaderManager.cpp" />
     <ClCompile Include="..\SystemClass\SkinnedModel.cpp" />
@@ -434,7 +439,9 @@
     <ClInclude Include="..\SystemClass\AssimpTest\Mesh.h" />
     <ClInclude Include="..\SystemClass\AssimpTest\ModelLoader.h" />
     <ClInclude Include="..\SystemClass\AssimpTest\TextureLoader.h" />
+    <ClInclude Include="..\SystemClass\BaseModel.h" />
     <ClInclude Include="..\SystemClass\BitmapClass.h" />
+    <ClInclude Include="..\SystemClass\buffer.h" />
     <ClInclude Include="..\SystemClass\BumpMapShaderClass.h" />
     <ClInclude Include="..\SystemClass\CameraClass.h" />
     <ClInclude Include="..\SystemClass\Colorshaderclass.h" />
@@ -458,8 +465,10 @@
     <ClInclude Include="..\SystemClass\Imgui\imstb_textedit.h" />
     <ClInclude Include="..\SystemClass\Imgui\imstb_truetype.h" />
     <ClInclude Include="..\SystemClass\InputClass.h" />
+    <ClInclude Include="..\SystemClass\Layer.h" />
     <ClInclude Include="..\SystemClass\LightClass.h" />
     <ClInclude Include="..\SystemClass\LightShaderClass.h" />
+    <ClInclude Include="..\SystemClass\MainScene.h" />
     <ClInclude Include="..\SystemClass\ModelClass.h" />
     <ClInclude Include="..\SystemClass\ModelListClass.h" />
     <ClInclude Include="..\SystemClass\ModelManager.h" />
@@ -471,6 +480,8 @@
     <ClInclude Include="..\SystemClass\ReflectionShaderClass.h" />
     <ClInclude Include="..\SystemClass\RenderTextureClass.h" />
     <ClInclude Include="..\SystemClass\ResourceManager.h" />
+    <ClInclude Include="..\SystemClass\Scene.h" />
+    <ClInclude Include="..\SystemClass\SceneManager.h" />
     <ClInclude Include="..\SystemClass\Shader.h" />
     <ClInclude Include="..\SystemClass\ShaderManager.h" />
     <ClInclude Include="..\SystemClass\Singleton.h" />

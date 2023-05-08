@@ -32,7 +32,7 @@ private:
     void OutputShaderErrorMessage(ID3D10Blob* ErrorMessage, HWND hwnd, WCHAR* FileName);
 
     bool SetShaderParameters(ID3D11DeviceContext* devcon, XMMATRIX WorldMatrix, XMMATRIX ViewMatrix, XMMATRIX ProjectionMatrix, XMFLOAT4 apex, XMFLOAT4 center);
-    void RenderShader(ID3D11DeviceContext* devcon, int indexCount);
+    void RenderShader(ID3D11DeviceContext* devcon);
 
 private:
     ID3D11VertexShader* m_vertexShader = nullptr;

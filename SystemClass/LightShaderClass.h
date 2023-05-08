@@ -55,7 +55,7 @@ public:
 	void Shutdown();
 	bool Render(ID3D11DeviceContext*, int, XMMATRIX, XMMATRIX, XMMATRIX, ID3D11ShaderResourceView*, 
 				XMFLOAT3, XMFLOAT4, XMFLOAT4, XMFLOAT3, XMFLOAT4, float);
-	void RenderShader(ID3D11DeviceContext*, int);
+	void RenderShader(ID3D11DeviceContext*);
 
 private:
 	bool InitializeShader(ID3D11Device*, HWND, WCHAR*, WCHAR*);

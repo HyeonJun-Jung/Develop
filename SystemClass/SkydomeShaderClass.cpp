@@ -32,7 +32,7 @@ bool SkydomeShaderClass::Render(ID3D11DeviceContext* devcon, int indexCount, XMM
 	if (!SetShaderParameters(devcon, WorldMatrix, ViewMatrix, ProjectionMatrix, apex, center))
 		return false;
 
-	RenderShader(devcon, indexCount);
+	RenderShader(devcon);
 
 	return true;
 }
@@ -229,7 +229,7 @@ bool SkydomeShaderClass::SetShaderParameters(ID3D11DeviceContext* devcon, XMMATR
 	return true;
 }
 
-void SkydomeShaderClass::RenderShader(ID3D11DeviceContext* devcon, int indexCount)
+void SkydomeShaderClass::RenderShader(ID3D11DeviceContext* devcon)
 {
 	// 정점 입력 레이아웃을 설정합니다.
 	devcon->IASetInputLayout(m_layout);
@@ -238,7 +238,4 @@ void SkydomeShaderClass::RenderShader(ID3D11DeviceContext* devcon, int indexCoun
 	devcon->VSSetShader(m_vertexShader, NULL, 0);
 	devcon->PSSetShader(m_pixelShader, NULL, 0);
 
-
-	// 모델을 그립니다.
-	devcon->DrawIndexed(indexCount, 0, 0);
 }

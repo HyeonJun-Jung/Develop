@@ -1,14 +1,14 @@
 #pragma once
-#include "WModel.h"
+#include "BaseModel.h"
 
-class DynamicModel : public WModel
+class DynamicModel : public BaseModel
 {
 public:
 	DynamicModel();
 	DynamicModel(const DynamicModel& mode);
 	~DynamicModel();
 
-	bool Render();
-	bool Update(float fDeltaTime);
+	virtual bool Render();
+	virtual bool Update(float fDeltaTime);
 
 };

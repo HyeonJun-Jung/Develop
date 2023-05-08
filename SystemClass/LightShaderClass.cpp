@@ -39,7 +39,7 @@ bool LightShaderClass::Render(ID3D11DeviceContext* deviceContext, int indexCount
 	}
 
 	// 설정된 버퍼를 셰이더로 렌더링한다.
-	RenderShader(deviceContext, indexCount);
+	RenderShader(deviceContext);
 
 	return true;
 }
@@ -377,7 +377,7 @@ bool LightShaderClass::SetShaderParameters(ID3D11DeviceContext* deviceContext, X
 
 
 
-void LightShaderClass::RenderShader(ID3D11DeviceContext* deviceContext, int indexCount)
+void LightShaderClass::RenderShader(ID3D11DeviceContext* deviceContext)
 {
 	// 정점 입력 레이아웃을 설정합니다.
 	deviceContext->IASetInputLayout(m_layout);
@@ -389,6 +389,4 @@ void LightShaderClass::RenderShader(ID3D11DeviceContext* deviceContext, int inde
 	// 픽셀 쉐이더에서 샘플러 상태를 설정합니다.
 	deviceContext->PSSetSamplers(0, 1, &m_sampleState);
 
-	// 삼각형을 그립니다.
-	deviceContext->DrawIndexed(indexCount, 0, 0);
 }

@@ -34,7 +34,7 @@ public:
 	void Shutdown();
 	bool Render(ID3D11DeviceContext* deviceContext, int indexcount, XMMATRIX worldMatrix, XMMATRIX viewMatrix, XMMATRIX projectionMatrix,
 		ID3D11ShaderResourceView* texture, XMFLOAT4 ambientColor, XMFLOAT4 diffuseColor, XMFLOAT3 LightDirection, XMFLOAT4 ClipPlane);
-	void RenderShader(ID3D11DeviceContext*, int);
+	void RenderShader(ID3D11DeviceContext*);
 
 private:
 	bool InitializeShader(ID3D11Device*, HWND, WCHAR*, WCHAR*);

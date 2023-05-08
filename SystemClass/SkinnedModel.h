@@ -27,6 +27,7 @@ public:
 	NodeInfo* GetRootNode() { return RootNode; };
 	XMFLOAT3* GetMaxPos() { return &MaxPos; }
 	XMFLOAT3* GetMinPos() { return &MinPos; }
+	Resource_Type GetResourceType();
 
 	XMMATRIX GetRootNodeTransform(int AnimationIndex, float AnimationTime, NodeInfo* node);
 	void UpdateBoneFinalMatrix(int AnimationIndex, float AnimationTime, XMMATRIX* BoneFinalTransform);
@@ -56,6 +57,6 @@ public:
 	XMMATRIX GlobalInverseTransform = XMMatrixIdentity();
 
 	// 사용되는 마테리얼 정보
-	MarterialType UseMarterial;
+	MarterialType Mt_Type;
 };
 

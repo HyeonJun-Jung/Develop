@@ -14,3 +14,10 @@ StaticModel::~StaticModel()
 {
 
 }
+
+bool StaticModel::Render()
+{
+	BaseModel::Render();
+	return true;
+}
+

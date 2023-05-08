@@ -41,7 +41,7 @@ bool ReflectionShaderClass::Render(ID3D11DeviceContext* DeviceContext, int index
         return false;
     }
 
-    RenderShader(DeviceContext, indexCount);
+    RenderShader(DeviceContext);
 
     return true;
 }
@@ -332,7 +332,7 @@ bool ReflectionShaderClass::SetShaderParameters(ID3D11DeviceContext* deviceConte
 	return true;
 }
 
-void ReflectionShaderClass::RenderShader(ID3D11DeviceContext* deviceContext, int indexCount)
+void ReflectionShaderClass::RenderShader(ID3D11DeviceContext* deviceContext)
 {
 	// 정점 입력 레이아웃을 설정합니다.
 	deviceContext->IASetInputLayout(m_layout);
@@ -343,8 +343,5 @@ void ReflectionShaderClass::RenderShader(ID3D11DeviceContext* deviceContext, int
 
 	// 픽셀 셰이더의 샘플러를 설정합니다.
 	deviceContext->PSSetSamplers(0, 1, &m_sampleState);
-
-	// 모델을 그립니다.
-	deviceContext->DrawIndexed(indexCount, 0, 0);
 
 }

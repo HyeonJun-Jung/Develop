@@ -94,17 +94,8 @@
     <Filter Include="SystemClass\GraphicsClass\Resources">
       <UniqueIdentifier>{0e5cabfe-6b8f-471b-a023-83fda38cf1eb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SystemClass\GraphicsClass\Resources\Terrain">
-      <UniqueIdentifier>{52bf72bc-6a53-463e-8be7-0848af782b1e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="SystemClass\GraphicsClass\Shader\TerrainShaderClass">
       <UniqueIdentifier>{c3549264-cf7b-4a7f-b587-7e145825bc4b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SystemClass\GraphicsClass\Resources\Terrain\QuadtreeClass">
-      <UniqueIdentifier>{a5ed52ba-4e0c-43db-bf1d-263e07493f2a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SystemClass\GraphicsClass\Resources\Terrain\SkydomeClass">
-      <UniqueIdentifier>{c5b22d9b-c5a3-41f4-a961-968050216810}</UniqueIdentifier>
     </Filter>
     <Filter Include="SystemClass\GraphicsClass\Shader\SkydomeShaderClass">
       <UniqueIdentifier>{ac1bdd08-dba5-4bca-ba00-63ef2f649039}</UniqueIdentifier>
@@ -136,9 +127,6 @@
     <Filter Include="SystemClass\GraphicsClass\Shader\ColorShaderClass">
       <UniqueIdentifier>{8d8d4f41-53d4-46a3-b433-b761874006c5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SystemClass\Manager\TerrainManager">
-      <UniqueIdentifier>{f46fdd38-4a0f-4a91-9348-0a674cc6acdd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="SystemClass\GraphicsClass\Resources\Model\WModel\SkinnedModel">
       <UniqueIdentifier>{766441ae-4076-49c5-adde-72032006e46e}</UniqueIdentifier>
     </Filter>
@@ -163,14 +151,32 @@
     <Filter Include="SystemClass\GraphicsClass\Resources\TextureClass">
       <UniqueIdentifier>{74f9511d-c127-49ca-813a-b72a8b68b60b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SystemClass\GraphicsClass\Resources\Model\Obb">
-      <UniqueIdentifier>{b27b916e-c045-454a-92a4-fbfd04c9badf}</UniqueIdentifier>
-    </Filter>
     <Filter Include="SystemClass\GraphicsClass\FrustumClass\ModelListClass">
       <UniqueIdentifier>{cb721798-e1d7-431d-b967-04135b965eeb}</UniqueIdentifier>
     </Filter>
     <Filter Include="SystemClass\GraphicsClass\Resources\Model\DynamicModel\01. Player">
       <UniqueIdentifier>{02e58f9b-d43f-46ca-bad9-f0142e90be45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\GraphicsClass\Resources\Model\WModel\Obb">
+      <UniqueIdentifier>{b27b916e-c045-454a-92a4-fbfd04c9badf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\GraphicsClass\Resources\ModelClass">
+      <UniqueIdentifier>{05944b07-028e-4590-b9fe-eeaa6cd45bc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\GraphicsClass\Resources\Model\Terrain">
+      <UniqueIdentifier>{52bf72bc-6a53-463e-8be7-0848af782b1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\GraphicsClass\Resources\Model\Terrain\QuadtreeClass">
+      <UniqueIdentifier>{a5ed52ba-4e0c-43db-bf1d-263e07493f2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\GraphicsClass\Resources\Model\Terrain\SkydomeClass">
+      <UniqueIdentifier>{c5b22d9b-c5a3-41f4-a961-968050216810}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\Manager\SceneManager\Scene\Layer">
+      <UniqueIdentifier>{eadcd661-a54d-404a-bfda-c650a22b41d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\Manager\SceneManager\Scene\MainScene">
+      <UniqueIdentifier>{04978916-19c3-45dc-8797-4f65963ccb16}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -188,9 +194,6 @@
     </ClCompile>
     <ClCompile Include="..\SystemClass\D3DClass.cpp">
       <Filter>SystemClass\GraphicsClass\D3DClass</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SystemClass\ModelClass.cpp">
-      <Filter>SystemClass\GraphicsClass\Resources\Model</Filter>
     </ClCompile>
     <ClCompile Include="..\SystemClass\SystemClass.cpp">
       <Filter>SystemClass</Filter>
@@ -286,16 +289,16 @@
       <Filter>AssimpTest</Filter>
     </ClCompile>
     <ClCompile Include="..\SystemClass\TerrainClass.cpp">
-      <Filter>SystemClass\GraphicsClass\Resources\Terrain</Filter>
+      <Filter>SystemClass\GraphicsClass\Resources\Model\Terrain</Filter>
     </ClCompile>
     <ClCompile Include="..\SystemClass\TerrainShaderClass.cpp">
       <Filter>SystemClass\GraphicsClass\Shader\TerrainShaderClass</Filter>
     </ClCompile>
     <ClCompile Include="..\SystemClass\QuadtreeClass.cpp">
-      <Filter>SystemClass\GraphicsClass\Resources\Terrain\QuadtreeClass</Filter>
+      <Filter>SystemClass\GraphicsClass\Resources\Model\Terrain\QuadtreeClass</Filter>
     </ClCompile>
     <ClCompile Include="..\SystemClass\SkydomeClass.cpp">
-      <Filter>SystemClass\GraphicsClass\Resources\Terrain\SkydomeClass</Filter>
+      <Filter>SystemClass\GraphicsClass\Resources\Model\Terrain\SkydomeClass</Filter>
     </ClCompile>
     <ClCompile Include="..\SystemClass\SkydomeShaderClass.cpp">
       <Filter>SystemClass\GraphicsClass\Shader\SkydomeShaderClass</Filter>
@@ -319,10 +322,7 @@
       <Filter>SystemClass\GraphicsClass\Shader\WaterShaderClass</Filter>
     </ClCompile>
     <ClCompile Include="..\SystemClass\Obb.cpp">
-      <Filter>SystemClass\GraphicsClass\Resources\Model\Obb</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SystemClass\Shader.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>SystemClass\GraphicsClass\Resources\Model\WModel\Obb</Filter>
     </ClCompile>
     <ClCompile Include="..\SystemClass\DynamicModel.cpp">
       <Filter>SystemClass\GraphicsClass\Resources\Model\DynamicModel</Filter>
@@ -332,6 +332,27 @@
     </ClCompile>
     <ClCompile Include="..\SystemClass\Player.cpp">
       <Filter>SystemClass\GraphicsClass\Resources\Model\DynamicModel\01. Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\Shader.cpp">
+      <Filter>SystemClass\GraphicsClass\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\SceneManager.cpp">
+      <Filter>SystemClass\Manager\SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\Scene.cpp">
+      <Filter>SystemClass\Manager\SceneManager\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\ModelClass.cpp">
+      <Filter>SystemClass\GraphicsClass\Resources\ModelClass</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\BaseModel.cpp">
+      <Filter>SystemClass\GraphicsClass\Resources\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\Layer.cpp">
+      <Filter>SystemClass\Manager\SceneManager\Scene\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\MainScene.cpp">
+      <Filter>SystemClass\Manager\SceneManager\Scene\MainScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -346,9 +367,6 @@
     </ClInclude>
     <ClInclude Include="..\SystemClass\D3DClass.h">
       <Filter>SystemClass\GraphicsClass\D3DClass</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SystemClass\ModelClass.h">
-      <Filter>SystemClass\GraphicsClass\Resources\Model</Filter>
     </ClInclude>
     <ClInclude Include="..\SystemClass\SystemClass.h">
       <Filter>SystemClass</Filter>
@@ -1173,16 +1191,16 @@
       <Filter>fbxsdk</Filter>
     </ClInclude>
     <ClInclude Include="..\SystemClass\TerrainClass.h">
-      <Filter>SystemClass\GraphicsClass\Resources\Terrain</Filter>
+      <Filter>SystemClass\GraphicsClass\Resources\Model\Terrain</Filter>
     </ClInclude>
     <ClInclude Include="..\SystemClass\TerrainShaderClass.h">
       <Filter>SystemClass\GraphicsClass\Shader\TerrainShaderClass</Filter>
     </ClInclude>
     <ClInclude Include="..\SystemClass\QuadtreeClass.h">
-      <Filter>SystemClass\GraphicsClass\Resources\Terrain\QuadtreeClass</Filter>
+      <Filter>SystemClass\GraphicsClass\Resources\Model\Terrain\QuadtreeClass</Filter>
     </ClInclude>
     <ClInclude Include="..\SystemClass\SkydomeClass.h">
-      <Filter>SystemClass\GraphicsClass\Resources\Terrain\SkydomeClass</Filter>
+      <Filter>SystemClass\GraphicsClass\Resources\Model\Terrain\SkydomeClass</Filter>
     </ClInclude>
     <ClInclude Include="..\SystemClass\SkydomeShaderClass.h">
       <Filter>SystemClass\GraphicsClass\Shader\SkydomeShaderClass</Filter>
@@ -1206,10 +1224,7 @@
       <Filter>SystemClass\GraphicsClass\Shader\WaterShaderClass</Filter>
     </ClInclude>
     <ClInclude Include="..\SystemClass\Obb.h">
-      <Filter>SystemClass\GraphicsClass\Resources\Model\Obb</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SystemClass\Shader.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>SystemClass\GraphicsClass\Resources\Model\WModel\Obb</Filter>
     </ClInclude>
     <ClInclude Include="..\SystemClass\DynamicModel.h">
       <Filter>SystemClass\GraphicsClass\Resources\Model\DynamicModel</Filter>
@@ -1219,6 +1234,30 @@
     </ClInclude>
     <ClInclude Include="..\SystemClass\Player.h">
       <Filter>SystemClass\GraphicsClass\Resources\Model\DynamicModel\01. Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\Shader.h">
+      <Filter>SystemClass\GraphicsClass\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\buffer.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\SceneManager.h">
+      <Filter>SystemClass\Manager\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\Scene.h">
+      <Filter>SystemClass\Manager\SceneManager\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\ModelClass.h">
+      <Filter>SystemClass\GraphicsClass\Resources\ModelClass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\BaseModel.h">
+      <Filter>SystemClass\GraphicsClass\Resources\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\Layer.h">
+      <Filter>SystemClass\Manager\SceneManager\Scene\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\MainScene.h">
+      <Filter>SystemClass\Manager\SceneManager\Scene\MainScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

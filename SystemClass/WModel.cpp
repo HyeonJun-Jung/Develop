@@ -1,5 +1,6 @@
 #include "WModel.h"
 #include "ModelManager.h"
+#include "ShaderManager.h"
 #include "BumpMapShaderClass.h"
 #include "D3DClass.h"
 #include "CameraClass.h"
@@ -12,6 +13,23 @@ WModel::WModel()
 
 WModel::~WModel()
 {
+}
+
+bool WModel::Initialize(string ModelDir)
+{
+	if (!LoadWModel(ModelDir))
+	{
+		return false;
+	}
+
+	/// 
+	/// Texture Type 에 따라서 ResourceType 정의
+	///
+	
+	m_RT = m_Skinnedmodel->GetResourceType();
+
+
+	return true;
 }
 
 bool WModel::LoadWModel(string ModelDir)
@@ -40,6 +58,8 @@ bool WModel::LoadWModel(string ModelDir)
 
 bool WModel::Render()
 {	
+	BaseModel::Render();
+
 	m_Skinnedmodel->Render(D3DClass::GetSingleton()->GetDeviceContext());
 
 	return true;
@@ -47,6 +67,8 @@ bool WModel::Render()
 
 bool WModel::Update(float fDeltaTime)
 {
+	BaseModel::Update(fDeltaTime);
+
 	/// <summary>
 	///	상수 버퍼 세팅
 	/// </summary>
@@ -92,18 +114,12 @@ bool WModel::Update(float fDeltaTime)
 		}
 	}
 
-	if (!m_Shader->SetMatrixBuffer(D3DClass::GetSingleton()->GetDeviceContext(), worldMatrix, viewMatrix, projectionMatrix))
+	if (!ShaderManager::GetSingleton()->SetMatrixBuffer(worldMatrix, viewMatrix, projectionMatrix))
 		return false;
 
 	if (!SetBoneTransform())
 		return false;
 
-}
-
-bool WModel::SetShader(BumpMapShaderClass* Shader)
-{
-	m_Shader = Shader;
-	return true;
 }
 
 void WModel::PlayAnimation(int AnimationIndex)
@@ -156,25 +172,4 @@ bool WModel::SetBoneTransform()
 void WModel::ReleaseModel()
 {
 	m_Skinnedmodel = nullptr;
-}
-
-void WModel::SetPosition(float PositionX, float PositionY, float PositionZ)
-{
-	m_WMType.Transx = PositionX;
-	m_WMType.Transy = PositionY;
-	m_WMType.Transz = PositionZ;
-}
-
-void WModel::SetScale(float ScaleX, float ScaleY, float ScaleZ)
-{
-	m_WMType.ScaleX = ScaleX;
-	m_WMType.ScaleY = ScaleY;
-	m_WMType.ScaleZ = ScaleZ;
-}
-
-void WModel::SetRotation(float RotationX, float RotationY, float RotationZ)
-{
-	m_WMType.RotationX = RotationX;
-	m_WMType.RotationY = RotationY;
-	m_WMType.RotationZ = RotationZ;
 }

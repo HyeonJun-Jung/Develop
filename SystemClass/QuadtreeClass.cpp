@@ -374,7 +374,7 @@ void QuadtreeClass::RenderNode(NodeType* node, FrustumClass* frustum, ID3D11Devi
 	int indexCount = node->triangleCount * 3;
 
 	// 지형 셰이더를 호출하여 이 노드의 다각형을 렌더링합니다.
-	shader->RenderShader(devcon, indexCount);
+	shader->RenderShader(devcon);
 
 	// 이 프레임 동안 렌더링 된 폴리곤의 수를 늘립니다.
 	m_drawnCount += node->triangleCount;

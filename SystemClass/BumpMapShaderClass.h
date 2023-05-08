@@ -3,9 +3,10 @@
 #include <DirectXMath.h>
 #include <d3d11.h>
 #include <vector>
+#include "Shader.h"
 using namespace DirectX;
 
-class BumpMapShaderClass
+class BumpMapShaderClass : public Shader
 {
 private:
 	struct MatrixBufferType
@@ -15,9 +16,8 @@ private:
 		XMMATRIX projection;
 	};
 
-	class CameraBufferType
+	struct CameraBufferType
 	{
-	public:
 		XMFLOAT3 cameraPosition;
 		float padding;
 	};
@@ -58,7 +58,6 @@ private:
 		XMFLOAT4 diffuseColor, XMFLOAT3 lightDirection, XMFLOAT4 specularColor, float specularPower);
 
 
-	void RenderShader(ID3D11DeviceContext*, int);
 	void RenderShader(ID3D11DeviceContext* devcon);
 
 private:

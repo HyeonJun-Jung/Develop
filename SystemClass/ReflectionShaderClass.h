@@ -1,8 +1,9 @@
 #pragma once
 #include <DirectXMath.h>
 #include <d3d11.h>
+#include "Shader.h"
 using namespace DirectX;
-class ReflectionShaderClass
+class ReflectionShaderClass : public Shader
 {
 private:
     struct MatrixBufferType
@@ -41,7 +42,7 @@ private:
 
     bool SetShaderParameters(ID3D11DeviceContext*, XMMATRIX, XMMATRIX, XMMATRIX, ID3D11ShaderResourceView*,
         ID3D11ShaderResourceView*, XMMATRIX);
-    void RenderShader(ID3D11DeviceContext*, int);
+    void RenderShader(ID3D11DeviceContext*);
 
 private:
     ID3D11VertexShader* m_vertexShader = nullptr;

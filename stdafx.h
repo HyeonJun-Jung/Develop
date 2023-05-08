@@ -33,7 +33,11 @@
 #include <queue>
 
 #include <memory>
+#include <stdarg.h>
 
+
+// 사용자 정의 헤더
+#include "SystemClass/Flag.h"
 
 // Directx11 라이브러리 헤더
 #include <d3d11.h>

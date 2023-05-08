@@ -1,7 +1,10 @@
 #include "TerrainClass.h"
 #include "TextureClass.h"
+#include "D3DClass.h"
+#include "ShaderManager.h"
 TerrainClass::TerrainClass()
 {
+	 
 }
 
 TerrainClass::TerrainClass(const TerrainClass&)
@@ -14,6 +17,8 @@ TerrainClass::~TerrainClass()
 
 bool TerrainClass::Initialize(ID3D11Device* device, const char* HeightMapFileName, const WCHAR* TextureFilename)
 {
+	m_RT = RT_Terrain;
+
     if (!LoadHeightMap(HeightMapFileName))
         return false;
 
@@ -41,10 +46,18 @@ void TerrainClass::shutdown()
 	ReleaseTexture();
 }
 
-void TerrainClass::Render(ID3D11DeviceContext* deviceContext)
+bool TerrainClass::Render()
 {
+	StaticModel::Render(); 
+
+	ShaderManager::GetSingleton()->SetTexture(D3DClass::GetSingleton()->GetDeviceContext(), 0, m_Texture->GetTexture());
+
 	// 정점 버퍼, 인덱스 버퍼를 파이프라인에 설정한다.
-	RenderBuffers(deviceContext);
+	RenderBuffers(D3DClass::GetSingleton()->GetDeviceContext());
+
+	D3DClass::GetSingleton()->GetDeviceContext()->DrawIndexed(m_IndexCount, 0, 0);
+
+	return true;
 }
 
 int TerrainClass::GetVertexCount()

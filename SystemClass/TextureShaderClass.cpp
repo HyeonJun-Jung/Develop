@@ -34,7 +34,7 @@ bool TextureShaderClass::Render(ID3D11DeviceContext* deviceContext, int indexCou
         return false;
     }
 
-    RenderShader(deviceContext, indexCount);
+    RenderShader(deviceContext);
 
     return true;
 }
@@ -288,7 +288,7 @@ bool TextureShaderClass::SetShaderParameters(ID3D11DeviceContext* deviceContext,
     
 }
 
-void TextureShaderClass::RenderShader(ID3D11DeviceContext* deviceContext, int indexCount)
+void TextureShaderClass::RenderShader(ID3D11DeviceContext* deviceContext)
 {
     // 정점 입력 레이아웃을 설정합니다.
     deviceContext->IASetInputLayout(m_layout);
@@ -300,6 +300,4 @@ void TextureShaderClass::RenderShader(ID3D11DeviceContext* deviceContext, int in
     // 픽셀 쉐이더에서 샘플러 상태를 설정합니다.
     deviceContext->PSSetSamplers(0, 1, &m_sampleState);
 
-    //삼각형을 그립니다 .
-    deviceContext->DrawIndexed(indexCount, 0, 0);
 }

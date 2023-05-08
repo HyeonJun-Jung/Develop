@@ -252,3 +252,13 @@ int SkinnedModel::FindAniNodeIndex(const Animation* animation, const string node
 	}
 	return -1;
 }
+
+
+
+
+Resource_Type SkinnedModel::GetResourceType()
+{
+	Resource_Type Rt_Type = RT_Model;
+
+	return Rt_Type;
+}

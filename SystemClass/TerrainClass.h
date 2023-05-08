@@ -1,10 +1,11 @@
 #pragma once
 #include "..\stdafx.h"
+#include "StaticModel.h"
 
 const int TEXTURE_REPEAT = 8;
 class TextureClass;
 
-class TerrainClass
+class TerrainClass : StaticModel
 {
 private:
 	struct VertexType
@@ -33,7 +34,7 @@ public:
 
 	bool Initialize(ID3D11Device*, const char*, const WCHAR*);
 	void shutdown();
-	void Render(ID3D11DeviceContext*);
+	bool Render();
 
 	int GetVertexCount();
 	int GetIndexCount();

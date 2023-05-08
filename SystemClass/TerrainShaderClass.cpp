@@ -37,7 +37,7 @@ bool TerrainShaderClass::Render(ID3D11DeviceContext* deviceContext, int indexcou
 	}
 
 	// 설정된 버퍼를 셰이더로 렌더링한다.
-	RenderShader(deviceContext, indexcount);
+	RenderShader(deviceContext);
 
 	return true;
 }
@@ -306,7 +306,7 @@ bool TerrainShaderClass::SetShaderParameters(ID3D11DeviceContext* deviceContext,
 	return true;
 }
 
-void TerrainShaderClass::RenderShader(ID3D11DeviceContext* deviceContext, int indexCount)
+void TerrainShaderClass::RenderShader(ID3D11DeviceContext* deviceContext)
 {
 	// 정점 입력 레이아웃을 설정합니다.
 	deviceContext->IASetInputLayout(m_layout);
@@ -318,6 +318,4 @@ void TerrainShaderClass::RenderShader(ID3D11DeviceContext* deviceContext, int in
 	// 픽셀 쉐이더에서 샘플러 상태를 설정합니다.
 	deviceContext->PSSetSamplers(0, 1, &m_sampleState);
 
-	// 삼각형을 그립니다.
-	deviceContext->DrawIndexed(indexCount, 0, 0);
 }

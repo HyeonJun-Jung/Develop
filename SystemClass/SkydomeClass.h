@@ -1,6 +1,7 @@
 #pragma once
 #include "..\stdafx.h"
-class SkydomeClass
+#include "DynamicModel.h"
+class SkydomeClass : public DynamicModel
 {
 	struct ModelType {
 		float x, y, z;
@@ -18,7 +19,8 @@ public:
 	~SkydomeClass();
 
 	bool Initialize(ID3D11Device* dev);
-	void Render(ID3D11DeviceContext* devcon);
+	bool Render();
+	bool Update(float fDeltaTime);
 	void ShutDown();
 
 	int GetIndexCount();

@@ -5,36 +5,6 @@
 #include "Imgui/imgui_impl_win32.h"
 
 #include "Singleton.h"
-/*
-class ImguiManager
-{
-private: 
-	ImguiManager();
-	~ImguiManager();
-
-private:
-	static ImguiManager* m_Instance;
-
-public:
-	void Initialize(HWND, ID3D11Device*, ID3D11DeviceContext*);
-	void Update();
-	void BeginFrame();
-	void EndFrame();
-
-public:
-	static ImguiManager* GetSingleton()
-	{
-		if (m_Instance == nullptr)
-		{
-			m_Instance = new ImguiManager();
-		}
-
-		return m_Instance;
-	}
-	
-	float my_color[4] = {0, 0, 0, 0};
-};
-*/
 
 
 class ImguiManager :public Singleton<ImguiManager>
@@ -44,7 +14,7 @@ public:
 	~ImguiManager();
 
 public:
-	void Initialize(HWND, ID3D11Device*, ID3D11DeviceContext*);
+	bool Initialize(HWND, ID3D11Device*, ID3D11DeviceContext*);
 	void Update();
 	void BeginFrame();
 	void EndFrame();
