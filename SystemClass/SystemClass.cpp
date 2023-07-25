@@ -92,6 +92,10 @@ bool SystemClass::Frame()
         CameraClass::GetSingleton()->CameraMove(MD_RIGHT);
     }
 
+    if (m_Input->IsNumber1Pressed())
+    {
+        m_Graphics->AddBox();
+    }
 
     m_Graphics->Frame(m_Timer->GetTime());
 
@@ -147,6 +151,12 @@ LRESULT WndProc(HWND hwnd, UINT umessage, WPARAM wparam, LPARAM lparam)
 
     switch (umessage)
     {
+    case WM_MOUSEMOVE:
+        m_Input->SetMouse(lparam);
+        break;
+    case WM_MOUSEWHEEL:
+
+        break;
         // 윈도우가 제거되었는지 확인합니다.
     case WM_DESTROY:
     {
@@ -205,7 +215,7 @@ bool SystemClass::Initialize()
     }
 
     // graphics 객체를 초기화합니다.
-    result = m_Graphics->Initialize(screenWidth, screenHeight, m_hwnd);
+    result = m_Graphics->Initialize(screenWidth, screenHeight, m_hwnd, m_Input);
     if (!result)
     {
         return false;

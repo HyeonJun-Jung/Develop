@@ -6,7 +6,7 @@ class StaticModel : public BaseModel
 public:
 	StaticModel();
 	StaticModel(const StaticModel& model);
-	~StaticModel();
+	virtual ~StaticModel();
 
 public:
 	virtual bool Render();

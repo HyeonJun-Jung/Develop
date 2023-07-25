@@ -31,7 +31,7 @@
 #include <map>
 #include <stack>
 #include <queue>
-
+#include <math.h>
 #include <memory>
 #include <stdarg.h>
 
@@ -51,3 +51,7 @@
 #include "SystemClass/Imgui/imgui_impl_dx11.h"
 #include "SystemClass/Imgui/imgui_impl_win32.h"
 
+// Physics 라이브러리 헤더
+#include <PxPhysicsAPI.h>
+
+using namespace physx;

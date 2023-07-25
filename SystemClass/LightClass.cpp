@@ -20,6 +20,11 @@ LightClass::~LightClass()
 }
 
 
+void LightClass::SetModel(BaseModel* model)
+{
+	m_Model = model;
+}
+
 void LightClass::SetAmbientColor(float red, float green, float blue, float alpha)
 {
 	m_ambientColor = XMFLOAT4(red, green, blue, alpha);

@@ -18,10 +18,11 @@ public:
 	void Update();
 	void BeginFrame();
 	void EndFrame();
+	void SetPlayerRotation(float yaw) { m_PRotation = yaw; }
 
 public:
 	float my_color[4] = { 0, 0, 0, 0 };
-
+	float m_PRotation = 0;
 	HWND hwnd = nullptr;
 	ID3D11Device* device = nullptr;
 	ID3D11DeviceContext* devcon = nullptr;

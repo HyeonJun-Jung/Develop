@@ -75,8 +75,9 @@
     <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(SolutionDir)\SystemClass\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)\SystemClass\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\HyunnJun Jeong\Documents\GitHub\Develop\DirectXTex\Bin\Desktop_2019_Win10\x64\Debug;$(SolutionDir)\SystemClass\lib;C:\Users\HyunnJun Jeong\Documents\GitHub\Develop\x64\Debug;$(LibraryPath)</LibraryPath>
+    <ExternalIncludePath>C:\Users\HyunnJun Jeong\Documents\GitHub\Develop\SystemClass\Physx\vc17win64\PhysX\include\characterkinematic;$(SolutionDir)\SystemClass\include;$(SolutionDir)\SystemClass\Physx\vc17win64\PhysX\include;$(SolutionDir)\SystemClass\Physx\vc17win64\PxShared\include;$(ExternalIncludePath)</ExternalIncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -114,13 +115,17 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>assimp-vc143-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>assimp-vc143-mtd.lib;DirectXTex.lib;LowLevel_static_64.lib;LowLevelAABB_static_64.lib;LowLevelDynamics_static_64.lib;PhysX_64.lib;PhysXCharacterKinematic_static_64.lib;PhysXCommon_64.lib;PhysXCooking_64.lib;PhysXExtensions_static_64.lib;PhysXFoundation_64.lib;PhysXPvdSDK_static_64.lib;PhysXTask_static_64.lib;PhysXVehicle_static_64.lib;SceneQuery_static_64.lib;SimulationController_static_64.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
+    <FxCompile>
+      <ShaderModel>5.0</ShaderModel>
+    </FxCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -140,6 +145,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\main.cpp" />
+    <ClCompile Include="..\SystemClass\ControllerPhysicsC.cpp" />
+    <ClCompile Include="..\SystemClass\AnimationComponent.cpp" />
     <ClCompile Include="..\SystemClass\AssimpModel.cpp" />
     <ClCompile Include="..\SystemClass\AssimpTest\ModelLoader.cpp" />
     <ClCompile Include="..\SystemClass\AssimpTest\TextureLoader.cpp" />
@@ -148,14 +155,17 @@
     <ClCompile Include="..\SystemClass\BumpMapShaderClass.cpp" />
     <ClCompile Include="..\SystemClass\CameraClass.cpp" />
     <ClCompile Include="..\SystemClass\Colorshaderclass.cpp" />
+    <ClCompile Include="..\SystemClass\Component.cpp" />
     <ClCompile Include="..\SystemClass\CpuClass.cpp" />
     <ClCompile Include="..\SystemClass\D3DClass.cpp" />
     <ClCompile Include="..\SystemClass\DDSTextureLoader.cpp" />
     <ClCompile Include="..\SystemClass\DynamicModel.cpp" />
+    <ClCompile Include="..\SystemClass\FieldLayer.cpp" />
     <ClCompile Include="..\SystemClass\FontClass.cpp" />
     <ClCompile Include="..\SystemClass\FontShaderClass.cpp" />
     <ClCompile Include="..\SystemClass\FpsClass.cpp" />
     <ClCompile Include="..\SystemClass\FrustumClass.cpp" />
+    <ClCompile Include="..\SystemClass\GraphicComponent.cpp" />
     <ClCompile Include="..\SystemClass\GraphicsClass.cpp" />
     <ClCompile Include="..\SystemClass\ImguiManager.cpp" />
     <ClCompile Include="..\SystemClass\Imgui\imgui.cpp" />
@@ -167,32 +177,54 @@
     <ClCompile Include="..\SystemClass\InputClass.cpp" />
     <ClCompile Include="..\SystemClass\Layer.cpp" />
     <ClCompile Include="..\SystemClass\LightClass.cpp" />
+    <ClCompile Include="..\SystemClass\LightManager.cpp" />
     <ClCompile Include="..\SystemClass\LightShaderClass.cpp" />
     <ClCompile Include="..\SystemClass\MainScene.cpp" />
     <ClCompile Include="..\SystemClass\ModelClass.cpp" />
     <ClCompile Include="..\SystemClass\ModelListClass.cpp" />
     <ClCompile Include="..\SystemClass\ModelManager.cpp" />
     <ClCompile Include="..\SystemClass\Obb.cpp" />
+    <ClCompile Include="..\SystemClass\Object.cpp" />
+    <ClCompile Include="..\SystemClass\Particle.cpp" />
+    <ClCompile Include="..\SystemClass\ParticleGraphicC.cpp" />
+    <ClCompile Include="..\SystemClass\ParticleLayer.cpp" />
+    <ClCompile Include="..\SystemClass\PhysicsComponent.cpp" />
+    <ClCompile Include="..\SystemClass\PJumpingState.cpp" />
     <ClCompile Include="..\SystemClass\Player.cpp" />
+    <ClCompile Include="..\SystemClass\PlayerHitCallback.cpp" />
+    <ClCompile Include="..\SystemClass\PlayerState.cpp" />
     <ClCompile Include="..\SystemClass\PositionClass.cpp" />
+    <ClCompile Include="..\SystemClass\PRunningState.cpp" />
+    <ClCompile Include="..\SystemClass\PStandingState.cpp" />
+    <ClCompile Include="..\SystemClass\PWalkingState.cpp" />
     <ClCompile Include="..\SystemClass\QuadtreeClass.cpp" />
+    <ClCompile Include="..\SystemClass\Ray.cpp" />
     <ClCompile Include="..\SystemClass\ReflectionShaderClass.cpp" />
     <ClCompile Include="..\SystemClass\RenderTextureClass.cpp" />
     <ClCompile Include="..\SystemClass\ResourceManager.cpp" />
+    <ClCompile Include="..\SystemClass\RigidBody.cpp" />
     <ClCompile Include="..\SystemClass\Scene.cpp" />
     <ClCompile Include="..\SystemClass\SceneManager.cpp" />
     <ClCompile Include="..\SystemClass\Shader.cpp" />
     <ClCompile Include="..\SystemClass\ShaderManager.cpp" />
+    <ClCompile Include="..\SystemClass\SkinnedGraphicC.cpp" />
     <ClCompile Include="..\SystemClass\SkinnedModel.cpp" />
+    <ClCompile Include="..\SystemClass\SkinnedObject.cpp" />
+    <ClCompile Include="..\SystemClass\DynamicPhysicsC.cpp" />
     <ClCompile Include="..\SystemClass\SkydomeClass.cpp" />
     <ClCompile Include="..\SystemClass\SkydomeShaderClass.cpp" />
     <ClCompile Include="..\SystemClass\StaticModel.cpp" />
+    <ClCompile Include="..\SystemClass\StaticPhysicsC.cpp" />
     <ClCompile Include="..\SystemClass\SystemClass.cpp" />
+    <ClCompile Include="..\SystemClass\Terrain.cpp" />
     <ClCompile Include="..\SystemClass\TerrainClass.cpp" />
+    <ClCompile Include="..\SystemClass\TerrainGraphicC.cpp" />
     <ClCompile Include="..\SystemClass\TerrainReflectionShaderClass.cpp" />
     <ClCompile Include="..\SystemClass\TerrainShaderClass.cpp" />
     <ClCompile Include="..\SystemClass\TextClass.cpp" />
     <ClCompile Include="..\SystemClass\TextureClass.cpp" />
+    <ClCompile Include="..\SystemClass\TexturedGraphicC.cpp" />
+    <ClCompile Include="..\SystemClass\TexturedObject.cpp" />
     <ClCompile Include="..\SystemClass\TextureShaderClass.cpp" />
     <ClCompile Include="..\SystemClass\TimerClass.cpp" />
     <ClCompile Include="..\SystemClass\WaterShaderClass.cpp" />
@@ -435,6 +467,9 @@
     <ClInclude Include="..\AlignedAllocationPolicy.h" />
     <ClInclude Include="..\DxDefine.h" />
     <ClInclude Include="..\stdafx.h" />
+    <ClInclude Include="..\SystemClass\ControllerCallBack.h" />
+    <ClInclude Include="..\SystemClass\ControllerPhysicsC.h" />
+    <ClInclude Include="..\SystemClass\AnimationComponent.h" />
     <ClInclude Include="..\SystemClass\AssimpModel.h" />
     <ClInclude Include="..\SystemClass\AssimpTest\Mesh.h" />
     <ClInclude Include="..\SystemClass\AssimpTest\ModelLoader.h" />
@@ -444,16 +479,20 @@
     <ClInclude Include="..\SystemClass\buffer.h" />
     <ClInclude Include="..\SystemClass\BumpMapShaderClass.h" />
     <ClInclude Include="..\SystemClass\CameraClass.h" />
+    <ClInclude Include="..\SystemClass\Collider.h" />
     <ClInclude Include="..\SystemClass\Colorshaderclass.h" />
+    <ClInclude Include="..\SystemClass\Component.h" />
     <ClInclude Include="..\SystemClass\CpuClass.h" />
     <ClInclude Include="..\SystemClass\D3DClass.h" />
     <ClInclude Include="..\SystemClass\DDSTextureLoader.h" />
     <ClInclude Include="..\SystemClass\DynamicModel.h" />
+    <ClInclude Include="..\SystemClass\FieldLayer.h" />
     <ClInclude Include="..\SystemClass\Flag.h" />
     <ClInclude Include="..\SystemClass\FontClass.h" />
     <ClInclude Include="..\SystemClass\FontShaderClass.h" />
     <ClInclude Include="..\SystemClass\FpsClass.h" />
     <ClInclude Include="..\SystemClass\FrustumClass.h" />
+    <ClInclude Include="..\SystemClass\GraphicComponent.h" />
     <ClInclude Include="..\SystemClass\GraphicsClass.h" />
     <ClInclude Include="..\SystemClass\ImguiManager.h" />
     <ClInclude Include="..\SystemClass\Imgui\imconfig.h" />
@@ -467,6 +506,7 @@
     <ClInclude Include="..\SystemClass\InputClass.h" />
     <ClInclude Include="..\SystemClass\Layer.h" />
     <ClInclude Include="..\SystemClass\LightClass.h" />
+    <ClInclude Include="..\SystemClass\LightManager.h" />
     <ClInclude Include="..\SystemClass\LightShaderClass.h" />
     <ClInclude Include="..\SystemClass\MainScene.h" />
     <ClInclude Include="..\SystemClass\ModelClass.h" />
@@ -474,27 +514,48 @@
     <ClInclude Include="..\SystemClass\ModelManager.h" />
     <ClInclude Include="..\SystemClass\ModelStructure.h" />
     <ClInclude Include="..\SystemClass\Obb.h" />
+    <ClInclude Include="..\SystemClass\Object.h" />
+    <ClInclude Include="..\SystemClass\Particle.h" />
+    <ClInclude Include="..\SystemClass\ParticleGraphicC.h" />
+    <ClInclude Include="..\SystemClass\ParticleLayer.h" />
+    <ClInclude Include="..\SystemClass\PhysicsComponent.h" />
+    <ClInclude Include="..\SystemClass\PJumpingState.h" />
     <ClInclude Include="..\SystemClass\Player.h" />
+    <ClInclude Include="..\SystemClass\PlayerHitCallback.h" />
+    <ClInclude Include="..\SystemClass\PlayerState.h" />
     <ClInclude Include="..\SystemClass\PositionClass.h" />
+    <ClInclude Include="..\SystemClass\PRunningState.h" />
+    <ClInclude Include="..\SystemClass\PStandingState.h" />
+    <ClInclude Include="..\SystemClass\PWalkingState.h" />
     <ClInclude Include="..\SystemClass\QuadtreeClass.h" />
+    <ClInclude Include="..\SystemClass\Ray.h" />
     <ClInclude Include="..\SystemClass\ReflectionShaderClass.h" />
     <ClInclude Include="..\SystemClass\RenderTextureClass.h" />
     <ClInclude Include="..\SystemClass\ResourceManager.h" />
+    <ClInclude Include="..\SystemClass\RigidBody.h" />
     <ClInclude Include="..\SystemClass\Scene.h" />
     <ClInclude Include="..\SystemClass\SceneManager.h" />
     <ClInclude Include="..\SystemClass\Shader.h" />
     <ClInclude Include="..\SystemClass\ShaderManager.h" />
     <ClInclude Include="..\SystemClass\Singleton.h" />
+    <ClInclude Include="..\SystemClass\SkinnedGraphicC.h" />
     <ClInclude Include="..\SystemClass\SkinnedModel.h" />
+    <ClInclude Include="..\SystemClass\SkinnedObject.h" />
+    <ClInclude Include="..\SystemClass\DynamicPhysicsC.h" />
     <ClInclude Include="..\SystemClass\SkydomeClass.h" />
     <ClInclude Include="..\SystemClass\SkydomeShaderClass.h" />
     <ClInclude Include="..\SystemClass\StaticModel.h" />
+    <ClInclude Include="..\SystemClass\StaticPhysicsC.h" />
     <ClInclude Include="..\SystemClass\SystemClass.h" />
+    <ClInclude Include="..\SystemClass\Terrain.h" />
     <ClInclude Include="..\SystemClass\TerrainClass.h" />
+    <ClInclude Include="..\SystemClass\TerrainGraphicC.h" />
     <ClInclude Include="..\SystemClass\TerrainReflectionShaderClass.h" />
     <ClInclude Include="..\SystemClass\TerrainShaderClass.h" />
     <ClInclude Include="..\SystemClass\TextClass.h" />
     <ClInclude Include="..\SystemClass\TextureClass.h" />
+    <ClInclude Include="..\SystemClass\TexturedGraphicC.h" />
+    <ClInclude Include="..\SystemClass\TexturedObject.h" />
     <ClInclude Include="..\SystemClass\TextureShaderClass.h" />
     <ClInclude Include="..\SystemClass\TimerClass.h" />
     <ClInclude Include="..\SystemClass\WaterShaderClass.h" />
@@ -516,6 +577,39 @@
     <None Include="..\SystemClass\Texture.vs" />
   </ItemGroup>
   <ItemGroup>
+    <FxCompile Include="..\SystemClass\ComputePicking.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">CS</EntryPointName>
+    </FxCompile>
+    <FxCompile Include="..\SystemClass\Fire_gs.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Geometry</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Geometry</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Geometry</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="..\SystemClass\Fire_ps.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\SystemClass\Fire_vs.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+    </FxCompile>
     <FxCompile Include="..\SystemClass\skydome_ps.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
@@ -552,6 +646,20 @@
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="..\SystemClass\Terrain_vs.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="..\SystemClass\Textured_ps.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="..\SystemClass\Textured_vs.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>

@@ -1,5 +1,6 @@
 #pragma once
 #include "..\stdafx.h"
+#include "BaseModel.h"
 
 // Color Shader 사용 예정
 struct Vertex {
@@ -17,7 +18,7 @@ struct Vertex {
 	}
 };
 
-class Obb
+class Obb : public BaseModel
 {
 public:
 	Obb();
@@ -26,12 +27,16 @@ public:
 
 public:
 	bool SetObb(XMFLOAT3 min, XMFLOAT3 max);
-	void Render();
+	bool Render();
+	bool Update();
+
+	void Translation(XMMATRIX worldMatrix);
 
 private:
 	void CreateCube();
 	void CreateAxisVector();
 	bool CreateBuffer();
+
 private:
 	XMFLOAT3 MinPos, MaxPos;
 	XMFLOAT3 Center;

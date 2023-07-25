@@ -1,10 +1,13 @@
 #pragma once
 #include "ModelStructure.h"
+
+class Obb;
+
 class BaseModel
 {
 public:
 	BaseModel();
-	~BaseModel();
+	virtual ~BaseModel();
 
 public:
 	virtual bool Render();
@@ -20,9 +23,22 @@ public:
 
 	XMMATRIX GetWorldMatrix();
 
-	// WorldMatrix 요소        
-	WMType m_WMType;
+	virtual bool CreateObb();
+	virtual bool CreateSphere();
+
+protected:
+	// WorldMatrix 요소
+	XMMATRIX m_RotationMatrix = XMMatrixIdentity();
+	XMMATRIX m_TranslationMatrix = XMMatrixIdentity();
+	XMMATRIX m_ScaleMatrix = XMMatrixIdentity();
+	XMMATRIX m_WorldMatrix = XMMatrixIdentity();
+
+
 	Resource_Type m_RT = RT_Model;
+	
+	Obb* m_Obb = nullptr;
+	Sphere* m_Sphere;
+	
 
 };
 

@@ -38,6 +38,8 @@ public:
 
 	int GetVertexCount();
 	int GetIndexCount();
+	ID3D11Buffer* GetVertexBuffer() { return m_vertexBuffer; }
+	ID3D11Buffer* GetIndexBuffer() { return m_indexBuffer; }
 	void CopyVertexArray(void*);
 	ID3D11ShaderResourceView* GetTexture();
 

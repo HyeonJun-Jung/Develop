@@ -1,46 +1,61 @@
 #pragma once
 #include "..\stdafx.h"
 const int MAX_TRIANGLES = 10000;
+
 class TerrainClass;
 class FrustumClass;
 class TerrainShaderClass;
 
 class QuadtreeClass
 {
+private:
 	struct VertexType
 	{
-		XMFLOAT3 Position;
-		XMFLOAT2 Texcoord;
-		XMFLOAT3 Normal;
+		XMFLOAT3 position;
+		XMFLOAT2 texture;
+		XMFLOAT3 normal;
 	};
-	
+
+	struct VectorType
+	{
+		float x, y, z;
+	};
+
 	struct NodeType
 	{
 		float positionX, positionZ, width;
 		int triangleCount;
-		ID3D11Buffer* vertexBuffer; ID3D11Buffer* indexBuffer;
-		NodeType* Child[4];
+		ID3D11Buffer* vertexBuffer, * indexBuffer;
+		VectorType* vertexArray;
+		NodeType* nodes[4];
 	};
 
 public:
 	QuadtreeClass();
 	QuadtreeClass(const QuadtreeClass&);
 	~QuadtreeClass();
-	bool Initialize(TerrainClass* terrain, ID3D11Device* device);
-	void Shutdown();
-	bool Render(FrustumClass* frustum, TerrainShaderClass* Shader, ID3D11DeviceContext* device);
 
+	bool Initialize(TerrainClass*, ID3D11Device*);
+	void Shutdown();
+	void Render(FrustumClass*, ID3D11DeviceContext*, TerrainShaderClass*);
+
+	int GetDrawCount();
+	bool GetHeightAtPosition(float, float, float&);
 
 private:
-	void CalculateMeshDimensions(int vertexCount, float& centerX, float& centerZ, float& width);
-	void CreateQuadtree(ID3D11Device* device, NodeType* Node, float PositionX, float PositionZ, float width);
-	int CountTriangles(float positionX, float positionZ, float width);
-	bool IsTriangleContained(int index, float positionX, float positionZ, float width);
-	void RenderNode(NodeType* node, FrustumClass* frustum, ID3D11DeviceContext* devcon, TerrainShaderClass* shader);
-	void ReleaseNode(NodeType* ParentNode);
+	void CalculateMeshDimensions(int, float&, float&, float&);
+	void CreateTreeNode(NodeType*, float, float, float, ID3D11Device*);
+	int CountTriangles(float, float, float);
+	bool IsTriangleContained(int, float, float, float);
+	void ReleaseNode(NodeType*);
+	void RenderNode(NodeType*, FrustumClass*, ID3D11DeviceContext*, TerrainShaderClass*);
 
-	int m_triangleCount, m_drawnCount;
-	VertexType* m_VertexList = nullptr;
-	NodeType* m_RootNode = nullptr;;
+	void FindNode(NodeType*, float, float, float&);
+	bool CheckHeightOfTriangle(float, float, float&, float[3], float[3], float[3]);
+
+private:
+	int m_triangleCount, m_drawCount;
+	VertexType* m_vertexList = nullptr;
+	NodeType* m_parentNode = nullptr;
 };
 

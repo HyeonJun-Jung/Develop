@@ -10,7 +10,8 @@ cbuffer LightBuffer
 	float4 ambientColor;
 	float4 diffuseColor;
 	float3 lightDirection;
-	float padding;
+	float	 specularPower;
+	float4 specularColor;
 };
 
 

@@ -5,102 +5,122 @@
 
 QuadtreeClass::QuadtreeClass()
 {
-	m_triangleCount = 0;
-	m_drawnCount = 0;
 }
 
-QuadtreeClass::QuadtreeClass(const QuadtreeClass&)
+
+QuadtreeClass::QuadtreeClass(const QuadtreeClass& other)
 {
 }
+
 
 QuadtreeClass::~QuadtreeClass()
 {
 }
 
+
 bool QuadtreeClass::Initialize(TerrainClass* terrain, ID3D11Device* device)
 {
+	float centerX = 0.0f;
+	float centerZ = 0.0f;
+	float width = 0.0f;
 
-	// TerrainÀ¸·ÎºÎÅÍ Á¤Á¡ °³¼ö¸¦ ¹Ş¾Æ¿Â´Ù.
+	// ì§€í˜• ì •ì  ë°°ì—´ì˜ ì •ì  ìˆ˜ë¥¼ ê°€ì ¸ì˜µë‹ˆë‹¤.
 	int vertexCount = terrain->GetVertexCount();
 
+	// ì •ì ë¦¬ìŠ¤íŠ¸ì˜ ì´ ì‚¼ê°í˜• ìˆ˜ë¥¼ ì €ì¥í•©ë‹ˆë‹¤.
 	m_triangleCount = vertexCount / 3;
 
-	// VertexList »ı¼º
-	m_VertexList = new VertexType[vertexCount];
-	if (!m_VertexList)
-		return false;
-
-	// TerrainÀ¸·ÎºÎÅÍ Á¤Á¡ Á¤º¸¸¦ º¹»çÇØ¿Â´Ù
-	terrain->CopyVertexArray((void *)m_VertexList);
-
-	float centerX = 0;
-	float centerZ = 0;
-	float width = 0;
-
-	CalculateMeshDimensions(vertexCount, centerX, centerZ, width);
-
-	m_RootNode = new NodeType;
-	if (!m_RootNode)
-		return false;
-
-	CreateQuadtree(device, m_RootNode,  centerX, centerZ, width);
-
-
-	// ÄõµåÆ®¸®¿¡¼­ ³ëµå¾È¿¡ Á¤Á¡ ¹öÆÛµéÀÌ ¸ğµÎ »ı¼ºµÇ¾ú±â ¶§¹®¿¡ VertexList¸¦ ÇØÁ¦ÇÑ´Ù.
-	if (m_VertexList)
+	// ëª¨ë“  ì§€í˜• ì •ì ì„ í¬í•¨í•˜ëŠ” ì •ì  ë°°ì—´ì„ ë§Œë“­ë‹ˆë‹¤.
+	m_vertexList = new VertexType[vertexCount];
+	if (!m_vertexList)
 	{
-		delete [] m_VertexList;
-		m_VertexList = 0;
+		return false;
 	}
 
-    return true;
+	// ì§€í˜• ì •ì ì„ ì •ì  ëª©ë¡ì— ë³µì‚¬í•©ë‹ˆë‹¤.
+	terrain->CopyVertexArray((void*)m_vertexList);
+
+	// ì¤‘ì‹¬ x, zì™€ ë©”ì‰¬ì˜ ë„ˆë¹„ë¥¼ ê³„ì‚°í•©ë‹ˆë‹¤.
+	CalculateMeshDimensions(vertexCount, centerX, centerZ, width);
+
+	// ì¿¼ë“œ íŠ¸ë¦¬ì˜ ë¶€ëª¨ ë…¸ë“œë¥¼ ë§Œë“­ë‹ˆë‹¤.
+	m_parentNode = new NodeType;
+	if (!m_parentNode)
+	{
+		return false;
+	}
+
+	// ì •ì  ëª©ë¡ ë°ì´í„°ì™€ ë©”ì‰¬ ì°¨ì›ì„ ê¸°ë°˜ìœ¼ë¡œ ì¿¼ë“œ íŠ¸ë¦¬ë¥¼ ì¬ê·€ ì ìœ¼ë¡œ ë¹Œë“œí•©ë‹ˆë‹¤.
+	CreateTreeNode(m_parentNode, centerX, centerZ, width, device);
+
+	// ì¿¼ë“œ íŠ¸ë¦¬ê°€ ê° ë…¸ë“œì— ì •ì ì„ ê°–ê¸° ë•Œë¬¸ì— ì •ì  ëª©ë¡ì„ ë†“ìŠµë‹ˆë‹¤.
+	if (m_vertexList)
+	{
+		delete[] m_vertexList;
+		m_vertexList = 0;
+	}
+
+	return true;
 }
+
 
 void QuadtreeClass::Shutdown()
 {
-	if (m_RootNode)
+	// ì¿¼ë“œ íŠ¸ë¦¬ ë°ì´í„°ë¥¼ ì¬ê·€ ì ìœ¼ë¡œ í•´ì œí•©ë‹ˆë‹¤.
+	if (m_parentNode)
 	{
-		ReleaseNode(m_RootNode);
-		delete m_RootNode;
-		m_RootNode = 0;
+		ReleaseNode(m_parentNode);
+		delete m_parentNode;
+		m_parentNode = 0;
 	}
 }
 
-bool QuadtreeClass::Render(FrustumClass* frustum, TerrainShaderClass* Shader, ID3D11DeviceContext* devcon)
+
+void QuadtreeClass::Render(FrustumClass* frustum, ID3D11DeviceContext* deviceContext, TerrainShaderClass* shader)
 {
-	m_drawnCount = 0;
-	RenderNode(m_RootNode, frustum, devcon, Shader);
-    return true;
+	// ì´ í”„ë ˆì„ì— ëŒ€í•´ ê·¸ë ¤ì§€ëŠ” ì‚¼ê°í˜•ì˜ ìˆ˜ë¥¼ ì´ˆê¸°í™”í•©ë‹ˆë‹¤.
+	m_drawCount = 0;
+
+	// ë¶€ëª¨ ë…¸ë“œì—ì„œ ì‹œì‘í•˜ì—¬ íŠ¸ë¦¬ ì•„ë˜ë¡œ ì´ë™í•˜ì—¬ ë³´ì´ëŠ” ê° ë…¸ë“œë¥¼ ë Œë”ë§í•©ë‹ˆë‹¤.
+	RenderNode(m_parentNode, frustum, deviceContext, shader);
 }
 
-void QuadtreeClass::CalculateMeshDimensions(int vertexCount, float& centerX, float& centerZ, float& width)
-{
-	// Áß°£Á¡ Ã£±â
-	centerX = 0;
-	centerZ = 0; 
 
+int QuadtreeClass::GetDrawCount()
+{
+	return m_drawCount;
+}
+
+
+void QuadtreeClass::CalculateMeshDimensions(int vertexCount, float& centerX, float& centerZ, float& meshWidth)
+{
+	// ë©”ì‰¬ì˜ ì¤‘ì‹¬ ìœ„ì¹˜ë¥¼ 0ìœ¼ë¡œ ì´ˆê¸°í™”í•©ë‹ˆë‹¤.
+	centerX = 0.0f;
+	centerZ = 0.0f;
+
+	// ë©”ì‰¬ì˜ ëª¨ë“  ì •ì ì„ í•©ì¹œë‹¤.
 	for (int i = 0; i < vertexCount; i++)
 	{
-		centerX += m_VertexList[i].Position.x;
-		centerZ += m_VertexList[i].Position.z;
+		centerX += m_vertexList[i].position.x;
+		centerZ += m_vertexList[i].position.z;
 	}
 
+	// ê·¸ë¦¬ê³  ë©”ì‰¬ì˜ ì¤‘ê°„ ì ì„ ì°¾ê¸° ìœ„í•´ ì •ì ì˜ ìˆ˜ë¡œ ë‚˜ëˆ•ë‹ˆë‹¤.
 	centerX = centerX / (float)vertexCount;
 	centerZ = centerZ / (float)vertexCount;
 
-	// width °è»ê
-		// ¸Ş½¬ÀÇ ÃÖ´ë ¹× ÃÖ¼Ò Å©±â¸¦ ÃÊ±âÈ­ÇÕ´Ï´Ù.
+	// ë©”ì‰¬ì˜ ìµœëŒ€ ë° ìµœì†Œ í¬ê¸°ë¥¼ ì´ˆê¸°í™”í•©ë‹ˆë‹¤.
 	float maxWidth = 0.0f;
 	float maxDepth = 0.0f;
 
-	float minWidth = fabsf(m_VertexList[0].Position.x - centerX);
-	float minDepth = fabsf(m_VertexList[0].Position.z - centerZ);
+	float minWidth = fabsf(m_vertexList[0].position.x - centerX);
+	float minDepth = fabsf(m_vertexList[0].position.z - centerZ);
 
-	// ¸ğµç Á¤Á¡À» »ìÆìº¸°í ¸Ş½¬ÀÇ ÃÖ´ë ³Êºñ¿Í ÃÖ¼Ò ³Êºñ¿Í ±íÀÌ¸¦ Ã£½À´Ï´Ù.
+	// ëª¨ë“  ì •ì ì„ ì‚´í´ë³´ê³  ë©”ì‰¬ì˜ ìµœëŒ€ ë„ˆë¹„ì™€ ìµœì†Œ ë„ˆë¹„ì™€ ê¹Šì´ë¥¼ ì°¾ìŠµë‹ˆë‹¤.
 	for (int i = 0; i < vertexCount; i++)
 	{
-		float width = fabsf(m_VertexList[i].Position.x - centerX);
-		float depth = fabsf(m_VertexList[i].Position.z - centerZ);
+		float width = fabsf(m_vertexList[i].position.x - centerX);
+		float depth = fabsf(m_vertexList[i].position.z - centerZ);
 
 		if (width > maxWidth) { maxWidth = width; }
 		if (depth > maxDepth) { maxDepth = depth; }
@@ -108,117 +128,140 @@ void QuadtreeClass::CalculateMeshDimensions(int vertexCount, float& centerX, flo
 		if (depth < minDepth) { minDepth = depth; }
 	}
 
-	// ÃÖ¼Ò¿Í ÃÖ´ë ±íÀÌ¿Í ³Êºñ »çÀÌÀÇ Àı´ë ÃÖ´ë °ªÀ» Ã£½À´Ï´Ù.
+	// ìµœì†Œì™€ ìµœëŒ€ ê¹Šì´ì™€ ë„ˆë¹„ ì‚¬ì´ì˜ ì ˆëŒ€ ìµœëŒ€ ê°’ì„ ì°¾ìŠµë‹ˆë‹¤.
 	float maxX = (float)max(fabs(minWidth), fabs(maxWidth));
 	float maxZ = (float)max(fabs(minDepth), fabs(maxDepth));
 
-	// ¸Ş½¬ÀÇ ÃÖ´ë Á÷°æÀ» °è»êÇÕ´Ï´Ù.
-	width = max(maxX, maxZ) * 2.0f;
-
+	// ë©”ì‰¬ì˜ ìµœëŒ€ ì§ê²½ì„ ê³„ì‚°í•©ë‹ˆë‹¤.
+	meshWidth = max(maxX, maxZ) * 2.0f;
 }
 
-void QuadtreeClass::CreateQuadtree(ID3D11Device* device, NodeType* Node, float PositionX, float PositionZ, float width)
+
+void QuadtreeClass::CreateTreeNode(NodeType* node, float positionX, float positionZ, float width, ID3D11Device* device)
 {
-	// ³ëµåÀÇ À§Ä¡¿Í Å©±â¸¦ ÀúÀåÇÑ´Ù.
-	Node->positionX = PositionX;
-	Node->positionZ = PositionZ;
-	Node->width = width;
+	// ë…¸ë“œì˜ ìœ„ì¹˜ì™€ í¬ê¸°ë¥¼ ì €ì¥í•œë‹¤.
+	node->positionX = positionX;
+	node->positionZ = positionZ;
+	node->width = width;
 
-	// ³ëµåÀÇ »ï°¢Çü ¼ö¸¦ 0À¸·Î ÃÊ±âÈ­ÇÕ´Ï´Ù.
-	Node->triangleCount = 0;
+	// ë…¸ë“œì˜ ì‚¼ê°í˜• ìˆ˜ë¥¼ 0ìœ¼ë¡œ ì´ˆê¸°í™”í•©ë‹ˆë‹¤.
+	node->triangleCount = 0;
 
-	//Á¤Á¡ ¹× ÀÎµ¦½º ¹öÆÛ¸¦ null·Î ÃÊ±âÈ­ÇÕ´Ï´Ù.
-	Node->vertexBuffer = 0;
-	Node->indexBuffer = 0;
+	//ì •ì  ë° ì¸ë±ìŠ¤ ë²„í¼ë¥¼ nullë¡œ ì´ˆê¸°í™”í•©ë‹ˆë‹¤.
+	node->vertexBuffer = 0;
+	node->indexBuffer = 0;
 
-	// ÀÌ ³ëµåÀÇ ÀÚ½Ä ³ëµå¸¦ null·Î ÃÊ±âÈ­ÇÕ´Ï´Ù.
-	Node->Child[0] = 0;
-	Node->Child[1] = 0;
-	Node->Child[2] = 0;
-	Node->Child[3] = 0;
+	// Initialize the vertex array to null.
+	node->vertexArray = 0;
 
-	// ÀÌ ³ëµå ¾È¿¡ ÀÖ´Â »ï°¢Çü ¼ö¸¦ ¼¾´Ù.
-	int numTriangles = CountTriangles(PositionX, PositionZ, width);
+	// ì´ ë…¸ë“œì˜ ìì‹ ë…¸ë“œë¥¼ nullë¡œ ì´ˆê¸°í™”í•©ë‹ˆë‹¤.
+	node->nodes[0] = 0;
+	node->nodes[1] = 0;
+	node->nodes[2] = 0;
+	node->nodes[3] = 0;
 
-	// »ç·Ê 1: ÀÌ ³ëµå¿¡ »ï°¢ÇüÀÌ ¾øÀ¸¸é ºñ¾îÀÖ´Â »óÅÂ·Î µ¹¾Æ°¡¼­ Ã³¸®ÇÒ ÇÊ¿ä°¡ ¾ø½À´Ï´Ù.
+	// ì´ ë…¸ë“œ ì•ˆì— ìˆëŠ” ì‚¼ê°í˜• ìˆ˜ë¥¼ ì„¼ë‹¤.
+	int numTriangles = CountTriangles(positionX, positionZ, width);
+
+	// ì‚¬ë¡€ 1: ì´ ë…¸ë“œì— ì‚¼ê°í˜•ì´ ì—†ìœ¼ë©´ ë¹„ì–´ìˆëŠ” ìƒíƒœë¡œ ëŒì•„ê°€ì„œ ì²˜ë¦¬í•  í•„ìš”ê°€ ì—†ìŠµë‹ˆë‹¤.
 	if (numTriangles == 0)
 	{
 		return;
 	}
 
-	// »ç·Ê 2: ÀÌ ³ëµå¿¡ ³Ê¹« ¸¹Àº »ï°¢ÇüÀÌ ÀÖ´Â °æ¿ì 4 °³ÀÇ µ¿ÀÏÇÑ Å©±âÀÇ ´õ ÀÛÀº Æ®¸® ³ëµå·Î ºĞÇÒÇÕ´Ï´Ù.
+	// ì‚¬ë¡€ 2: ì´ ë…¸ë“œì— ë„ˆë¬´ ë§ì€ ì‚¼ê°í˜•ì´ ìˆëŠ” ê²½ìš° 4 ê°œì˜ ë™ì¼í•œ í¬ê¸°ì˜ ë” ì‘ì€ íŠ¸ë¦¬ ë…¸ë“œë¡œ ë¶„í• í•©ë‹ˆë‹¤.
 	if (numTriangles > MAX_TRIANGLES)
 	{
 		for (int i = 0; i < 4; i++)
 		{
-			// »õ·Î¿î ÀÚ½Ä ³ëµå¿¡ ´ëÇÑ À§Ä¡ ¿ÀÇÁ¼ÂÀ» °è»êÇÕ´Ï´Ù.
+			// ìƒˆë¡œìš´ ìì‹ ë…¸ë“œì— ëŒ€í•œ ìœ„ì¹˜ ì˜¤í”„ì…‹ì„ ê³„ì‚°í•©ë‹ˆë‹¤.
 			float offsetX = (((i % 2) < 1) ? -1.0f : 1.0f) * (width / 4.0f);
 			float offsetZ = (((i % 4) < 2) ? -1.0f : 1.0f) * (width / 4.0f);
 
-			// »õ ³ëµå¿¡ »ï°¢ÇüÀÌ ÀÖ´ÂÁö È®ÀÎÇÕ´Ï´Ù.
-			int count = CountTriangles((PositionX + offsetX), (PositionZ + offsetZ), (width / 2.0f));
+			// ìƒˆ ë…¸ë“œì— ì‚¼ê°í˜•ì´ ìˆëŠ”ì§€ í™•ì¸í•©ë‹ˆë‹¤.
+			int count = CountTriangles((positionX + offsetX), (positionZ + offsetZ), (width / 2.0f));
 			if (count > 0)
 			{
-				// ÀÌ »õ ³ëµå°¡ÀÖ´Â »ï°¢ÇüÀÌÀÖ´Â °æ¿ì ÀÚ½Ä ³ëµå¸¦ ¸¸µì´Ï´Ù.
-				Node->Child[i] = new NodeType;
+				// ì´ ìƒˆ ë…¸ë“œê°€ìˆëŠ” ì‚¼ê°í˜•ì´ìˆëŠ” ê²½ìš° ìì‹ ë…¸ë“œë¥¼ ë§Œë“­ë‹ˆë‹¤.
+				node->nodes[i] = new NodeType;
 
-				// ÀÌÁ¦ÀÌ »õ ÀÚ½Ä ³ëµå¿¡¼­ ½ÃÀÛÇÏ´Â Æ®¸®¸¦ È®ÀåÇÕ´Ï´Ù.
-				CreateQuadtree(device, Node->Child[i], (PositionX + offsetX), (PositionZ + offsetZ), (width / 2.0f));
+				// ì´ì œì´ ìƒˆ ìì‹ ë…¸ë“œì—ì„œ ì‹œì‘í•˜ëŠ” íŠ¸ë¦¬ë¥¼ í™•ì¥í•©ë‹ˆë‹¤.
+				CreateTreeNode(node->nodes[i], (positionX + offsetX), (positionZ + offsetZ), (width / 2.0f), device);
 			}
 		}
 		return;
 	}
 
-	// »ç·Ê 3: ÀÌ ³ëµå°¡ ºñ¾î ÀÖÁö¾Ê°í ±× ³ëµåÀÇ »ï°¢Çü ¼ö°¡ ÃÖ´ë °ªº¸´Ù ÀÛÀ¸¸é 
-	// ÀÌ ³ëµå´Â Æ®¸®ÀÇ ¸Ç ¾Æ·¡¿¡ ÀÖÀ¸¹Ç·Î ÀúÀåÇÒ »ï°¢Çü ¸ñ·ÏÀ» ¸¸µì´Ï´Ù.
-	Node->triangleCount = numTriangles;
+	// ì‚¬ë¡€ 3: ì´ ë…¸ë“œê°€ ë¹„ì–´ ìˆì§€ì•Šê³  ê·¸ ë…¸ë“œì˜ ì‚¼ê°í˜• ìˆ˜ê°€ ìµœëŒ€ ê°’ë³´ë‹¤ ì‘ìœ¼ë©´ 
+	// ì´ ë…¸ë“œëŠ” íŠ¸ë¦¬ì˜ ë§¨ ì•„ë˜ì— ìˆìœ¼ë¯€ë¡œ ì €ì¥í•  ì‚¼ê°í˜• ëª©ë¡ì„ ë§Œë“­ë‹ˆë‹¤.
+	node->triangleCount = numTriangles;
 
-	// Á¤Á¡ÀÇ ¼ö¸¦ °è»êÇÕ´Ï´Ù.
+	// ì •ì ì˜ ìˆ˜ë¥¼ ê³„ì‚°í•©ë‹ˆë‹¤.
 	int vertexCount = numTriangles * 3;
 
-	// Á¤Á¡ ¹è¿­À» ¸¸µì´Ï´Ù.
+	// ì •ì  ë°°ì—´ì„ ë§Œë“­ë‹ˆë‹¤.
 	VertexType* vertices = new VertexType[vertexCount];
 
-	// ÀÎµ¦½º ¹è¿­À» ¸¸µì´Ï´Ù.
+	// ì¸ë±ìŠ¤ ë°°ì—´ì„ ë§Œë“­ë‹ˆë‹¤.
 	unsigned long* indices = new unsigned long[vertexCount];
 
-	// ÀÌ »õ·Î¿î Á¤Á¡ ¹× ÀÎµ¦½º ¹è¿­ÀÇ ÀÎµ¦½º¸¦ ÃÊ±âÈ­ÇÕ´Ï´Ù.
-	int index = 0;
-	int vertexIndex = 0;
+	// ì •ì  ë°°ì—´ì„ ë§Œë“­ë‹ˆë‹¤.
+	node->vertexArray = new VectorType[vertexCount];
 
-	// Á¤Á¡ ¸ñ·ÏÀÇ ¸ğµç »ï°¢ÇüÀ» »ìÆì º¾´Ï´Ù.
+	// ì´ ìƒˆë¡œìš´ ì •ì  ë° ì¸ë±ìŠ¤ ë°°ì—´ì˜ ì¸ë±ìŠ¤ë¥¼ ì´ˆê¸°í™”í•©ë‹ˆë‹¤.
+	int index = 0;
+
+	// ì •ì  ëª©ë¡ì˜ ëª¨ë“  ì‚¼ê°í˜•ì„ ì‚´í´ ë´…ë‹ˆë‹¤.
+	int vertexIndex = 0;
 	for (int i = 0; i < m_triangleCount; i++)
 	{
-		// »ï°¢ÇüÀÌÀÌ ³ëµå ¾È¿¡ ÀÖÀ¸¸é ²ÀÁöÁ¡ ¹è¿­¿¡ Ãß°¡ÇÕ´Ï´Ù.
-		if (IsTriangleContained(i, PositionX, PositionZ, width) == true)
+		// ì‚¼ê°í˜•ì´ì´ ë…¸ë“œ ì•ˆì— ìˆìœ¼ë©´ ê¼­ì§€ì  ë°°ì—´ì— ì¶”ê°€í•©ë‹ˆë‹¤.
+		if (IsTriangleContained(i, positionX, positionZ, width) == true)
 		{
-			// ÁöÇü ¹öÅØ½º ¸ñ·Ï¿¡ ÀÎµ¦½º¸¦ °è»êÇÕ´Ï´Ù.
+			// ì§€í˜• ë²„í…ìŠ¤ ëª©ë¡ì— ì¸ë±ìŠ¤ë¥¼ ê³„ì‚°í•©ë‹ˆë‹¤.
 			vertexIndex = i * 3;
 
-			// Á¤Á¡ ¸ñ·Ï¿¡¼­ ÀÌ »ï°¢ÇüÀÇ ¼¼ ²ÀÁöÁ¡À» °¡Á®¿É´Ï´Ù.
-			vertices[index].Position = m_VertexList[vertexIndex].Position;
-			vertices[index].Texcoord = m_VertexList[vertexIndex].Texcoord;
-			vertices[index].Normal = m_VertexList[vertexIndex].Normal;
+			// ì •ì  ëª©ë¡ì—ì„œ ì´ ì‚¼ê°í˜•ì˜ ì„¸ ê¼­ì§€ì ì„ ê°€ì ¸ì˜µë‹ˆë‹¤.
+			vertices[index].position = m_vertexList[vertexIndex].position;
+			vertices[index].texture = m_vertexList[vertexIndex].texture;
+			vertices[index].normal = m_vertexList[vertexIndex].normal;
 			indices[index] = index;
+
+			// ë˜í•œ ì •ì  ìœ„ì¹˜ ì •ë³´ë¥¼ ë…¸ë“œ ì •ì  ë°°ì—´ì— ì €ì¥í•©ë‹ˆë‹¤.
+			node->vertexArray[index].x = m_vertexList[vertexIndex].position.x;
+			node->vertexArray[index].y = m_vertexList[vertexIndex].position.y;
+			node->vertexArray[index].z = m_vertexList[vertexIndex].position.z;
+
+			// ì¸ë±ìŠ¤ ê°’ì„ ì¦ê°€í•©ë‹ˆë‹¤.
 			index++;
 
 			vertexIndex++;
-			vertices[index].Position = m_VertexList[vertexIndex].Position;
-			vertices[index].Texcoord = m_VertexList[vertexIndex].Texcoord;
-			vertices[index].Normal = m_VertexList[vertexIndex].Normal;
+
+			// ë‹¤ìŒ ìš”ì ì— ëŒ€í•´ì„œë„ ë˜‘ê°™ì´í•˜ì‹­ì‹œì˜¤.
+			vertices[index].position = m_vertexList[vertexIndex].position;
+			vertices[index].texture = m_vertexList[vertexIndex].texture;
+			vertices[index].normal = m_vertexList[vertexIndex].normal;
 			indices[index] = index;
+			node->vertexArray[index].x = m_vertexList[vertexIndex].position.x;
+			node->vertexArray[index].y = m_vertexList[vertexIndex].position.y;
+			node->vertexArray[index].z = m_vertexList[vertexIndex].position.z;
 			index++;
 
 			vertexIndex++;
-			vertices[index].Position = m_VertexList[vertexIndex].Position;
-			vertices[index].Texcoord = m_VertexList[vertexIndex].Texcoord;
-			vertices[index].Normal = m_VertexList[vertexIndex].Normal;
+
+			// ë‹¤ìŒ ìš”ì ì— ëŒ€í•´ì„œë„ ë˜‘ê°™ì´í•˜ì‹­ì‹œì˜¤.
+			vertices[index].position = m_vertexList[vertexIndex].position;
+			vertices[index].texture = m_vertexList[vertexIndex].texture;
+			vertices[index].normal = m_vertexList[vertexIndex].normal;
 			indices[index] = index;
+			node->vertexArray[index].x = m_vertexList[vertexIndex].position.x;
+			node->vertexArray[index].y = m_vertexList[vertexIndex].position.y;
+			node->vertexArray[index].z = m_vertexList[vertexIndex].position.z;
 			index++;
 		}
 	}
 
-	// Á¤Á¡ ¹öÆÛÀÇ ±¸Á¶Ã¼¸¦ ¼³Á¤ÇÕ´Ï´Ù.
+	// ì •ì  ë²„í¼ì˜ êµ¬ì¡°ì²´ë¥¼ ì„¤ì •í•©ë‹ˆë‹¤.
 	D3D11_BUFFER_DESC vertexBufferDesc;
 	vertexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
 	vertexBufferDesc.ByteWidth = sizeof(VertexType) * vertexCount;
@@ -227,16 +270,16 @@ void QuadtreeClass::CreateQuadtree(ID3D11Device* device, NodeType* Node, float P
 	vertexBufferDesc.MiscFlags = 0;
 	vertexBufferDesc.StructureByteStride = 0;
 
-	// subresource ±¸Á¶¿¡ Á¤Á¡ µ¥ÀÌÅÍ¿¡ ´ëÇÑ Æ÷ÀÎÅÍ¸¦ Á¦°øÇÕ´Ï´Ù.
+	// subresource êµ¬ì¡°ì— ì •ì  ë°ì´í„°ì— ëŒ€í•œ í¬ì¸í„°ë¥¼ ì œê³µí•©ë‹ˆë‹¤.
 	D3D11_SUBRESOURCE_DATA vertexData;
 	vertexData.pSysMem = vertices;
 	vertexData.SysMemPitch = 0;
 	vertexData.SysMemSlicePitch = 0;
 
-	// ÀÌÁ¦ ¸¶Ä§³» Á¤Á¡ ¹öÆÛ¸¦ ¸¸µì´Ï´Ù.
-	device->CreateBuffer(&vertexBufferDesc, &vertexData, &Node->vertexBuffer);
+	// ì´ì œ ë§ˆì¹¨ë‚´ ì •ì  ë²„í¼ë¥¼ ë§Œë“­ë‹ˆë‹¤.
+	device->CreateBuffer(&vertexBufferDesc, &vertexData, &node->vertexBuffer);
 
-	// ÀÎµ¦½º ¹öÆÛÀÇ ¼³¸íÀ» ¼³Á¤ÇÕ´Ï´Ù.
+	// ì¸ë±ìŠ¤ ë²„í¼ì˜ ì„¤ëª…ì„ ì„¤ì •í•©ë‹ˆë‹¤.
 	D3D11_BUFFER_DESC indexBufferDesc;
 	indexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
 	indexBufferDesc.ByteWidth = sizeof(unsigned long) * vertexCount;
@@ -245,33 +288,33 @@ void QuadtreeClass::CreateQuadtree(ID3D11Device* device, NodeType* Node, float P
 	indexBufferDesc.MiscFlags = 0;
 	indexBufferDesc.StructureByteStride = 0;
 
-	// ÇÏÀ§ ¸®¼Ò½º ±¸Á¶¿¡ ÀÎµ¦½º µ¥ÀÌÅÍ¿¡ ´ëÇÑ Æ÷ÀÎÅÍ¸¦ Á¦°øÇÕ´Ï´Ù.
+	// í•˜ìœ„ ë¦¬ì†ŒìŠ¤ êµ¬ì¡°ì— ì¸ë±ìŠ¤ ë°ì´í„°ì— ëŒ€í•œ í¬ì¸í„°ë¥¼ ì œê³µí•©ë‹ˆë‹¤.
 	D3D11_SUBRESOURCE_DATA indexData;
 	indexData.pSysMem = indices;
 	indexData.SysMemPitch = 0;
 	indexData.SysMemSlicePitch = 0;
 
-	// ÀÎµ¦½º ¹öÆÛ¸¦ ¸¸µì´Ï´Ù.
-	device->CreateBuffer(&indexBufferDesc, &indexData, &Node->indexBuffer);
+	// ì¸ë±ìŠ¤ ë²„í¼ë¥¼ ë§Œë“­ë‹ˆë‹¤.
+	device->CreateBuffer(&indexBufferDesc, &indexData, &node->indexBuffer);
 
-	// ÀÌÁ¦ ³ëµåÀÇ ¹öÆÛ¿¡ µ¥ÀÌÅÍ°¡ ÀúÀåµÇ¹Ç·Î ²ÀÁöÁ¡°ú ÀÎµ¦½º ¹è¿­À» ÇØÁ¦ÇÕ´Ï´Ù.
+	// ì´ì œ ë…¸ë“œì˜ ë²„í¼ì— ë°ì´í„°ê°€ ì €ì¥ë˜ë¯€ë¡œ ê¼­ì§€ì ê³¼ ì¸ë±ìŠ¤ ë°°ì—´ì„ í•´ì œí•©ë‹ˆë‹¤.
 	delete[] vertices;
 	vertices = 0;
 
 	delete[] indices;
 	indices = 0;
-	
 }
+
 
 int QuadtreeClass::CountTriangles(float positionX, float positionZ, float width)
 {
-	// Ä«¿îÆ®¸¦ 0À¸·Î ÃÊ±âÈ­ÇÑ´Ù.
+	// ì¹´ìš´íŠ¸ë¥¼ 0ìœ¼ë¡œ ì´ˆê¸°í™”í•œë‹¤.
 	int count = 0;
 
-	// ÀüÃ¼ ¸Ş½¬ÀÇ ¸ğµç »ï°¢ÇüÀ» »ìÆìº¸°í ¾î¶² ³ëµå°¡ ÀÌ ³ëµå ¾È¿¡ ÀÖ¾î¾ß ÇÏ´ÂÁö È®ÀÎÇÕ´Ï´Ù.
+	// ì „ì²´ ë©”ì‰¬ì˜ ëª¨ë“  ì‚¼ê°í˜•ì„ ì‚´í´ë³´ê³  ì–´ë–¤ ë…¸ë“œê°€ ì´ ë…¸ë“œ ì•ˆì— ìˆì–´ì•¼ í•˜ëŠ”ì§€ í™•ì¸í•©ë‹ˆë‹¤.
 	for (int i = 0; i < m_triangleCount; i++)
 	{
-		// »ï°¢ÇüÀÌ ³ëµå ¾È¿¡ ÀÖÀ¸¸é 1¾¿ Áõ°¡½ÃÅµ´Ï´Ù.
+		// ì‚¼ê°í˜•ì´ ë…¸ë“œ ì•ˆì— ìˆìœ¼ë©´ 1ì”© ì¦ê°€ì‹œí‚µë‹ˆë‹¤.
 		if (IsTriangleContained(i, positionX, positionZ, width) == true)
 		{
 			count++;
@@ -281,48 +324,49 @@ int QuadtreeClass::CountTriangles(float positionX, float positionZ, float width)
 	return count;
 }
 
+
 bool QuadtreeClass::IsTriangleContained(int index, float positionX, float positionZ, float width)
 {
-	// ÀÌ ³ëµåÀÇ ¹İ°æÀ» °è»êÇÕ´Ï´Ù.
+	// ì´ ë…¸ë“œì˜ ë°˜ê²½ì„ ê³„ì‚°í•©ë‹ˆë‹¤.
 	float radius = width / 2.0f;
 
-	// ÀÎµ¦½º¸¦ Á¤Á¡ ¸ñ·ÏÀ¸·Î °¡Á®¿É´Ï´Ù.
+	// ì¸ë±ìŠ¤ë¥¼ ì •ì  ëª©ë¡ìœ¼ë¡œ ê°€ì ¸ì˜µë‹ˆë‹¤.
 	int vertexIndex = index * 3;
 
-	// Á¤Á¡ ¸ñ·Ï¿¡¼­ ÀÌ »ï°¢ÇüÀÇ ¼¼ ²ÀÁöÁ¡À» °¡Á®¿É´Ï´Ù.
-	float x1 = m_VertexList[vertexIndex].Position.x;
-	float z1 = m_VertexList[vertexIndex].Position.z;
+	// ì •ì  ëª©ë¡ì—ì„œ ì´ ì‚¼ê°í˜•ì˜ ì„¸ ê¼­ì§€ì ì„ ê°€ì ¸ì˜µë‹ˆë‹¤.
+	float x1 = m_vertexList[vertexIndex].position.x;
+	float z1 = m_vertexList[vertexIndex].position.z;
 	vertexIndex++;
 
-	float x2 = m_VertexList[vertexIndex].Position.x;
-	float z2 = m_VertexList[vertexIndex].Position.z;
+	float x2 = m_vertexList[vertexIndex].position.x;
+	float z2 = m_vertexList[vertexIndex].position.z;
 	vertexIndex++;
 
-	float x3 = m_VertexList[vertexIndex].Position.x;
-	float z3 = m_VertexList[vertexIndex].Position.z;
+	float x3 = m_vertexList[vertexIndex].position.x;
+	float z3 = m_vertexList[vertexIndex].position.z;
 
-	// »ï°¢ÇüÀÇ x ÁÂÇ¥ÀÇ ÃÖ¼Ò°ªÀÌ ³ëµå ¾È¿¡ ÀÖ´ÂÁö È®ÀÎÇÏ½Ê½Ã¿À.
+	// ì‚¼ê°í˜•ì˜ x ì¢Œí‘œì˜ ìµœì†Œê°’ì´ ë…¸ë“œ ì•ˆì— ìˆëŠ”ì§€ í™•ì¸í•˜ì‹­ì‹œì˜¤.
 	float minimumX = min(x1, min(x2, x3));
 	if (minimumX > (positionX + radius))
 	{
 		return false;
 	}
 
-	// »ï°¢ÇüÀÇ x ÁÂÇ¥ÀÇ ÃÖ´ë °ªÀÌ ³ëµå ¾È¿¡ ÀÖ´ÂÁö È®ÀÎÇÏ½Ê½Ã¿À.
+	// ì‚¼ê°í˜•ì˜ x ì¢Œí‘œì˜ ìµœëŒ€ ê°’ì´ ë…¸ë“œ ì•ˆì— ìˆëŠ”ì§€ í™•ì¸í•˜ì‹­ì‹œì˜¤.
 	float maximumX = max(x1, max(x2, x3));
 	if (maximumX < (positionX - radius))
 	{
 		return false;
 	}
 
-	// »ï°¢ÇüÀÇ z ÁÂÇ¥ÀÇ ÃÖ¼Ò°ªÀÌ ³ëµå ¾È¿¡ ÀÖ´ÂÁö È®ÀÎÇÏ½Ê½Ã¿À.
+	// ì‚¼ê°í˜•ì˜ z ì¢Œí‘œì˜ ìµœì†Œê°’ì´ ë…¸ë“œ ì•ˆì— ìˆëŠ”ì§€ í™•ì¸í•˜ì‹­ì‹œì˜¤.
 	float minimumZ = min(z1, min(z2, z3));
 	if (minimumZ > (positionZ + radius))
 	{
 		return false;
 	}
 
-	// »ï°¢ÇüÀÇ z ÁÂÇ¥ÀÇ ÃÖ´ë °ªÀÌ ³ëµå ¾È¿¡ ÀÖ´ÂÁö È®ÀÎÇÏ½Ê½Ã¿À.
+	// ì‚¼ê°í˜•ì˜ z ì¢Œí‘œì˜ ìµœëŒ€ ê°’ì´ ë…¸ë“œ ì•ˆì— ìˆëŠ”ì§€ í™•ì¸í•˜ì‹­ì‹œì˜¤.
 	float maximumZ = max(z1, max(z2, z3));
 	if (maximumZ < (positionZ - radius))
 	{
@@ -332,73 +376,325 @@ bool QuadtreeClass::IsTriangleContained(int index, float positionX, float positi
 	return true;
 }
 
-void QuadtreeClass::RenderNode(NodeType* node, FrustumClass* frustum, ID3D11DeviceContext* devcon, TerrainShaderClass* shader)
-{
-	// ÇöÀç ³ëµå°¡ º¸ÀÌ´ÂÁö FrustumÀ» ÅëÇØ ÆÇ´Ü
-	if (!frustum->CheckCube(node->positionX, 0, node->positionZ, node->width))
-		return;
 
-	// ÀÚ½Ä ³ëµå°¡ ÀÖ´Â °æ¿ì ÀÚ½Ä ³ëµå¿¡ ´ëÇØ RenderNode
-	int count = 0;
+void QuadtreeClass::ReleaseNode(NodeType* node)
+{
+	// ì¬ê·€ì ìœ¼ë¡œ íŠ¸ë¦¬ ì•„ë˜ë¡œ ë‚´ë ¤ì™€ ë§¨ ì•„ë˜ ë…¸ë“œë¥¼ ë¨¼ì € ë†“ìŠµë‹ˆë‹¤.
 	for (int i = 0; i < 4; i++)
 	{
-		if (node->Child[i] != 0)
+		if (node->nodes[i] != 0)
 		{
-			RenderNode(node->Child[i], frustum, devcon, shader);
-			count++;
+			ReleaseNode(node->nodes[i]);
 		}
 	}
 
-	// ÀÚ½Ä ³ëµå°¡ ÀÖ´Â °æ¿ì ºÎ¸ğ´Â Render ÇÒ ÇÊ¿ä°¡ ¾ø´Ù.
+	// ì´ ë…¸ë“œì˜ ë²„í…ìŠ¤ ë²„í¼ë¥¼ í•´ì œí•œë‹¤.
+	if (node->vertexBuffer)
+	{
+		node->vertexBuffer->Release();
+		node->vertexBuffer = 0;
+	}
+
+	// ì´ ë…¸ë“œì˜ ì¸ë±ìŠ¤ ë²„í¼ë¥¼ í•´ì œí•©ë‹ˆë‹¤.
+	if (node->indexBuffer)
+	{
+		node->indexBuffer->Release();
+		node->indexBuffer = 0;
+	}
+
+	// ì´ ë…¸ë“œì˜ ì •ì  ë°°ì—´ì„ í•´ì œí•©ë‹ˆë‹¤.
+	if (node->vertexArray)
+	{
+		delete[] node->vertexArray;
+		node->vertexArray = 0;
+	}
+
+	// 4ê°œì˜ ìì‹ ë…¸ë“œë¥¼ í•´ì œí•©ë‹ˆë‹¤.
+	for (int i = 0; i < 4; i++)
+	{
+		if (node->nodes[i])
+		{
+			delete node->nodes[i];
+			node->nodes[i] = 0;
+		}
+	}
+}
+
+
+void QuadtreeClass::RenderNode(NodeType* node, FrustumClass* frustum, ID3D11DeviceContext* deviceContext, TerrainShaderClass* shader)
+{
+	// ë…¸ë“œë¥¼ ë³¼ ìˆ˜ ìˆëŠ”ì§€, ë†’ì´ëŠ” ì¿¼ë“œ íŠ¸ë¦¬ì—ì„œ ì¤‘ìš”í•˜ì§€ ì•Šì€ì§€ í™•ì¸í•©ë‹ˆë‹¤.
+	// ë³´ì´ì§€ ì•ŠëŠ” ê²½ìš° ìì‹ ì¤‘ í•˜ë‚˜ë„ íŠ¸ë¦¬ ì•„ë˜ë¡œ ê³„ì† ì§„í–‰í•  ìˆ˜ ì—†ìœ¼ë©° ì†ë„ê°€ ì¦ê°€í•œ ê³³ì…ë‹ˆë‹¤.
+	if (!frustum->CheckCube(node->positionX, 0.0f, node->positionZ, (node->width / 2.0f)))
+	{
+		return;
+	}
+
+	// ë³¼ ìˆ˜ ìˆëŠ” ê²½ìš° ë„¤ ê°œì˜ ìì‹ ë…¸ë“œë¥¼ ëª¨ë‘ í™•ì¸í•˜ì—¬ ë³¼ â€‹â€‹ìˆ˜ ìˆëŠ”ì§€ í™•ì¸í•©ë‹ˆë‹¤.
+	int count = 0;
+	for (int i = 0; i < 4; i++)
+	{
+		if (node->nodes[i] != 0)
+		{
+			count++;
+			RenderNode(node->nodes[i], frustum, deviceContext, shader);
+		}
+	}
+
+	// ìì‹ ë…¸ë“œê°€ ìˆëŠ” ê²½ìš° ë¶€ëª¨ ë…¸ë“œê°€ ë Œë”ë§ í•  ì‚¼ê°í˜•ì„ í¬í•¨í•˜ì§€ ì•Šìœ¼ë¯€ë¡œ ê³„ì†í•  í•„ìš”ê°€ ì—†ìŠµë‹ˆë‹¤.
 	if (count != 0)
 	{
 		return;
 	}
 
-	// ÀÚ½Ä ³ëµå°¡ ¾ø´Â °æ¿ì Render
+	// ê·¸ë ‡ì§€ ì•Šìœ¼ë©´ ì´ ë…¸ë“œë¥¼ ë³¼ ìˆ˜ ìˆê³  ê·¸ ì•ˆì— ì‚¼ê°í˜•ì´ ìˆìœ¼ë©´ ì´ ì‚¼ê°í˜•ì„ ë Œë”ë§í•©ë‹ˆë‹¤.
 
-	// Á¤Á¡ ¹öÆÛ º¸Æø ¹× ¿ÀÇÁ¼ÂÀ» ¼³Á¤ÇÕ´Ï´Ù.
+	// ì •ì  ë²„í¼ ë³´í­ ë° ì˜¤í”„ì…‹ì„ ì„¤ì •í•©ë‹ˆë‹¤.
 	unsigned int stride = sizeof(VertexType);
 	unsigned int offset = 0;
 
-	// ·»´õ¸µ ÇÒ ¼ö ÀÖµµ·Ï ÀÔ·Â ¾î¼Àºí·¯¿¡¼­ Á¤Á¡ ¹öÆÛ¸¦ È°¼ºÀ¸·Î ¼³Á¤ÇÕ´Ï´Ù.
-	devcon->IASetVertexBuffers(0, 1, &node->vertexBuffer, &stride, &offset);
+	// ë Œë”ë§ í•  ìˆ˜ ìˆë„ë¡ ì…ë ¥ ì–´ì…ˆë¸”ëŸ¬ì—ì„œ ì •ì  ë²„í¼ë¥¼ í™œì„±ìœ¼ë¡œ ì„¤ì •í•©ë‹ˆë‹¤.
+	deviceContext->IASetVertexBuffers(0, 1, &node->vertexBuffer, &stride, &offset);
 
-	// ·»´õ¸µ ÇÒ ¼ö ÀÖµµ·Ï ÀÔ·Â ¾î¼Àºí·¯¿¡¼­ ÀÎµ¦½º ¹öÆÛ¸¦ È°¼ºÀ¸·Î ¼³Á¤ÇÕ´Ï´Ù.
-	devcon->IASetIndexBuffer(node->indexBuffer, DXGI_FORMAT_R32_UINT, 0);
+	// ë Œë”ë§ í•  ìˆ˜ ìˆë„ë¡ ì…ë ¥ ì–´ì…ˆë¸”ëŸ¬ì—ì„œ ì¸ë±ìŠ¤ ë²„í¼ë¥¼ í™œì„±ìœ¼ë¡œ ì„¤ì •í•©ë‹ˆë‹¤.
+	deviceContext->IASetIndexBuffer(node->indexBuffer, DXGI_FORMAT_R32_UINT, 0);
 
-	// ÀÌ ²ÀÁöÁ¡ ¹öÆÛ¿¡¼­ ·»´õ¸µ µÇ¾î¾ß ÇÏ´Â ÇÁ¸®¹ÌÆ¼ºê À¯ÇüÀ» ¼³Á¤ÇÕ´Ï´Ù. ÀÌ °æ¿ì¿¡´Â »ï°¢ÇüÀÔ´Ï´Ù.
-	devcon->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	// ì´ ê¼­ì§€ì  ë²„í¼ì—ì„œ ë Œë”ë§ ë˜ì–´ì•¼ í•˜ëŠ” í”„ë¦¬ë¯¸í‹°ë¸Œ ìœ í˜•ì„ ì„¤ì •í•©ë‹ˆë‹¤. ì´ ê²½ìš°ì—ëŠ” ì‚¼ê°í˜•ì…ë‹ˆë‹¤.
+	deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-	// ÀÌ ³ëµå¿¡¼­ ÀÎµ¦½ºÀÇ ¼ö¸¦ °áÁ¤ÇÕ´Ï´Ù.
+	// ì´ ë…¸ë“œì—ì„œ ì¸ë±ìŠ¤ì˜ ìˆ˜ë¥¼ ê²°ì •í•©ë‹ˆë‹¤.
 	int indexCount = node->triangleCount * 3;
 
-	// ÁöÇü ¼ÎÀÌ´õ¸¦ È£ÃâÇÏ¿© ÀÌ ³ëµåÀÇ ´Ù°¢ÇüÀ» ·»´õ¸µÇÕ´Ï´Ù.
-	shader->RenderShader(devcon);
+	// ì§€í˜• ì…°ì´ë”ë¥¼ í˜¸ì¶œí•˜ì—¬ ì´ ë…¸ë“œì˜ ë‹¤ê°í˜•ì„ ë Œë”ë§í•©ë‹ˆë‹¤.
+	shader->RenderShader(deviceContext);
 
-	// ÀÌ ÇÁ·¹ÀÓ µ¿¾È ·»´õ¸µ µÈ Æú¸®°ïÀÇ ¼ö¸¦ ´Ã¸³´Ï´Ù.
-	m_drawnCount += node->triangleCount;
-
+	// ì´ í”„ë ˆì„ ë™ì•ˆ ë Œë”ë§ ëœ í´ë¦¬ê³¤ì˜ ìˆ˜ë¥¼ ëŠ˜ë¦½ë‹ˆë‹¤.
+	m_drawCount += node->triangleCount;
 }
 
-void QuadtreeClass::ReleaseNode(NodeType* ParentNode)
+
+bool QuadtreeClass::GetHeightAtPosition(float positionX, float positionZ, float& height)
 {
+	float meshMinX = m_parentNode->positionX - (m_parentNode->width / 2.0f);
+	float meshMaxX = m_parentNode->positionX + (m_parentNode->width / 2.0f);
+
+	float meshMinZ = m_parentNode->positionZ - (m_parentNode->width / 2.0f);
+	float meshMaxZ = m_parentNode->positionZ + (m_parentNode->width / 2.0f);
+
+	// ì¢Œí‘œê°€ ì‹¤ì œë¡œ ë‹¤ê°í˜• ìœ„ì— ìˆëŠ”ì§€ í™•ì¸í•˜ì‹­ì‹œì˜¤.
+	if ((positionX < meshMinX) || (positionX > meshMaxX) || (positionZ < meshMinZ) || (positionZ > meshMaxZ))
+	{
+		return false;
+	}
+
+	// ì´ ìœ„ì¹˜ì— ëŒ€í•œ ë‹¤ê°í˜•ì„ í¬í•¨í•˜ëŠ” ë…¸ë“œë¥¼ ì°¾ìŠµë‹ˆë‹¤.
+	FindNode(m_parentNode, positionX, positionZ, height);
+
+	return true;
+}
+
+
+void QuadtreeClass::FindNode(NodeType* node, float x, float z, float& height)
+{
+	// ì´ ë…¸ë“œì˜ í¬ê¸°ë¥¼ ê³„ì‚°í•©ë‹ˆë‹¤.
+	float xMin = node->positionX - (node->width / 2.0f);
+	float xMax = node->positionX + (node->width / 2.0f);
+
+	float zMin = node->positionZ - (node->width / 2.0f);
+	float zMax = node->positionZ + (node->width / 2.0f);
+
+	// x ë° z ì¢Œí‘œê°€ì´ ë…¸ë“œì— ìˆëŠ”ì§€ í™•ì¸í•©ë‹ˆë‹¤. ê·¸ë ‡ì§€ ì•Šìœ¼ë©´ íŠ¸ë¦¬ì˜ì´ ë¶€ë¶„ì„ íƒìƒ‰í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.
+	if ((x < xMin) || (x > xMax) || (z < zMin) || (z > zMax))
+	{
+		return;
+	}
+
+	// ì¢Œí‘œê°€ ì´ ë…¸ë“œì— ìˆìœ¼ë©´ ìì‹ ë…¸ë“œê°€ ìˆëŠ”ì§€ ë¨¼ì € í™•ì¸í•©ë‹ˆë‹¤.
+	int count = 0;
+
 	for (int i = 0; i < 4; i++)
 	{
-		if (ParentNode->Child[i] != 0)
-			ReleaseNode(ParentNode->Child[i]);
+		if (node->nodes[i] != 0)
+		{
+			count++;
+			FindNode(node->nodes[i], x, z, height);
+		}
 	}
 
-	
-	if (ParentNode->vertexBuffer)
+	// ìì‹ ë…¸ë“œê°€ ìˆëŠ” ê²½ìš° í´ë¦¬ê³¤ì´ ìì‹ì¤‘ í•˜ë‚˜ì— ìˆìœ¼ë¯€ë¡œ ë…¸ë“œê°€ ë°˜í™˜ë©ë‹ˆë‹¤.
+	if (count > 0)
 	{
-		ParentNode->vertexBuffer->Release();
-		ParentNode->vertexBuffer = 0;
+		return;
 	}
 
-	if (ParentNode->indexBuffer)
+	float vertex1[3] = { 0.0f, 0.0f, 0.0f };
+	float vertex2[3] = { 0.0f, 0.0f, 0.0f };
+	float vertex3[3] = { 0.0f, 0.0f, 0.0f };
+
+	// ìì‹ì´ ì—†ìœ¼ë©´ ë‹¤ê°í˜•ì´ì´ ë…¸ë“œì— ìˆì–´ì•¼í•©ë‹ˆë‹¤. ì´ ë…¸ë“œì˜ ëª¨ë“  ë‹¤ê°í˜•ì„ í™•ì¸í•˜ì—¬ ì°¾ìŠµë‹ˆë‹¤.
+	// ìš°ë¦¬ê°€ ì°¾ê³ ìˆëŠ” í´ë¦¬ê³¤ì˜ ë†’ì´.
+	for (int i = 0; i < node->triangleCount; i++)
 	{
-		ParentNode->indexBuffer->Release();
-		ParentNode->indexBuffer = 0;
+		int index = i * 3;
+		vertex1[0] = node->vertexArray[index].x;
+		vertex1[1] = node->vertexArray[index].y;
+		vertex1[2] = node->vertexArray[index].z;
+
+		index++;
+		vertex2[0] = node->vertexArray[index].x;
+		vertex2[1] = node->vertexArray[index].y;
+		vertex2[2] = node->vertexArray[index].z;
+
+		index++;
+		vertex3[0] = node->vertexArray[index].x;
+		vertex3[1] = node->vertexArray[index].y;
+		vertex3[2] = node->vertexArray[index].z;
+
+		// ì´ê²ƒì´ ìš°ë¦¬ê°€ ì°¾ê³ ìˆëŠ” í´ë¦¬ê³¤ì¸ì§€ í™•ì¸í•©ë‹ˆë‹¤.
+		// ì‚¼ê°í˜• ì¸ ê²½ìš° í•¨ìˆ˜ë¥¼ ì¢…ë£Œí•˜ê³  ë†’ì´ê°€ í˜¸ì¶œ í•¨ìˆ˜ì— ë°˜í™˜ë©ë‹ˆë‹¤.
+		if (CheckHeightOfTriangle(x, z, height, vertex1, vertex2, vertex3))
+		{
+			return;
+		}
 	}
+}
+
+
+bool QuadtreeClass::CheckHeightOfTriangle(float x, float z, float& height, float v0[3], float v1[3], float v2[3])
+{
+	float startVector[3] = { 0.0f, 0.0f, 0.0f };
+	float directionVector[3] = { 0.0f, 0.0f, 0.0f };
+	float edge1[3] = { 0.0f, 0.0f, 0.0f };
+	float edge2[3] = { 0.0f, 0.0f, 0.0f };
+	float normal[3] = { 0.0f, 0.0f, 0.0f };
+	float Q[3] = { 0.0f, 0.0f, 0.0f };
+	float e1[3] = { 0.0f, 0.0f, 0.0f };
+	float e2[3] = { 0.0f, 0.0f, 0.0f };
+	float e3[3] = { 0.0f, 0.0f, 0.0f };
+	float edgeNormal[3] = { 0.0f, 0.0f, 0.0f };
+	float temp[3] = { 0.0f, 0.0f, 0.0f };
+
+	// ì „ì†¡ì¤‘ì¸ ê´‘ì„ ì˜ ì‹œì‘ ìœ„ì¹˜.
+	startVector[0] = x;
+	startVector[1] = 0.0f;
+	startVector[2] = z;
+
+	// ê´‘ì„ ì´ íˆ¬ì˜ë˜ëŠ” ë°©í–¥ì…ë‹ˆë‹¤.
+	directionVector[0] = 0.0f;
+	directionVector[1] = -1.0f;
+	directionVector[2] = 0.0f;
+
+	// ì£¼ì–´ì§„ ì„¸ ì ìœ¼ë¡œë¶€í„° ë‘ ëª¨ì„œë¦¬ë¥¼ ê³„ì‚°í•©ë‹ˆë‹¤.
+	edge1[0] = v1[0] - v0[0];
+	edge1[1] = v1[1] - v0[1];
+	edge1[2] = v1[2] - v0[2];
+
+	edge2[0] = v2[0] - v0[0];
+	edge2[1] = v2[1] - v0[1];
+	edge2[2] = v2[2] - v0[2];
+
+	// ë‘ ëª¨ì„œë¦¬ì—ì„œ ì‚¼ê°í˜•ì˜ ë²•ì„ ì„ ê³„ì‚°í•©ë‹ˆë‹¤.
+	normal[0] = (edge1[1] * edge2[2]) - (edge1[2] * edge2[1]);
+	normal[1] = (edge1[2] * edge2[0]) - (edge1[0] * edge2[2]);
+	normal[2] = (edge1[0] * edge2[1]) - (edge1[1] * edge2[0]);
+
+	float magnitude = (float)sqrt((normal[0] * normal[0]) + (normal[1] * normal[1]) + (normal[2] * normal[2]));
+	normal[0] = normal[0] / magnitude;
+	normal[1] = normal[1] / magnitude;
+	normal[2] = normal[2] / magnitude;
+
+	// ì›ì ì—ì„œ í‰ë©´ê¹Œì§€ì˜ ê±°ë¦¬ë¥¼ êµ¬í•©ë‹ˆë‹¤.
+	float D = ((-normal[0] * v0[0]) + (-normal[1] * v0[1]) + (-normal[2] * v0[2]));
+
+	// ë°©ì •ì‹ì˜ ë¶„ëª¨ë¥¼ êµ¬í•˜ì‹­ì‹œì˜¤.
+	float denominator = ((normal[0] * directionVector[0]) + (normal[1] * directionVector[1]) + (normal[2] * directionVector[2]));
+
+	// ê²°ê³¼ê°€ 0ì— ë„ˆë¬´ ê°€ê¹Œì›Œì§€ì§€ ì•Šë„ë¡í•˜ì—¬ 0ìœ¼ë¡œ ë‚˜ëˆ„ëŠ” ê²ƒì„ ë°©ì§€í•˜ì‹­ì‹œì˜¤.
+	if (fabs(denominator) < 0.0001f)
+	{
+		return false;
+	}
+
+	// ë°©ì •ì‹ì˜ ë¶„ìë¥¼ êµ¬í•©ë‹ˆë‹¤.
+	float numerator = -1.0f * (((normal[0] * startVector[0]) + (normal[1] * startVector[1]) + (normal[2] * startVector[2])) + D);
+
+	// ì‚¼ê°í˜•ê³¼ êµì°¨í•˜ëŠ” ìœ„ì¹˜ë¥¼ ê³„ì‚°í•©ë‹ˆë‹¤.
+	float t = numerator / denominator;
+
+	// êµì°¨ ë²¡í„°ë¥¼ ì°¾ìŠµë‹ˆë‹¤.
+	Q[0] = startVector[0] + (directionVector[0] * t);
+	Q[1] = startVector[1] + (directionVector[1] * t);
+	Q[2] = startVector[2] + (directionVector[2] * t);
+
+	// ì‚¼ê°í˜•ì˜ ì„¸ ëª¨ì„œë¦¬ë¥¼ ì°¾ìŠµë‹ˆë‹¤.
+	e1[0] = v1[0] - v0[0];
+	e1[1] = v1[1] - v0[1];
+	e1[2] = v1[2] - v0[2];
+
+	e2[0] = v2[0] - v1[0];
+	e2[1] = v2[1] - v1[1];
+	e2[2] = v2[2] - v1[2];
+
+	e3[0] = v0[0] - v2[0];
+	e3[1] = v0[1] - v2[1];
+	e3[2] = v0[2] - v2[2];
+
+	// ì²« ë²ˆì§¸ ê°€ì¥ìë¦¬ì˜ ë²•ì„ ì„ ê³„ì‚°í•©ë‹ˆë‹¤.
+	edgeNormal[0] = (e1[1] * normal[2]) - (e1[2] * normal[1]);
+	edgeNormal[1] = (e1[2] * normal[0]) - (e1[0] * normal[2]);
+	edgeNormal[2] = (e1[0] * normal[1]) - (e1[1] * normal[0]);
+
+	// í–‰ë ¬ì´ ë‚´ë¶€, ì™¸ë¶€ ë˜ëŠ” ì§ì ‘ ê°€ì¥ìë¦¬ì— ìˆëŠ”ì§€ ê²°ì •í•˜ê¸° ìœ„í•´ í–‰ë ¬ì‹ì„ ê³„ì‚°í•©ë‹ˆë‹¤.
+	temp[0] = Q[0] - v0[0];
+	temp[1] = Q[1] - v0[1];
+	temp[2] = Q[2] - v0[2];
+
+	float determinant = ((edgeNormal[0] * temp[0]) + (edgeNormal[1] * temp[1]) + (edgeNormal[2] * temp[2]));
+
+	// ì™¸ë¶€ì— ìˆëŠ”ì§€ í™•ì¸í•˜ì‹­ì‹œì˜¤.
+	if (determinant > 0.001f)
+	{
+		return false;
+	}
+
+	// ë‘ ë²ˆì§¸ ê°€ì¥ìë¦¬ì˜ ë²•ì„ ì„ ê³„ì‚°í•©ë‹ˆë‹¤.
+	edgeNormal[0] = (e2[1] * normal[2]) - (e2[2] * normal[1]);
+	edgeNormal[1] = (e2[2] * normal[0]) - (e2[0] * normal[2]);
+	edgeNormal[2] = (e2[0] * normal[1]) - (e2[1] * normal[0]);
+
+	// í–‰ë ¬ì´ ë‚´ë¶€, ì™¸ë¶€ ë˜ëŠ” ì§ì ‘ ê°€ì¥ìë¦¬ì— ìˆëŠ”ì§€ ê²°ì •í•˜ê¸° ìœ„í•´ í–‰ë ¬ì‹ì„ ê³„ì‚°í•©ë‹ˆë‹¤.
+	temp[0] = Q[0] - v1[0];
+	temp[1] = Q[1] - v1[1];
+	temp[2] = Q[2] - v1[2];
+
+	determinant = ((edgeNormal[0] * temp[0]) + (edgeNormal[1] * temp[1]) + (edgeNormal[2] * temp[2]));
+
+	// ì™¸ë¶€ì— ìˆëŠ”ì§€ í™•ì¸í•˜ì‹­ì‹œì˜¤.
+	if (determinant > 0.001f)
+	{
+		return false;
+	}
+
+	// ì„¸ ë²ˆì§¸ ê°€ì¥ìë¦¬ì˜ ë²•ì„ ì„ ê³„ì‚°í•©ë‹ˆë‹¤.
+	edgeNormal[0] = (e3[1] * normal[2]) - (e3[2] * normal[1]);
+	edgeNormal[1] = (e3[2] * normal[0]) - (e3[0] * normal[2]);
+	edgeNormal[2] = (e3[0] * normal[1]) - (e3[1] * normal[0]);
+
+	// í–‰ë ¬ì´ ë‚´ë¶€, ì™¸ë¶€ ë˜ëŠ” ì§ì ‘ ê°€ì¥ìë¦¬ì— ìˆëŠ”ì§€ ê²°ì •í•˜ê¸° ìœ„í•´ í–‰ë ¬ì‹ì„ ê³„ì‚°í•©ë‹ˆë‹¤.
+	temp[0] = Q[0] - v2[0];
+	temp[1] = Q[1] - v2[1];
+	temp[2] = Q[2] - v2[2];
+
+	determinant = ((edgeNormal[0] * temp[0]) + (edgeNormal[1] * temp[1]) + (edgeNormal[2] * temp[2]));
+
+	// ì™¸ë¶€ì— ìˆëŠ”ì§€ í™•ì¸í•˜ì‹­ì‹œì˜¤.
+	if (determinant > 0.001f)
+	{
+		return false;
+	}
+
+	// ì´ì œ ìš°ë¦¬ ë†’ì´ê°€ ìˆìŠµë‹ˆë‹¤.
+	height = Q[1];
+
+	return true;
 }

@@ -6,20 +6,20 @@
 /////////////
 // GLOBALS //
 /////////////
-cbuffer MatrixBuffer
+cbuffer MatrixBuffer : register(b0)
 {
     matrix worldMatrix;
     matrix viewMatrix;
     matrix projectionMatrix;
 };
 
-cbuffer CameraBuffer
+cbuffer CameraBuffer : register(b1)
 {
     float3 cameraPosition;
     float padding;
 };
 
-cbuffer TransformBuffer
+cbuffer TransformBuffer : register(b2)
 {
     matrix TransformMatrix[100];
 };
@@ -78,8 +78,9 @@ PixelInputType BumpMapVertexShader(VertexInputType input)
     input.position.w = 1.0f;
 
     // 월드, 뷰 및 투영 행렬에 대한 정점의 위치를 계산합니다.
+    
     output.position = mul(input.position, bonetransform);
-    output.position = mul(output.position, worldMatrix);  
+    output.position = mul(output.position, worldMatrix);
     output.position = mul(output.position, viewMatrix);
     output.position = mul(output.position, projectionMatrix);
 

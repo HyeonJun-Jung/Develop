@@ -16,6 +16,7 @@ cbuffer LightBuffer
     float4 specularColor;
 };
 
+
 //////////////
 // TYPEDEFS //
 //////////////
@@ -31,7 +32,6 @@ struct PixelInputType
 
 float4 BumpMapPixelShader(PixelInputType input) : SV_TARGET
 {
-    
     float4 textureColor;
     float4 bumpMap;
     float3 bumpNormal;
@@ -85,14 +85,12 @@ float4 BumpMapPixelShader(PixelInputType input) : SV_TARGET
         {
             // specular map으로부터 픽셀을 샘플링합니다.
             specularIntensity = shaderTextures[1].Sample(SampleType, input.tex);    
-
             
             // glossiness map에서 광택 픽셀을 샘플링합니다.
             glossiness = shaderTextures[3].Sample(SampleType, input.tex);
 
             // glossiness 픽셀의 a를 뽑습니다.
-            float gloss = glossiness.a;
-            
+            float gloss = glossiness.a;  
 
             // 빛의 강도, 법선 벡터 및 빛의 방향으로 부터 반사 벡터를 계산합니다.
             reflection = normalize(2 * lightIntensity * bumpNormal - lightDir); 

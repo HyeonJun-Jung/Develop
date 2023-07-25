@@ -25,11 +25,6 @@ struct MarterialType {
 	bool Emissive = false;
 };
 
-struct TransformBufferType
-{
-	XMMATRIX TransformMatrix[100];
-};
-
 struct VectorType {
 	float x, y, z;
 };
@@ -85,4 +80,13 @@ struct MtMesh {
 	ID3D11Buffer* IndexBuffer = nullptr;
 	unsigned int VertexCount = 0;
 	unsigned int IndexCount = 0;
+};
+
+struct Sphere {
+	Sphere(float x, float y, float z)
+	{
+		centerPos = XMFLOAT3(x, y, z);
+	}
+	XMFLOAT3 centerPos;
+	float radius;
 };

@@ -21,20 +21,34 @@ public:
 
 	vector<MtMesh*>* GetMeshList() { return &MeshList; }
 	vector<Animation>* GetAnimationList() { return &AnimationList; }
+	Animation* GetAnimation(int index) { return &AnimationList[index]; }
 	vector<boneInfo>* GetBoneList() { return &BoneInfos; };
 	map<string, int>* GetBoneMap() { return &BoneMap; }
 	int GetBoneNum() { return BoneInfos.size(); }
 	NodeInfo* GetRootNode() { return RootNode; };
+	NodeInfo* GetMoveNode() { return MoveNode; }
 	XMFLOAT3* GetMaxPos() { return &MaxPos; }
 	XMFLOAT3* GetMinPos() { return &MinPos; }
 	Resource_Type GetResourceType();
+	PxConvexMeshGeometry& GetConvexMeshGeometry() { return ConvexMeshGeometry;}
+	PxBoxGeometry& GetBoxGeometry() { return BoxGeometry; }
+	PxCapsuleGeometry& GetCapsuleGeometry() { return CapsuleGeometry; }
 
 	XMMATRIX GetRootNodeTransform(int AnimationIndex, float AnimationTime, NodeInfo* node);
 	void UpdateBoneFinalMatrix(int AnimationIndex, float AnimationTime, XMMATRIX* BoneFinalTransform);
 
+	void ChangeAnimation(int prevAni, int nextAni, float animationTime, float LerpTime, XMMATRIX* BoneFinalTransform);
+	float GetFrameTime(int animationIdx, int frameIdx);
+
+	float GetCurFrameTime(int animationIdx, float animationTime);
+	float GetNextFrameTime(int animationIdx, float animationTime);
+	
 private:
 	void ReadNodeHierarchy(int AnimationIndex, float AnimaitonTime, NodeInfo* node, const XMMATRIX& parentTransform, XMMATRIX* BoneFinalTransform);
+	void ReadNodeHierarchy(int prevAni, int nextAni, float AnimaitonTime, float LerpTime, NodeInfo* node, const XMMATRIX& parentTransform, XMMATRIX* BoneFinalTransform);
 	int FindAniNodeIndex(const Animation* animation, const string nodeName);
+	void processMoveNode();
+	
 
 private:
 	// 정점 버퍼, 인덱스 버퍼, 마테리얼 정보
@@ -49,9 +63,19 @@ private:
 
 	// Node 계층 구조
 	NodeInfo* RootNode = new NodeInfo;
+	NodeInfo* MoveNode = nullptr;
+
+	// Physx Material
+	PxConvexMeshGeometry ConvexMeshGeometry;
+	PxBoxGeometry BoxGeometry;
+	PxCapsuleGeometry CapsuleGeometry;
 
 	// Obb 최대 최소
 	XMFLOAT3 MaxPos, MinPos;
+	
+	// Last Frame Postion
+	XMFLOAT3 LastFramePosition;
+
 
 public:
 	XMMATRIX GlobalInverseTransform = XMMatrixIdentity();

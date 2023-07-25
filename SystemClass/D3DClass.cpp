@@ -28,6 +28,10 @@ D3DClass::~D3DClass()
 bool D3DClass::Initialize(int screenWidth, int screenHeight, bool vsync, HWND hwnd, bool fullscreen,
     float screenDepth, float screenNear)
 {
+    m_Screenwidth = screenWidth;
+    m_ScreenHeight = screenHeight;
+
+
     HRESULT result;
     int error;
 
@@ -403,6 +407,16 @@ bool D3DClass::Initialize(int screenWidth, int screenHeight, bool vsync, HWND hw
         return false;
     }
 
+    // 깊이 쓰기를 하지 않는 상태
+    depthDisalbedStencilDesc.DepthEnable = true;
+    depthDisalbedStencilDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ZERO;
+
+    result = m_device->CreateDepthStencilState(&depthDisalbedStencilDesc, &m_depthWriteFalseState);
+    if (FAILED(result))
+    {
+        return false;
+    }   
+
 
     // 블렌딩을 위한 블렌딩 상태를 만듭니다.
     D3D11_BLEND_DESC blendStateDescription;
@@ -413,12 +427,33 @@ bool D3DClass::Initialize(int screenWidth, int screenHeight, bool vsync, HWND hw
     blendStateDescription.RenderTarget[0].SrcBlend = D3D11_BLEND_ONE;
     blendStateDescription.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
     blendStateDescription.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+
     blendStateDescription.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
     blendStateDescription.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
     blendStateDescription.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
     blendStateDescription.RenderTarget[0].RenderTargetWriteMask = 0x0f;
+
     // Create the blend state using the description.
     result = m_device->CreateBlendState(&blendStateDescription, &m_alphaEnableBlendingState);
+    if (FAILED(result))
+    {
+        return false;
+    }
+
+    blendStateDescription.AlphaToCoverageEnable = false;
+    blendStateDescription.IndependentBlendEnable = false;
+
+    blendStateDescription.RenderTarget[0].BlendEnable = true;
+    blendStateDescription.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
+    blendStateDescription.RenderTarget[0].DestBlend = D3D11_BLEND_ONE;
+    blendStateDescription.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+
+    blendStateDescription.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
+    blendStateDescription.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_INV_SRC_ALPHA;
+    blendStateDescription.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+    blendStateDescription.RenderTarget[0].RenderTargetWriteMask = 0x0f;
+
+    result = m_device->CreateBlendState(&blendStateDescription, &m_ParticleState);
     if (FAILED(result))
     {
         return false;
@@ -610,6 +645,16 @@ void D3DClass::TurnZBufferOff()
     m_deviceContext->OMSetDepthStencilState(m_depthDisabledStencilState, 1);
 }
 
+void D3DClass::EnableDepthMask()
+{
+    m_deviceContext->OMSetDepthStencilState(m_depthStencilState, 1);
+}
+
+void D3DClass::DisableDepthMask()
+{
+    m_deviceContext->OMSetDepthStencilState(m_depthWriteFalseState, 1);
+}
+
 void D3DClass::TurnOnAlphaBlending()
 {
     float blendFactor[4];
@@ -634,6 +679,19 @@ void D3DClass::TurnOffAlphaBlending()
     blendFactor[3] = 0.0f;
 
     m_deviceContext->OMSetBlendState(m_alphaDisableBlendingState, blendFactor, 0xffffffff);
+}
+
+void D3DClass::EnableParticleBlending()
+{
+    float blendFactor[4];
+
+    // Setup the blend factor.
+    blendFactor[0] = 0.0f;
+    blendFactor[1] = 0.0f;
+    blendFactor[2] = 0.0f;
+    blendFactor[3] = 0.0f;
+
+    m_deviceContext->OMSetBlendState(m_ParticleState, blendFactor, 0xffffffff);
 }
 
 void D3DClass::TurnOnCulling()

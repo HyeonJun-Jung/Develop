@@ -42,13 +42,20 @@ public:
     void GetWorldMatrix(XMMATRIX&);
     void GetOrthoMatrix(XMMATRIX&);
 
+    int GetScreenWidth() { return m_Screenwidth; }
+    int GetScreenHeight() { return m_ScreenHeight; }
+
     void GetVideoCardInfo(char*, int&);
 
     void TurnZBufferOn();
     void TurnZBufferOff();
 
+    void DisableDepthMask();
+    void EnableDepthMask();
+
     void TurnOnAlphaBlending();
     void TurnOffAlphaBlending();
+    void EnableParticleBlending();
 
     void TurnOnCulling();
     void TurnOffCulling();
@@ -76,10 +83,17 @@ private:
     XMMATRIX m_orthoMatrix;
 
     ID3D11DepthStencilState* m_depthDisabledStencilState = nullptr;
+    ID3D11DepthStencilState* m_depthWriteFalseState = nullptr;
+
     ID3D11BlendState* m_alphaEnableBlendingState = nullptr;
     ID3D11BlendState* m_alphaDisableBlendingState = nullptr;
+    ID3D11BlendState* m_ParticleState = nullptr;
+
     ID3D11RasterizerState* m_rasterStateNoCulling = nullptr;
     D3D11_VIEWPORT m_viewport;
+
+    int m_Screenwidth;
+    int m_ScreenHeight;
 
 };
 

@@ -29,6 +29,7 @@ public:
 	~ModelLoader();
 
 	SkinnedModel* Load(HWND hwnd, ID3D11Device* dev, ID3D11DeviceContext* devcon, float animationTime, std::string filename);
+	bool AddAnimation(HWND hwnd, ID3D11Device* dev, ID3D11DeviceContext* devcon, SkinnedModel* model, std::string filename);
 	void Close();
 
 	int m_vertexCount = 0;
@@ -43,12 +44,17 @@ private:
 	ID3D11Device *dev_;
 	ID3D11DeviceContext *devcon_;
 	std::string directory_;
-
 	std::vector<Texture> textures_loaded_;
+
+	vector<PxVec3> px_vertices;
+	vector<PxU8> px_indices;
+private:
 
 	void processNode(aiNode* ainode, NodeInfo* node);
 	void processMesh(aiMesh* mesh, const aiScene* scene, SkinnedModel* model);
 	void processAnimation(const aiScene* scene, SkinnedModel* model);
+	void processPhysxGeometry(SkinnedModel* model);
+
 
 	 std::  vector<Texture> loadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string typeName, const aiScene* scene);
 	ID3D11ShaderResourceView* loadEmbeddedTexture(const aiTexture* embeddedTexture);

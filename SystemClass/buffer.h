@@ -9,6 +9,16 @@ struct MatrixBufferType
 	XMMATRIX projection;
 };
 
+struct RotationBufferType
+{
+	XMMATRIX Rotation;
+};
+
+struct TransformBufferType
+{
+	XMMATRIX TransformMatrix[100];
+};
+
 struct CameraBufferType
 {
 	XMFLOAT3 cameraPosition;

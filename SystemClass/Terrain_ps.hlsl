@@ -1,35 +1,60 @@
 
-
-
-/////////////
-// GLOBALS //
-/////////////
 Texture2D shaderTexture;
 SamplerState SampleType;
 
-cbuffer LightBuffer
+cbuffer LightBuffer : register(b0)
 {
 	float4 ambientColor;
 	float4 diffuseColor;
 	float3 lightDirection;
-	float padding;
+	float	specularPower;
+	float4 specularColor;
 };
 
+cbuffer BrushBuffer : register(b1)
+{
+	int type;
+	float3 location;
+	float range;
+	float3 color;
+};
 
-//////////////
-// TYPEDEFS //
-//////////////
 struct PixelInputType
 {
 	float4 position : SV_POSITION;
 	float2 tex : TEXCOORD0;
 	float3 normal : NORMAL;
+	float3 worldPos : Position;
 };
 
 
-////////////////////////////////////////////////////////////////////////////////
-// Pixel Shader
-////////////////////////////////////////////////////////////////////////////////
+float3 BrushColor(float3 pos)
+{
+	if (type == 0)
+	{
+		float x = pos.x - location.x;
+		float z = pos.z - location.z;
+		//
+		float distance = sqrt(x * x + z * z);
+		//
+		if (distance <= range)
+			return color;
+	}
+	else if (type == 1)
+	{
+		float x = pos.x - location.x;
+		float z = pos.z - location.z;
+		//
+		float distX = abs(x);
+		float distZ = abs(z);
+		//
+		if (distX <= range && distZ <= range)
+			return color;
+	}
+	//
+	return float3(0, 0, 0);
+}
+
 float4 TerrainPixelShader(PixelInputType input) : SV_TARGET
 {
 	float4 textureColor;
@@ -59,8 +84,15 @@ float4 TerrainPixelShader(PixelInputType input) : SV_TARGET
 	// 최종 빛의 색상을 채웁니다.
 	color = saturate(color);
 
+	float4 brushColor = (BrushColor(input.worldPos), 0);
+
 	// 텍스처 픽셀과 최종 밝은 색을 곱하여 결과를 얻습니다.
-	color = color * textureColor;
+	if (brushColor.y != 0 || brushColor.x != 0 || brushColor.z != 0)
+		return brushColor;
+
+	color = color * textureColor + brushColor;
+
+	
 
 	return color;
 }

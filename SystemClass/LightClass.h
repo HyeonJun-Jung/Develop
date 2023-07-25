@@ -1,20 +1,12 @@
-////////////////////////////////////////////////////////////////////////////////
-// Filename: lightclass.h
-////////////////////////////////////////////////////////////////////////////////
+
 #ifndef _LIGHTCLASS_H_
 #define _LIGHTCLASS_H_
 
-
-//////////////
-// INCLUDES //
-//////////////
 #include <directxmath.h>
 using namespace DirectX;
 
+class BaseModel;
 
-////////////////////////////////////////////////////////////////////////////////
-// Class name: LightClass
-////////////////////////////////////////////////////////////////////////////////
 class LightClass
 {
 public:
@@ -22,6 +14,7 @@ public:
 	LightClass(const LightClass&);
 	~LightClass();
 
+	void SetModel(BaseModel* model);
 	void SetAmbientColor(float, float, float, float);
 	void SetDiffuseColor(float, float, float, float);
 	void SetDirection(float, float, float);
@@ -35,6 +28,8 @@ public:
 	XMFLOAT4 GetSpecularColor();
 
 private:
+	BaseModel* m_Model = nullptr;
+	XMFLOAT4 m_position;
 	XMFLOAT4 m_ambientColor;
 	XMFLOAT4 m_diffuseColor;
 	XMFLOAT3 m_direction;

@@ -1,5 +1,5 @@
 #include "SystemClass/SystemClass.h"
-
+#include "stdafx.h"
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR pScmdline, int iCmdshow)
 {

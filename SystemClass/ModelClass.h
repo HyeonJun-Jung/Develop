@@ -11,7 +11,6 @@
 using namespace DirectX;
 
 class TextureClass;
-class ModelLoader;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: ModelClass
@@ -53,8 +52,6 @@ private:
 	bool InitializeBuffers(ID3D11Device*);
 	void ShutdownBuffers();
 	void RenderBuffers(ID3D11DeviceContext*);
-
-	bool LoadModelFromFbx(HWND hwnd, ID3D11Device* dev, ID3D11DeviceContext* devcon, char* filename);
 	bool LoadModelFromtxt(char*);
 	void ReleaseModel();
 	bool LoadTexture(ID3D11Device*, WCHAR*);	
@@ -72,13 +69,7 @@ private:
 	int m_indexCount = 0;
 	ModelType* m_model = nullptr;
 	TextureClass* m_Texture = nullptr;
-	ModelLoader* m_ModelLoader = nullptr;
 
-	float m_AniamtionTime;
-
-	XMMATRIX m_RotationMatrix;
-	XMMATRIX m_ScaleMatrix;
-	XMMATRIX m_TranslateMatrix;
 };
 
 #endif

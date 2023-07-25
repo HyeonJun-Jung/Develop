@@ -138,7 +138,6 @@ void CameraClass::GetViewMatrix(XMMATRIX& viewMatrix)
 
 void CameraClass::ReflectionRender(float height)
 {
-
 	XMVECTOR positionVector;
 	XMFLOAT3 up, position, lookAt;
 	XMMATRIX rotationMatrix;
@@ -197,7 +196,7 @@ void CameraClass::CameraMove(Camera_Move_Dir MoveDir)
 	XMFLOAT3 ForwardDirection = GetCameraForwardDirection();
 	XMFLOAT3 RightDirection = GetCameraRightDirection();
 
-	float MoveVal = 0.3f;
+	float MoveVal = 0.3f + 2.7f;
 
 	switch (MoveDir)
 	{
@@ -237,7 +236,7 @@ void CameraClass::CameraMove(Camera_Move_Dir MoveDir)
 void CameraClass::CameraRotation(Camera_Rotation_Dir RotationDir)
 {
 	XMFLOAT3 RightDirection = GetCameraRightDirection();
-	float Rotationval = 1.5f;
+	float Rotationval = 1.5f + 3.0f;
 	
 	switch (RotationDir)
 	{

@@ -1,16 +1,9 @@
 #include "ModelClass.h"
 #include "TextureClass.h"
 #include "..\stdafx.h"
-#include <assimp\Importer.hpp>
-#include <assimp\scene.h>
-#include <assimp\postprocess.h>
-#include "AssimpTest/ModelLoader.h"
 
 ModelClass::ModelClass()
 {
-	m_RotationMatrix = XMMatrixIdentity();
-	m_ScaleMatrix = XMMatrixIdentity();
-	m_TranslateMatrix = XMMatrixIdentity();
 
 }
 
@@ -217,13 +210,6 @@ void ModelClass::ReleaseTexture()
 	}
 }
 
-bool ModelClass::LoadModelFromFbx(HWND hwnd, ID3D11Device* dev, ID3D11DeviceContext* devcon, char* filename)
-{
-	ModelLoader _ModelLoader;
-	_ModelLoader.Load(hwnd, dev, devcon, 0, filename);
-	return true;
-}
-
 bool ModelClass::LoadModelFromtxt(char* filename)
 {
 
@@ -289,23 +275,4 @@ void ModelClass::ReleaseModel()
 		delete[] m_model;
 		m_model = 0;
 	}
-}
-
-void ModelClass::SetRotation(float x, float y, float z)
-{
-	float Roll = x * 0.0174532925f;
-	float Pitch = x * 0.0174532925f;
-	float Yaw = x * 0.0174532925f;
-
-	m_RotationMatrix = XMMatrixRotationRollPitchYaw(Roll, Pitch, Yaw);
-}
-
-void ModelClass::SetScale(float x, float y, float z)
-{
-	m_ScaleMatrix = XMMatrixScaling(x, y, z);
-}
-
-void ModelClass::SetTranslate(float x, float y, float z)
-{
-	m_TranslateMatrix = XMMatrixTranslation(x, y, z);
 }

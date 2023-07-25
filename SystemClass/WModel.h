@@ -1,19 +1,16 @@
 #pragma once
 #include "..\stdafx.h"
-#include "Shader.h"
 #include "DynamicModel.h"
 
 #define MAX_BONES 100
 
 class SkinnedModel;
-class BumpMapShaderClass;
-class Obb;
 
-class WModel : BaseModel
+class WModel : public DynamicModel
 {
 public:
 	WModel();
-	~WModel();
+	virtual ~WModel();
 
 	bool Initialize(string ModelDir);
 	
@@ -26,6 +23,10 @@ public:
 	void UpdateAnimation(float Deltatime);
 	bool SetBoneTransform();
 
+	virtual bool CreateObb();
+	virtual bool CreateSphere();
+
+
 private:
 	bool LoadWModel(string ModelDir);
 	void ReleaseModel();
@@ -34,14 +35,11 @@ private:
 private:
 	SkinnedModel* m_Skinnedmodel = nullptr;
 
-	Shader* m_Shader = nullptr;
-
 	// Animation ป๓ลย
 	int PlayAni = -1;				// play Animation Index
 	float PlayTime = 0;				// Animation Play Time
 
-	XMMATRIX BoneFinalTransform[MAX_BONES];
+	XMMATRIX BoneCurrentTransform[MAX_BONES];
 	ID3D11Buffer* m_TransformBuffer;
-
 };
 

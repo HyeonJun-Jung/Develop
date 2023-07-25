@@ -31,8 +31,8 @@ bool SkydomeClass::Initialize(ID3D11Device* dev)
 
 bool SkydomeClass::Render()
 {
-
-	DynamicModel::Render();
+	if (!DynamicModel::Render())
+		return false;
 
 	XMFLOAT3 CameraPos = CameraClass::GetSingleton()->GetPosition();
 	XMMATRIX WorldMatrix = XMMatrixTranslation(CameraPos.x, CameraPos.y, CameraPos.z);
@@ -44,17 +44,27 @@ bool SkydomeClass::Render()
 	//ShaderManager::GetSingleton()->SetWorldMatrix(WorldMatrix);
 	ShaderManager::GetSingleton()->SetGradientBuffer(m_ApexColor, m_CenterColor);
 
+	D3DClass::GetSingleton()->TurnZBufferOff();
+	D3DClass::GetSingleton()->TurnOffCulling();
 
 	RenderBuffer(D3DClass::GetSingleton()->GetDeviceContext());
 
 	D3DClass::GetSingleton()->GetDeviceContext()->DrawIndexed(m_IndexCount, 0, 0);
+
+	D3DClass::GetSingleton()->TurnZBufferOn();
+	D3DClass::GetSingleton()->TurnOnCulling();
+
+
+	WorldMatrix = XMMatrixIdentity();
+	ShaderManager::GetSingleton()->SetMatrixBuffer(WorldMatrix, ViewMatrix, ProjectionMatrix);
 
 	return true;
 }
 
 bool SkydomeClass::Update(float fDeltaTime)
 {
-	DynamicModel::Update(fDeltaTime);
+	if (!DynamicModel::Update(fDeltaTime))
+		return false;
 
 	return true;
 }

@@ -29,7 +29,17 @@ bool Obb::SetObb(XMFLOAT3 min, XMFLOAT3 max)
 	return true;
 }
 
-void Obb::Render()
+bool Obb::Render()
+{
+	return true;
+}
+
+bool Obb::Update()
+{
+	return true;
+}
+
+void Obb::Translation(XMMATRIX worldMatrix)
 {
 }
 

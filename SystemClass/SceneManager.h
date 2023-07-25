@@ -2,8 +2,10 @@
 #include <map>
 #include <string>
 #include "Singleton.h"
+#include "..\stdafx.h"
 
 class Scene;
+class InputClass;
 
 class SceneManager : public Singleton<SceneManager>
 {
@@ -12,14 +14,15 @@ public:
 	~SceneManager();
 
 public:
-	bool Init();
+	bool Initialize(ID3D11Device* dev, InputClass* input);
 
-	bool Render();
-	bool Update(float fDeltaTime);
+	bool Render(ID3D11DeviceContext* devcon);
+	bool Update(ID3D11DeviceContext* devcon, float fDeltaTime);
 
 private:
-	Scene* currentScene = nullptr;
-	Scene* nextScene = nullptr;
+	Scene* m_currentScene = nullptr;
+	Scene* m_nextScene = nullptr;
+	InputClass* m_Input = nullptr;
 
 };
 

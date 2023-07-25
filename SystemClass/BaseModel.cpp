@@ -16,70 +16,69 @@ bool BaseModel::Render()
 {
 	ShaderManager::GetSingleton()->GetShader(m_RT)->RenderShader(D3DClass::GetSingleton()->GetDeviceContext());
 
-	XMMATRIX worldMatrix = BaseModel::GetWorldMatrix();
 	XMMATRIX viewMatrix; CameraClass::GetSingleton()->GetViewMatrix(viewMatrix);
 	XMMATRIX projectionMatrix; D3DClass::GetSingleton()->GetProjectionMatrix(projectionMatrix);
-		
-	ShaderManager::GetSingleton()->SetMatrixBuffer(worldMatrix, viewMatrix, projectionMatrix);
+
+	ShaderManager::GetSingleton()->SetMatrixBuffer(m_WorldMatrix, viewMatrix, projectionMatrix);
+
 
 	return true;
 }
 
 bool BaseModel::Update(float fDeltaTime)
 {
+	
     return true;
 }
 
 void BaseModel::SetPosition(float PositionX, float PositionY, float PositionZ)
 {
-	m_WMType.Transx = PositionX;
-	m_WMType.Transy = PositionY;
-	m_WMType.Transz = PositionZ;
+	m_TranslationMatrix = XMMatrixTranslation(PositionX, PositionY, PositionZ);
 }
 
 void BaseModel::SetScale(float ScaleX, float ScaleY, float ScaleZ)
 {
-	m_WMType.ScaleX = ScaleX;
-	m_WMType.ScaleY = ScaleY;
-	m_WMType.ScaleZ = ScaleZ;
+	m_ScaleMatrix = XMMatrixScaling(ScaleX, ScaleY, ScaleZ);
+	m_WorldMatrix = m_ScaleMatrix * m_RotationMatrix * m_TranslationMatrix;
 }
 
 void BaseModel::SetRotation(float RotationX, float RotationY, float RotationZ)
 {
-	m_WMType.RotationX = RotationX;
-	m_WMType.RotationY = RotationY;
-	m_WMType.RotationZ = RotationZ;
+	float pitch = RotationX * 0.0174532925f;
+	float yaw = RotationY * 0.0174532925f;
+	float roll = RotationZ * 0.0174532925f;
+	m_RotationMatrix = XMMatrixRotationRollPitchYaw(pitch, yaw, roll);
 }
 
 void BaseModel::AddPosition(float PositionX, float PositionY, float PositionZ)
 {
-	m_WMType.Transx += PositionX;
-	m_WMType.Transy += PositionY;
-	m_WMType.Transz += PositionZ;
+	m_TranslationMatrix = m_TranslationMatrix + XMMatrixTranslation(PositionX, PositionY, PositionZ);
 }
 
 void BaseModel::AddScale(float ScaleX, float ScaleY, float ScaleZ)
 {
-	m_WMType.ScaleX += ScaleX;
-	m_WMType.ScaleY += ScaleY;
-	m_WMType.ScaleZ += ScaleZ;
+	m_ScaleMatrix = m_ScaleMatrix + XMMatrixScaling(ScaleX, ScaleY, ScaleZ);
 }
 
 void BaseModel::AddRotation(float RotationX, float RotationY, float RotationZ)
 {
-	m_WMType.RotationX += RotationX;
-	m_WMType.RotationY += RotationY;
-	m_WMType.RotationZ += RotationZ;
+	float pitch = RotationX * 0.0174532925f;
+	float yaw = RotationY * 0.0174532925f;
+	float roll = RotationZ * 0.0174532925f;
+	m_RotationMatrix = m_RotationMatrix + XMMatrixRotationRollPitchYaw(pitch, yaw, roll);
 }
 
 XMMATRIX BaseModel::GetWorldMatrix()
 {
-	float pitch = m_WMType.RotationX * 0.0174532925f;
-	float yaw = m_WMType.RotationY * 0.0174532925f;
-	float roll = m_WMType.RotationZ * 0.0174532925f;
+	return m_WorldMatrix;
+}
 
-	XMMATRIX WorldMatrix = XMMatrixScaling(m_WMType.ScaleX, m_WMType.ScaleY, m_WMType.ScaleZ)
-		* XMMatrixRotationRollPitchYaw(pitch, yaw, roll)
-		* XMMatrixTranslation(m_WMType.Transx, m_WMType.Transy, m_WMType.Transz);
-	return WorldMatrix;
+bool BaseModel::CreateObb()
+{
+	return true;
+}
+
+bool BaseModel::CreateSphere()
+{
+	return true;
 }

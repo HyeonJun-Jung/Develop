@@ -38,7 +38,6 @@ private:
     HINSTANCE m_hinstance;
     HWND m_hwnd;
 
-    InputClass* m_Input = nullptr;
     GraphicsClass* m_Graphics;
     FpsClass* m_Fps = nullptr;
     CpuClass* m_Cpu = nullptr;
@@ -57,6 +56,7 @@ static LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 /////////////
 // GLOBALS //
 /////////////
+static InputClass* m_Input = nullptr;
 static SystemClass* ApplicationHandle = 0;
 
 #endif

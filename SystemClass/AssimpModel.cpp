@@ -1,6 +1,5 @@
 #include "AssimpModel.h"
 #include "AssimpTest/ModelLoader.h"
-
 AssimpModel::AssimpModel()
 {
 }

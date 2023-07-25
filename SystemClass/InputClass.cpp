@@ -15,7 +15,7 @@ InputClass::~InputClass()
 
 bool InputClass::Initialize(HINSTANCE hInstance, HWND hwnd, int screenWidth, int screenHeight)
 {
-   
+
     // 마우스 커서의 위치 지정에 사용될 화면 크기를 설정합니다.
     m_screenWidth = screenWidth;
     m_screenHeight = screenHeight;
@@ -118,16 +118,29 @@ bool InputClass::Frame()
     }
 
     // 키보드와 마우스의 변경 상태를 처리합니다.
-    ProcessInput();
+    // ProcessInput();
 
     return true;
+}
+
+void InputClass::SetMouse(LPARAM IParam)
+{
+    float x = (float)LOWORD(IParam);
+    float y = (float)HIWORD(IParam);
+
+    if(x <= m_screenWidth)
+        m_mouseX = x;
+    if (y <= m_screenHeight)
+        m_mouseY = y;
 }
 
 
 bool InputClass::ReadKeyboard()
 {
-    HRESULT result = m_keyboard->GetDeviceState(sizeof(m_keyboardState), (LPVOID)&m_keyboardState);
-    
+    memcpy(m_oldkeyboardState, m_curkeyboardState, sizeof(m_oldkeyboardState));
+
+    HRESULT result = m_keyboard->GetDeviceState(sizeof(m_curkeyboardState), (LPVOID)&m_curkeyboardState);
+
     if (FAILED(result))
     {
         // 키보드가 포커스를 잃었거나 획득되지 않을 경우 컨트롤을 다시 가져온다.
@@ -141,12 +154,32 @@ bool InputClass::ReadKeyboard()
         }
     }
 
+    for (int i = 0; i < 256; i++)
+    {
+        byte key = m_curkeyboardState[i] & 0x80;
+        //m_curkeyboardState[i] = key ? 1 : 0;
+
+        int old = m_oldkeyboardState[i];
+        int cur = m_curkeyboardState[i];
+
+        if (old == 0 && cur == 1)
+            m_keyState[i] = DOWN;
+        else if (old == 1 && cur == 0)
+            m_keyState[i] = UP;
+        else if (old == 1 && cur == 1)
+            m_keyState[i] = PRESS;
+        else
+            m_keyState[i] = NONE;
+    }
+
     return true;
 }
 
 bool InputClass::ReadMouse()
 {
-    HRESULT result = m_mouse->GetDeviceState(sizeof(DIMOUSESTATE), (LPVOID)&m_mouseState);
+    memcpy(&m_oldmouseState, &m_curmouseState, sizeof(m_oldmouseState));
+
+    HRESULT result = m_mouse->GetDeviceState(sizeof(DIMOUSESTATE), (LPVOID)&m_curmouseState);
 
     if (FAILED(result))
     {
@@ -161,14 +194,32 @@ bool InputClass::ReadMouse()
         }
     }
 
+    for (int i = 0; i < 4; i++)
+    {
+        byte key = m_curmouseState.rgbButtons[i] & 0x80;
+        //m_curmouseState.rgbButtons[i] = key ? 1 : 0;
+
+        int old = m_oldmouseState.rgbButtons[i];
+        int cur = m_curmouseState.rgbButtons[i];
+
+        if (old == 0 && cur == 1)
+            m_mouseState[i] = DOWN;
+        else if (old == 1 && cur == 0)
+            m_mouseState[i] = UP;
+        else if (old == 1 && cur == 1)
+            m_mouseState[i] = PRESS;
+        else
+            m_mouseState[i] = NONE;
+    }
+
     return true;
 }
 
 void InputClass::ProcessInput()
 {
     // 프레임동안 마우스 위치의 변경을 기반으로 마우스 커서의 위치를 업데이트합니다.
-    m_mouseX += m_mouseState.lX;
-    m_mouseY += m_mouseState.lY;
+    m_mouseX += m_curmouseState.lX;
+    m_mouseY += m_curmouseState.lY;
 
     
     // 마우스 위치가 화면 너비 또는 높이를 초과하지 않는지 확인합니다.
@@ -184,7 +235,7 @@ void InputClass::ProcessInput()
 bool InputClass::IsEscapePressed()
 {
     // escape 키가 현재 눌러지고 있는지 bit값을 계산하여 확인한다.
-    if (m_keyboardState[DIK_ESCAPE] * 0x80)
+    if (m_curkeyboardState[DIK_ESCAPE] & 0x80)
     {
         return true;
     }
@@ -194,7 +245,7 @@ bool InputClass::IsEscapePressed()
 
 bool InputClass::IsLeftArrowPressed()
 {
-    if (m_keyboardState[DIK_A] * 0x80)
+    if (m_curkeyboardState[DIK_A] & 0x80)
     {
         return true;
     }
@@ -204,11 +255,20 @@ bool InputClass::IsLeftArrowPressed()
 
 bool InputClass::IsRightArrowPressed()
 {
-    if (m_keyboardState[DIK_D] * 0x80)
+    if (m_curkeyboardState[DIK_D] & 0x80)
     {
         return true;
     }
 
+    return false;
+}
+
+bool InputClass::IsMouseLeftClicked()
+{
+    if (m_curmouseState.rgbButtons[0] & 0x80)
+    {
+        return true;
+    }
     return false;
 }
 
@@ -218,11 +278,21 @@ void InputClass::GetMouseLocation(int& mouseX, int& mouseY)
     mouseY = m_mouseY;
 }
 
+bool InputClass::IsNumber1Pressed()
+{
+    if (m_curkeyboardState[DIK_SPACE] & 0x80)
+    {
+        return true;
+    }
+
+    return false;
+}
+
 bool InputClass::IsCameraRotationRight()
 {
-    if (m_mouseState.rgbButtons[1] & 0x80)
+    if (m_curmouseState.rgbButtons[1] & 0x80)
     {
-        if (m_mouseState.lX > 0)
+        if (m_curmouseState.lX > 0)
             return true;
     }
 
@@ -231,9 +301,9 @@ bool InputClass::IsCameraRotationRight()
 
 bool InputClass::IsCameraRotationLeft()
 {
-    if (m_mouseState.rgbButtons[1] & 0x80)
+    if (m_curmouseState.rgbButtons[1] & 0x80)
     {
-        if (m_mouseState.lX < 0)
+        if (m_curmouseState.lX < 0)
             return true;
     }
 
@@ -242,9 +312,9 @@ bool InputClass::IsCameraRotationLeft()
 
 bool InputClass::IsCameraRotationUp()
 {
-    if (m_mouseState.rgbButtons[1] & 0x80)
+    if (m_curmouseState.rgbButtons[1] & 0x80)
     {
-        if (m_mouseState.lY < 0)
+        if (m_curmouseState.lY < 0)
             return true;
     }
 
@@ -253,9 +323,9 @@ bool InputClass::IsCameraRotationUp()
 
 bool InputClass::IsCameraRotationDown()
 {
-    if (m_mouseState.rgbButtons[1] & 0x80)
+    if (m_curmouseState.rgbButtons[1] & 0x80)
     {
-        if (m_mouseState.lY > 0)
+        if (m_curmouseState.lY > 0)
             return true;
     }
 
@@ -264,7 +334,7 @@ bool InputClass::IsCameraRotationDown()
 
 bool InputClass::IsCameraZoomIn()
 {
-    if (m_mouseState.lZ > 0 || (m_keyboardState[DIK_W] & 0x80))
+    if (m_curmouseState.lZ > 0 || (m_curkeyboardState[DIK_UPARROW] & 0x80))
     {
         return true;
     }
@@ -274,7 +344,7 @@ bool InputClass::IsCameraZoomIn()
 
 bool InputClass::IsCameraZoomOut()
 {
-    if (m_mouseState.lZ < 0 || (m_keyboardState[DIK_S] & 0x80))
+    if (m_curmouseState.lZ < 0 || (m_curkeyboardState[DIK_DOWNARROW] & 0x80))
     {
         return true;
     }
@@ -284,7 +354,7 @@ bool InputClass::IsCameraZoomOut()
 
 bool InputClass::IsCameraMoveRight()
 {
-    if (m_keyboardState[DIK_D] & 0x80)
+    if (m_curkeyboardState[DIK_RIGHTARROW] & 0x80)
     {
         return true;
     }
@@ -294,7 +364,7 @@ bool InputClass::IsCameraMoveRight()
 
 bool InputClass::IsCameraMoveLeft()
 {
-    if (m_keyboardState[DIK_A] & 0x80)
+    if (m_curkeyboardState[DIK_LEFTARROW] & 0x80)
     {
         return true;
     }

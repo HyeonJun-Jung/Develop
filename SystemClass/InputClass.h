@@ -9,12 +9,15 @@
 
 #include <dinput.h>
 
-
-////////////////////////////////////////////////////////////////////////////////
-// Class name: InputClass
-////////////////////////////////////////////////////////////////////////////////
 class InputClass
 {
+	enum {
+		NONE,
+		DOWN,
+		UP,
+		PRESS
+	};
+
 public:
 	InputClass();
 	InputClass(const InputClass&);
@@ -23,9 +26,23 @@ public:
 	bool Initialize(HINSTANCE, HWND, int, int);
 	void Shutdown();
 	bool Frame();
+	void SetMouse(LPARAM IParam);
 
 	bool IsEscapePressed();
 	void GetMouseLocation(int&, int&);
+
+	bool Down(UINT key) { return m_keyState[key] == DOWN; }
+	bool Up(UINT key) { return m_keyState[key] == UP; }
+	bool Press(UINT key) { return m_keyState[key] == PRESS; }
+
+	bool MouseDown(UINT key) { return m_mouseState[key] == DOWN; }
+	bool MouseUp(UINT key) { return m_mouseState[key] == UP; }
+	bool MousePress(UINT key) { return m_mouseState[key] == PRESS; }
+
+	IDirectInputDevice8* GetMouse() { return m_mouse; }
+	IDirectInputDevice8* GetKeyBoard() { return m_keyboard; }
+
+	bool IsNumber1Pressed();
 
 	bool IsCameraRotationRight();
 	bool IsCameraRotationLeft();
@@ -39,6 +56,7 @@ public:
 
 	bool IsLeftArrowPressed();
 	bool IsRightArrowPressed();
+	bool IsMouseLeftClicked();
 
 private:
 	bool ReadKeyboard();
@@ -50,9 +68,14 @@ private:
 	IDirectInputDevice8* m_keyboard = nullptr;
 	IDirectInputDevice8* m_mouse = nullptr;
 
-private:
-	unsigned char m_keyboardState[256];
-	DIMOUSESTATE m_mouseState;
+public:
+	unsigned char m_oldkeyboardState[256];
+	unsigned char m_curkeyboardState[256];
+	unsigned char m_keyState[256];
+
+	DIMOUSESTATE m_oldmouseState;
+	DIMOUSESTATE m_curmouseState;
+	unsigned char m_mouseState[4];
 
 	int m_screenWidth = 0;
 	int m_screenHeight = 0;

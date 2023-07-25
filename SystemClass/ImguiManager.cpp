@@ -44,8 +44,6 @@ void ImguiManager::BeginFrame()
     ImGui_ImplWin32_NewFrame();
     ImGui::NewFrame();
 
-    ImGui::Begin("Test");
-
     static int selected_item = NULL;
     int current_item = 0;
     const char* items[3] = { "File", "Open File", "Save File" };
@@ -134,8 +132,7 @@ void ImguiManager::BeginFrame()
 
     float Scale[3] = { 1.0f, 1.0f, 1.0f };
     ImGui::SliderFloat3("Scale", Scale, 0, 100, "%.3f Scale");
-    
-    ImGui::End();
+
 
     
 
@@ -173,6 +170,7 @@ void ImguiManager::BeginFrame()
     }
     ImGui::End();
 
+    // ImGui::Begin("Use AnyWhere");
 
     //ImGui::ShowMetricsWindow();               // ImGui 헬프
     //ImGui::ColorEdit4("Color", my_color);     // ImGui 컬러 픽업

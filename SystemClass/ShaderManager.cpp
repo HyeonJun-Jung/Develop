@@ -292,10 +292,12 @@ bool ShaderManager::SetGradientBuffer(XMFLOAT4 ApexColor, XMFLOAT4 CenterColor)
 	devcon->Unmap(m_GradientBuffer, 0);
 
 	// 정점 셰이더에서의 상수 버퍼의 위치를 설정합니다.
-	unsigned int bufferNumber = 0;
+	unsigned int bufferNumber = 1;
 
 	// 마지막으로 정점 셰이더의 상수 버퍼를 바뀐 값으로 바꿉니다.
 	devcon->PSSetConstantBuffers(bufferNumber, 1, &m_GradientBuffer);
+
+	return true;
 }
 
 bool ShaderManager::SetTexture(ID3D11DeviceContext* dev, int startNum, ID3D11ShaderResourceView* texture)

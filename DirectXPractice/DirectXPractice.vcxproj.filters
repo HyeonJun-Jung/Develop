@@ -70,21 +70,6 @@
     <Filter Include="SystemClass\RenderTextureClass">
       <UniqueIdentifier>{c42892e0-d85d-482c-b9b5-85fb33d21568}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SystemClass\Manager">
-      <UniqueIdentifier>{7e66f02a-f123-42e7-a475-27ec1303729c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SystemClass\Manager\ResourceManager">
-      <UniqueIdentifier>{b77bfeff-26a2-42b8-b377-c94b0e077a61}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SystemClass\Manager\ImguiManager">
-      <UniqueIdentifier>{8ec06b6f-9b59-4a59-b36f-b91dbca58840}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SystemClass\Manager\ResourceManager\ModelManager">
-      <UniqueIdentifier>{99561a39-1884-43b3-848c-2b8dae4c6dd2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SystemClass\Manager\ImguiManager\Imgui">
-      <UniqueIdentifier>{c281e5a0-abd1-4178-bf27-f7883f318416}</UniqueIdentifier>
-    </Filter>
     <Filter Include="AssimpModel">
       <UniqueIdentifier>{933feb0c-da37-465d-9a2f-e2a610522949}</UniqueIdentifier>
     </Filter>
@@ -103,12 +88,6 @@
     <Filter Include="SystemClass\GraphicsClass\Resources\Model">
       <UniqueIdentifier>{577cb4fc-587f-4129-9d35-242c91b2e16a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SystemClass\GraphicsClass\Resources\Model\WModel">
-      <UniqueIdentifier>{93446f52-2e3b-41c4-912c-c8848c58479f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SystemClass\Manager\SceneManager">
-      <UniqueIdentifier>{47b1fa06-291a-4d47-b3cf-3cf778ec9853}</UniqueIdentifier>
-    </Filter>
     <Filter Include="헤더 파일\hlsl">
       <UniqueIdentifier>{d54780e4-00b1-4ecd-b68e-5b23c1cdfefc}</UniqueIdentifier>
     </Filter>
@@ -118,23 +97,8 @@
     <Filter Include="SystemClass\GraphicsClass\Shader\WaterShaderClass">
       <UniqueIdentifier>{9fb0a838-03a1-4c66-a0b3-f5382937b341}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SystemClass\Manager\ShaderManager">
-      <UniqueIdentifier>{a3f132fd-420b-4f35-acbc-b0823558682d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SystemClass\Manager\SceneManager\Scene">
-      <UniqueIdentifier>{a23d5290-8b04-4e8a-b176-be4cbd4866f2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="SystemClass\GraphicsClass\Shader\ColorShaderClass">
       <UniqueIdentifier>{8d8d4f41-53d4-46a3-b433-b761874006c5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SystemClass\GraphicsClass\Resources\Model\WModel\SkinnedModel">
-      <UniqueIdentifier>{766441ae-4076-49c5-adde-72032006e46e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SystemClass\GraphicsClass\Resources\Model\StaticModel">
-      <UniqueIdentifier>{7db16ecb-126d-44f5-a1f4-e124bce142ce}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SystemClass\GraphicsClass\Resources\Model\DynamicModel">
-      <UniqueIdentifier>{74fd85ce-5e40-46ab-86d3-60b8a485ed5c}</UniqueIdentifier>
     </Filter>
     <Filter Include="SystemClass\GraphicsClass\Resources\BitmapClass">
       <UniqueIdentifier>{83378501-0907-4e83-b8c4-ed1659fb1cb4}</UniqueIdentifier>
@@ -154,12 +118,6 @@
     <Filter Include="SystemClass\GraphicsClass\FrustumClass\ModelListClass">
       <UniqueIdentifier>{cb721798-e1d7-431d-b967-04135b965eeb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SystemClass\GraphicsClass\Resources\Model\DynamicModel\01. Player">
-      <UniqueIdentifier>{02e58f9b-d43f-46ca-bad9-f0142e90be45}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SystemClass\GraphicsClass\Resources\Model\WModel\Obb">
-      <UniqueIdentifier>{b27b916e-c045-454a-92a4-fbfd04c9badf}</UniqueIdentifier>
-    </Filter>
     <Filter Include="SystemClass\GraphicsClass\Resources\ModelClass">
       <UniqueIdentifier>{05944b07-028e-4590-b9fe-eeaa6cd45bc0}</UniqueIdentifier>
     </Filter>
@@ -172,11 +130,146 @@
     <Filter Include="SystemClass\GraphicsClass\Resources\Model\Terrain\SkydomeClass">
       <UniqueIdentifier>{c5b22d9b-c5a3-41f4-a961-968050216810}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SystemClass\Manager\SceneManager\Scene\Layer">
+    <Filter Include="SystemClass\GraphicsClass\Resources\Model\Rigid body">
+      <UniqueIdentifier>{75e15238-73d9-4ed1-a6fc-162fbcfca0ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\GraphicsClass\Resources\Model\BaseModel">
+      <UniqueIdentifier>{86074859-82be-469f-9296-ba1691772430}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\GraphicsClass\Resources\Model\BaseModel\DynamicModel">
+      <UniqueIdentifier>{74fd85ce-5e40-46ab-86d3-60b8a485ed5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\GraphicsClass\Resources\Model\BaseModel\StaticModel">
+      <UniqueIdentifier>{7db16ecb-126d-44f5-a1f4-e124bce142ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\GraphicsClass\Resources\Model\BaseModel\WModel">
+      <UniqueIdentifier>{93446f52-2e3b-41c4-912c-c8848c58479f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\GraphicsClass\Resources\Model\BaseModel\WModel\SkinnedModel">
+      <UniqueIdentifier>{766441ae-4076-49c5-adde-72032006e46e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\GraphicsClass\Resources\Model\Rigid body\Obb">
+      <UniqueIdentifier>{b27b916e-c045-454a-92a4-fbfd04c9badf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\Game">
+      <UniqueIdentifier>{7a925e6a-62d4-4d0a-a11e-ec24f189eda6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\Game\Component">
+      <UniqueIdentifier>{553c8a31-ec6f-4324-b4a1-46597ec00440}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\Game\Component\GraphicComponent">
+      <UniqueIdentifier>{9911d53d-283c-43ce-bc93-577a7cf255bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\Game\Component\PhysicsComponent">
+      <UniqueIdentifier>{a3eb3ba1-cc8c-4f25-a240-b4b0810bd126}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\Game\Object">
+      <UniqueIdentifier>{ab3ca470-a538-4c9f-b02d-6b6a8218a1dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\Game\Component\GraphicComponent\SkinnedGraphicComponent">
+      <UniqueIdentifier>{7c6af8d4-820d-4025-9c53-3baedfbdaa20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\Game\Object\SkinnedObject">
+      <UniqueIdentifier>{b8d56303-55ac-4c27-be24-46cde841d1a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\Game\Component\AnimationComponent">
+      <UniqueIdentifier>{7f30ce9b-4a65-485c-abca-fc9cf1bb8fee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\Game\Component\GraphicComponent\TerrainGraphicComponent">
+      <UniqueIdentifier>{81515565-b330-4dca-a2e3-02ce636710f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\Game\Object\Terrain">
+      <UniqueIdentifier>{1d0d8b25-ac9a-4e3b-9200-3d3ef4c89df8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\Game\Component\PhysicsComponent\DynamicPhysicsC">
+      <UniqueIdentifier>{acc12a14-25ea-4494-9deb-2b5b8c0080d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\Game\Component\PhysicsComponent\StaticPhysicsC">
+      <UniqueIdentifier>{1a405225-93cb-45d8-adcb-62d2263c3a9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\Game\Object\TexturedObject">
+      <UniqueIdentifier>{975b3456-2b72-4204-8f48-27b17d3d0751}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\Game\Component\GraphicComponent\TexturedGraphicComponent">
+      <UniqueIdentifier>{d9c0f730-99d0-4e57-ba13-7d998f98a33a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\hlsl\NotUsed">
+      <UniqueIdentifier>{e1af91cd-0f53-4ac8-acb4-9b2f21954dbc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\Game\Object\SkinnedObject\Player">
+      <UniqueIdentifier>{41657460-bb8e-4467-8d84-baff480c5ae4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\Game\Object\SkinnedObject\Player\PlayerState">
+      <UniqueIdentifier>{4549c6cd-9f7e-4f2a-b532-4ad6f0c3b26a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\Game\Object\SkinnedObject\Player\PlayerState\RunningState">
+      <UniqueIdentifier>{2cc4b7d8-bf7d-46d6-85ce-8a40555654fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\Game\Object\SkinnedObject\Player\PlayerState\Walking">
+      <UniqueIdentifier>{dbea236e-79be-4e6b-ba7a-dd0f12eb2bbc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\Game\Object\SkinnedObject\Player\PlayerState\JumpingState">
+      <UniqueIdentifier>{219b0f59-ac01-4f68-b122-cc4c15901cc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\Game\Component\PhysicsComponent\ControllerPhysicsC">
+      <UniqueIdentifier>{e03a3fae-454b-4bd4-91c6-8b3e9de34b71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\Game\Component\PhysicsComponent\ControllerPhysicsC\PlayerHitCallback">
+      <UniqueIdentifier>{2aa0cb7d-15c3-4d58-aa7e-c315e540d7cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\Game\Object\SkinnedObject\Player\PlayerState\StandingState">
+      <UniqueIdentifier>{b8548f2f-fdab-4bba-b5c4-8afc7f5f365c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\GraphicsClass\Ray">
+      <UniqueIdentifier>{a9398692-23b7-455e-9cf9-f24b51fb7ec8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\Game\Manager">
+      <UniqueIdentifier>{7e66f02a-f123-42e7-a475-27ec1303729c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\Game\Manager\ResourceManager">
+      <UniqueIdentifier>{b77bfeff-26a2-42b8-b377-c94b0e077a61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\Game\Manager\ResourceManager\ModelManager">
+      <UniqueIdentifier>{99561a39-1884-43b3-848c-2b8dae4c6dd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\Game\Manager\ImguiManager">
+      <UniqueIdentifier>{8ec06b6f-9b59-4a59-b36f-b91dbca58840}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\Game\Manager\ImguiManager\Imgui">
+      <UniqueIdentifier>{c281e5a0-abd1-4178-bf27-f7883f318416}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\Game\Manager\SceneManager">
+      <UniqueIdentifier>{47b1fa06-291a-4d47-b3cf-3cf778ec9853}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\Game\Manager\SceneManager\Scene">
+      <UniqueIdentifier>{a23d5290-8b04-4e8a-b176-be4cbd4866f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\Game\Manager\SceneManager\Scene\Layer">
       <UniqueIdentifier>{eadcd661-a54d-404a-bfda-c650a22b41d8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SystemClass\Manager\SceneManager\Scene\MainScene">
+    <Filter Include="SystemClass\Game\Manager\SceneManager\Scene\MainScene">
       <UniqueIdentifier>{04978916-19c3-45dc-8797-4f65963ccb16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\Game\Manager\SceneManager\Scene\MainScene\UI">
+      <UniqueIdentifier>{bda1169a-97dd-4892-9435-68aba3d33e80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\Game\Manager\SceneManager\Scene\MainScene\FieldLayer">
+      <UniqueIdentifier>{aa412dc6-e27b-414a-be3b-87c9208604e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\Game\Manager\ShaderManager">
+      <UniqueIdentifier>{a3f132fd-420b-4f35-acbc-b0823558682d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\Game\Manager\LightManager">
+      <UniqueIdentifier>{a2d70ac4-473d-4740-9b9c-227d1aca146b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\Game\Object\Particle">
+      <UniqueIdentifier>{04d422b3-39e1-4214-b6ac-d2f2e80b60eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\Game\Component\GraphicComponent\ParticleGraphicComponent">
+      <UniqueIdentifier>{cf4e4af6-a2ae-46bc-b66c-96ad9ddd96cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\Game\Manager\SceneManager\Scene\ParticleLayer">
+      <UniqueIdentifier>{c6642a86-02f2-4c43-9dde-f5f8095959b7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -259,28 +352,28 @@
       <Filter>SystemClass\GraphicsClass\Shader\ReflectionShaderClass</Filter>
     </ClCompile>
     <ClCompile Include="..\SystemClass\Imgui\imgui.cpp">
-      <Filter>SystemClass\Manager\ImguiManager\Imgui</Filter>
+      <Filter>SystemClass\Game\Manager\ImguiManager\Imgui</Filter>
     </ClCompile>
     <ClCompile Include="..\SystemClass\Imgui\imgui_draw.cpp">
-      <Filter>SystemClass\Manager\ImguiManager\Imgui</Filter>
+      <Filter>SystemClass\Game\Manager\ImguiManager\Imgui</Filter>
     </ClCompile>
     <ClCompile Include="..\SystemClass\Imgui\imgui_impl_dx11.cpp">
-      <Filter>SystemClass\Manager\ImguiManager\Imgui</Filter>
+      <Filter>SystemClass\Game\Manager\ImguiManager\Imgui</Filter>
     </ClCompile>
     <ClCompile Include="..\SystemClass\Imgui\imgui_impl_win32.cpp">
-      <Filter>SystemClass\Manager\ImguiManager\Imgui</Filter>
+      <Filter>SystemClass\Game\Manager\ImguiManager\Imgui</Filter>
     </ClCompile>
     <ClCompile Include="..\SystemClass\Imgui\imgui_tables.cpp">
-      <Filter>SystemClass\Manager\ImguiManager\Imgui</Filter>
+      <Filter>SystemClass\Game\Manager\ImguiManager\Imgui</Filter>
     </ClCompile>
     <ClCompile Include="..\SystemClass\Imgui\imgui_widgets.cpp">
-      <Filter>SystemClass\Manager\ImguiManager\Imgui</Filter>
+      <Filter>SystemClass\Game\Manager\ImguiManager\Imgui</Filter>
     </ClCompile>
     <ClCompile Include="..\SystemClass\ResourceManager.cpp">
-      <Filter>SystemClass\Manager\ResourceManager</Filter>
+      <Filter>SystemClass\Game\Manager\ResourceManager</Filter>
     </ClCompile>
     <ClCompile Include="..\SystemClass\ImguiManager.cpp">
-      <Filter>SystemClass\Manager\ImguiManager</Filter>
+      <Filter>SystemClass\Game\Manager\ImguiManager</Filter>
     </ClCompile>
     <ClCompile Include="..\SystemClass\AssimpModel.cpp">
       <Filter>AssimpModel</Filter>
@@ -304,16 +397,16 @@
       <Filter>SystemClass\GraphicsClass\Shader\SkydomeShaderClass</Filter>
     </ClCompile>
     <ClCompile Include="..\SystemClass\SkinnedModel.cpp">
-      <Filter>SystemClass\GraphicsClass\Resources\Model\WModel\SkinnedModel</Filter>
+      <Filter>SystemClass\GraphicsClass\Resources\Model\BaseModel\WModel\SkinnedModel</Filter>
     </ClCompile>
     <ClCompile Include="..\SystemClass\ShaderManager.cpp">
-      <Filter>SystemClass\Manager\ShaderManager</Filter>
+      <Filter>SystemClass\Game\Manager\ShaderManager</Filter>
     </ClCompile>
     <ClCompile Include="..\SystemClass\ModelManager.cpp">
-      <Filter>SystemClass\Manager\ResourceManager\ModelManager</Filter>
+      <Filter>SystemClass\Game\Manager\ResourceManager\ModelManager</Filter>
     </ClCompile>
     <ClCompile Include="..\SystemClass\WModel.cpp">
-      <Filter>SystemClass\GraphicsClass\Resources\Model\WModel</Filter>
+      <Filter>SystemClass\GraphicsClass\Resources\Model\BaseModel\WModel</Filter>
     </ClCompile>
     <ClCompile Include="..\SystemClass\TerrainReflectionShaderClass.cpp">
       <Filter>SystemClass\GraphicsClass\Shader\TerrainShaderClass\TerrainReflectionShaderClass</Filter>
@@ -322,37 +415,118 @@
       <Filter>SystemClass\GraphicsClass\Shader\WaterShaderClass</Filter>
     </ClCompile>
     <ClCompile Include="..\SystemClass\Obb.cpp">
-      <Filter>SystemClass\GraphicsClass\Resources\Model\WModel\Obb</Filter>
+      <Filter>SystemClass\GraphicsClass\Resources\Model\Rigid body\Obb</Filter>
     </ClCompile>
     <ClCompile Include="..\SystemClass\DynamicModel.cpp">
-      <Filter>SystemClass\GraphicsClass\Resources\Model\DynamicModel</Filter>
+      <Filter>SystemClass\GraphicsClass\Resources\Model\BaseModel\DynamicModel</Filter>
     </ClCompile>
     <ClCompile Include="..\SystemClass\StaticModel.cpp">
-      <Filter>SystemClass\GraphicsClass\Resources\Model\StaticModel</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SystemClass\Player.cpp">
-      <Filter>SystemClass\GraphicsClass\Resources\Model\DynamicModel\01. Player</Filter>
+      <Filter>SystemClass\GraphicsClass\Resources\Model\BaseModel\StaticModel</Filter>
     </ClCompile>
     <ClCompile Include="..\SystemClass\Shader.cpp">
       <Filter>SystemClass\GraphicsClass\Shader</Filter>
     </ClCompile>
     <ClCompile Include="..\SystemClass\SceneManager.cpp">
-      <Filter>SystemClass\Manager\SceneManager</Filter>
+      <Filter>SystemClass\Game\Manager\SceneManager</Filter>
     </ClCompile>
     <ClCompile Include="..\SystemClass\Scene.cpp">
-      <Filter>SystemClass\Manager\SceneManager\Scene</Filter>
+      <Filter>SystemClass\Game\Manager\SceneManager\Scene</Filter>
     </ClCompile>
     <ClCompile Include="..\SystemClass\ModelClass.cpp">
       <Filter>SystemClass\GraphicsClass\Resources\ModelClass</Filter>
     </ClCompile>
-    <ClCompile Include="..\SystemClass\BaseModel.cpp">
-      <Filter>SystemClass\GraphicsClass\Resources\Model</Filter>
-    </ClCompile>
     <ClCompile Include="..\SystemClass\Layer.cpp">
-      <Filter>SystemClass\Manager\SceneManager\Scene\Layer</Filter>
+      <Filter>SystemClass\Game\Manager\SceneManager\Scene\Layer</Filter>
     </ClCompile>
     <ClCompile Include="..\SystemClass\MainScene.cpp">
-      <Filter>SystemClass\Manager\SceneManager\Scene\MainScene</Filter>
+      <Filter>SystemClass\Game\Manager\SceneManager\Scene\MainScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\BaseModel.cpp">
+      <Filter>SystemClass\GraphicsClass\Resources\Model\BaseModel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\RigidBody.cpp">
+      <Filter>SystemClass\GraphicsClass\Resources\Model\Rigid body</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\LightManager.cpp">
+      <Filter>SystemClass\Game\Manager\LightManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\Component.cpp">
+      <Filter>SystemClass\Game\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\GraphicComponent.cpp">
+      <Filter>SystemClass\Game\Component\GraphicComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\SkinnedGraphicC.cpp">
+      <Filter>SystemClass\Game\Component\GraphicComponent\SkinnedGraphicComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\Object.cpp">
+      <Filter>SystemClass\Game\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\SkinnedObject.cpp">
+      <Filter>SystemClass\Game\Object\SkinnedObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\AnimationComponent.cpp">
+      <Filter>SystemClass\Game\Component\AnimationComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\PhysicsComponent.cpp">
+      <Filter>SystemClass\Game\Component\PhysicsComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\TerrainGraphicC.cpp">
+      <Filter>SystemClass\Game\Component\GraphicComponent\TerrainGraphicComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\Terrain.cpp">
+      <Filter>SystemClass\Game\Object\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\DynamicPhysicsC.cpp">
+      <Filter>SystemClass\Game\Component\PhysicsComponent\DynamicPhysicsC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\TexturedObject.cpp">
+      <Filter>SystemClass\Game\Object\TexturedObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\TexturedGraphicC.cpp">
+      <Filter>SystemClass\Game\Component\GraphicComponent\TexturedGraphicComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\StaticPhysicsC.cpp">
+      <Filter>SystemClass\Game\Component\PhysicsComponent\StaticPhysicsC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\FieldLayer.cpp">
+      <Filter>SystemClass\Game\Manager\SceneManager\Scene\MainScene\FieldLayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\ControllerPhysicsC.cpp">
+      <Filter>SystemClass\Game\Component\PhysicsComponent\ControllerPhysicsC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\Player.cpp">
+      <Filter>SystemClass\Game\Object\SkinnedObject\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\PlayerState.cpp">
+      <Filter>SystemClass\Game\Object\SkinnedObject\Player\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\PRunningState.cpp">
+      <Filter>SystemClass\Game\Object\SkinnedObject\Player\PlayerState\RunningState</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\PWalkingState.cpp">
+      <Filter>SystemClass\Game\Object\SkinnedObject\Player\PlayerState\Walking</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\PJumpingState.cpp">
+      <Filter>SystemClass\Game\Object\SkinnedObject\Player\PlayerState\JumpingState</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\PlayerHitCallback.cpp">
+      <Filter>SystemClass\Game\Component\PhysicsComponent\ControllerPhysicsC\PlayerHitCallback</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\PStandingState.cpp">
+      <Filter>SystemClass\Game\Object\SkinnedObject\Player\PlayerState\StandingState</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\Ray.cpp">
+      <Filter>SystemClass\GraphicsClass\Ray</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\Particle.cpp">
+      <Filter>SystemClass\Game\Object\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\ParticleGraphicC.cpp">
+      <Filter>SystemClass\Game\Component\GraphicComponent\ParticleGraphicComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\ParticleLayer.cpp">
+      <Filter>SystemClass\Game\Manager\SceneManager\Scene\ParticleLayer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -450,34 +624,34 @@
       <Filter>SystemClass\GraphicsClass\Shader\ReflectionShaderClass</Filter>
     </ClInclude>
     <ClInclude Include="..\SystemClass\Imgui\imconfig.h">
-      <Filter>SystemClass\Manager\ImguiManager\Imgui</Filter>
+      <Filter>SystemClass\Game\Manager\ImguiManager\Imgui</Filter>
     </ClInclude>
     <ClInclude Include="..\SystemClass\Imgui\imgui.h">
-      <Filter>SystemClass\Manager\ImguiManager\Imgui</Filter>
+      <Filter>SystemClass\Game\Manager\ImguiManager\Imgui</Filter>
     </ClInclude>
     <ClInclude Include="..\SystemClass\Imgui\imgui_impl_dx11.h">
-      <Filter>SystemClass\Manager\ImguiManager\Imgui</Filter>
+      <Filter>SystemClass\Game\Manager\ImguiManager\Imgui</Filter>
     </ClInclude>
     <ClInclude Include="..\SystemClass\Imgui\imgui_impl_win32.h">
-      <Filter>SystemClass\Manager\ImguiManager\Imgui</Filter>
+      <Filter>SystemClass\Game\Manager\ImguiManager\Imgui</Filter>
     </ClInclude>
     <ClInclude Include="..\SystemClass\Imgui\imgui_internal.h">
-      <Filter>SystemClass\Manager\ImguiManager\Imgui</Filter>
+      <Filter>SystemClass\Game\Manager\ImguiManager\Imgui</Filter>
     </ClInclude>
     <ClInclude Include="..\SystemClass\Imgui\imstb_rectpack.h">
-      <Filter>SystemClass\Manager\ImguiManager\Imgui</Filter>
+      <Filter>SystemClass\Game\Manager\ImguiManager\Imgui</Filter>
     </ClInclude>
     <ClInclude Include="..\SystemClass\Imgui\imstb_textedit.h">
-      <Filter>SystemClass\Manager\ImguiManager\Imgui</Filter>
+      <Filter>SystemClass\Game\Manager\ImguiManager\Imgui</Filter>
     </ClInclude>
     <ClInclude Include="..\SystemClass\Imgui\imstb_truetype.h">
-      <Filter>SystemClass\Manager\ImguiManager\Imgui</Filter>
+      <Filter>SystemClass\Game\Manager\ImguiManager\Imgui</Filter>
     </ClInclude>
     <ClInclude Include="..\SystemClass\ResourceManager.h">
-      <Filter>SystemClass\Manager\ResourceManager</Filter>
+      <Filter>SystemClass\Game\Manager\ResourceManager</Filter>
     </ClInclude>
     <ClInclude Include="..\SystemClass\ImguiManager.h">
-      <Filter>SystemClass\Manager\ImguiManager</Filter>
+      <Filter>SystemClass\Game\Manager\ImguiManager</Filter>
     </ClInclude>
     <ClInclude Include="..\SystemClass\Singleton.h">
       <Filter>헤더 파일</Filter>
@@ -1206,16 +1380,16 @@
       <Filter>SystemClass\GraphicsClass\Shader\SkydomeShaderClass</Filter>
     </ClInclude>
     <ClInclude Include="..\SystemClass\SkinnedModel.h">
-      <Filter>SystemClass\GraphicsClass\Resources\Model\WModel\SkinnedModel</Filter>
+      <Filter>SystemClass\GraphicsClass\Resources\Model\BaseModel\WModel\SkinnedModel</Filter>
     </ClInclude>
     <ClInclude Include="..\SystemClass\ShaderManager.h">
-      <Filter>SystemClass\Manager\ShaderManager</Filter>
+      <Filter>SystemClass\Game\Manager\ShaderManager</Filter>
     </ClInclude>
     <ClInclude Include="..\SystemClass\ModelManager.h">
-      <Filter>SystemClass\Manager\ResourceManager\ModelManager</Filter>
+      <Filter>SystemClass\Game\Manager\ResourceManager\ModelManager</Filter>
     </ClInclude>
     <ClInclude Include="..\SystemClass\WModel.h">
-      <Filter>SystemClass\GraphicsClass\Resources\Model\WModel</Filter>
+      <Filter>SystemClass\GraphicsClass\Resources\Model\BaseModel\WModel</Filter>
     </ClInclude>
     <ClInclude Include="..\SystemClass\TerrainReflectionShaderClass.h">
       <Filter>SystemClass\GraphicsClass\Shader\TerrainShaderClass\TerrainReflectionShaderClass</Filter>
@@ -1224,16 +1398,13 @@
       <Filter>SystemClass\GraphicsClass\Shader\WaterShaderClass</Filter>
     </ClInclude>
     <ClInclude Include="..\SystemClass\Obb.h">
-      <Filter>SystemClass\GraphicsClass\Resources\Model\WModel\Obb</Filter>
+      <Filter>SystemClass\GraphicsClass\Resources\Model\Rigid body\Obb</Filter>
     </ClInclude>
     <ClInclude Include="..\SystemClass\DynamicModel.h">
-      <Filter>SystemClass\GraphicsClass\Resources\Model\DynamicModel</Filter>
+      <Filter>SystemClass\GraphicsClass\Resources\Model\BaseModel\DynamicModel</Filter>
     </ClInclude>
     <ClInclude Include="..\SystemClass\StaticModel.h">
-      <Filter>SystemClass\GraphicsClass\Resources\Model\StaticModel</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SystemClass\Player.h">
-      <Filter>SystemClass\GraphicsClass\Resources\Model\DynamicModel\01. Player</Filter>
+      <Filter>SystemClass\GraphicsClass\Resources\Model\BaseModel\StaticModel</Filter>
     </ClInclude>
     <ClInclude Include="..\SystemClass\Shader.h">
       <Filter>SystemClass\GraphicsClass\Shader</Filter>
@@ -1242,22 +1413,112 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="..\SystemClass\SceneManager.h">
-      <Filter>SystemClass\Manager\SceneManager</Filter>
+      <Filter>SystemClass\Game\Manager\SceneManager</Filter>
     </ClInclude>
     <ClInclude Include="..\SystemClass\Scene.h">
-      <Filter>SystemClass\Manager\SceneManager\Scene</Filter>
+      <Filter>SystemClass\Game\Manager\SceneManager\Scene</Filter>
     </ClInclude>
     <ClInclude Include="..\SystemClass\ModelClass.h">
       <Filter>SystemClass\GraphicsClass\Resources\ModelClass</Filter>
     </ClInclude>
-    <ClInclude Include="..\SystemClass\BaseModel.h">
-      <Filter>SystemClass\GraphicsClass\Resources\Model</Filter>
-    </ClInclude>
     <ClInclude Include="..\SystemClass\Layer.h">
-      <Filter>SystemClass\Manager\SceneManager\Scene\Layer</Filter>
+      <Filter>SystemClass\Game\Manager\SceneManager\Scene\Layer</Filter>
     </ClInclude>
     <ClInclude Include="..\SystemClass\MainScene.h">
-      <Filter>SystemClass\Manager\SceneManager\Scene\MainScene</Filter>
+      <Filter>SystemClass\Game\Manager\SceneManager\Scene\MainScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\BaseModel.h">
+      <Filter>SystemClass\GraphicsClass\Resources\Model\BaseModel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\RigidBody.h">
+      <Filter>SystemClass\GraphicsClass\Resources\Model\Rigid body</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\LightManager.h">
+      <Filter>SystemClass\Game\Manager\LightManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\Collider.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\Component.h">
+      <Filter>SystemClass\Game\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\GraphicComponent.h">
+      <Filter>SystemClass\Game\Component\GraphicComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\SkinnedGraphicC.h">
+      <Filter>SystemClass\Game\Component\GraphicComponent\SkinnedGraphicComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\Object.h">
+      <Filter>SystemClass\Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\SkinnedObject.h">
+      <Filter>SystemClass\Game\Object\SkinnedObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\AnimationComponent.h">
+      <Filter>SystemClass\Game\Component\AnimationComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\PhysicsComponent.h">
+      <Filter>SystemClass\Game\Component\PhysicsComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\TerrainGraphicC.h">
+      <Filter>SystemClass\Game\Component\GraphicComponent\TerrainGraphicComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\Terrain.h">
+      <Filter>SystemClass\Game\Object\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\DynamicPhysicsC.h">
+      <Filter>SystemClass\Game\Component\PhysicsComponent\DynamicPhysicsC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\TexturedObject.h">
+      <Filter>SystemClass\Game\Object\TexturedObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\TexturedGraphicC.h">
+      <Filter>SystemClass\Game\Component\GraphicComponent\TexturedGraphicComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\StaticPhysicsC.h">
+      <Filter>SystemClass\Game\Component\PhysicsComponent\StaticPhysicsC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\FieldLayer.h">
+      <Filter>SystemClass\Game\Manager\SceneManager\Scene\MainScene\FieldLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\ControllerPhysicsC.h">
+      <Filter>SystemClass\Game\Component\PhysicsComponent\ControllerPhysicsC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\Player.h">
+      <Filter>SystemClass\Game\Object\SkinnedObject\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\PlayerState.h">
+      <Filter>SystemClass\Game\Object\SkinnedObject\Player\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\PRunningState.h">
+      <Filter>SystemClass\Game\Object\SkinnedObject\Player\PlayerState\RunningState</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\PWalkingState.h">
+      <Filter>SystemClass\Game\Object\SkinnedObject\Player\PlayerState\Walking</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\PJumpingState.h">
+      <Filter>SystemClass\Game\Object\SkinnedObject\Player\PlayerState\JumpingState</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\PlayerHitCallback.h">
+      <Filter>SystemClass\Game\Component\PhysicsComponent\ControllerPhysicsC\PlayerHitCallback</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\ControllerCallBack.h">
+      <Filter>SystemClass\Game\Component\PhysicsComponent\ControllerPhysicsC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\PStandingState.h">
+      <Filter>SystemClass\Game\Object\SkinnedObject\Player\PlayerState\StandingState</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\Ray.h">
+      <Filter>SystemClass\GraphicsClass\Ray</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\Particle.h">
+      <Filter>SystemClass\Game\Object\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\ParticleGraphicC.h">
+      <Filter>SystemClass\Game\Component\GraphicComponent\ParticleGraphicComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\ParticleLayer.h">
+      <Filter>SystemClass\Game\Manager\SceneManager\Scene\ParticleLayer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1321,6 +1582,24 @@
       <Filter>헤더 파일\hlsl</Filter>
     </FxCompile>
     <FxCompile Include="..\SystemClass\water_vs.hlsl">
+      <Filter>헤더 파일\hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="..\SystemClass\Textured_vs.hlsl">
+      <Filter>헤더 파일\hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="..\SystemClass\Textured_ps.hlsl">
+      <Filter>헤더 파일\hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="..\SystemClass\ComputePicking.hlsl">
+      <Filter>헤더 파일\hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="..\SystemClass\Fire_gs.hlsl">
+      <Filter>헤더 파일\hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="..\SystemClass\Fire_vs.hlsl">
+      <Filter>헤더 파일\hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="..\SystemClass\Fire_ps.hlsl">
       <Filter>헤더 파일\hlsl</Filter>
     </FxCompile>
   </ItemGroup>
