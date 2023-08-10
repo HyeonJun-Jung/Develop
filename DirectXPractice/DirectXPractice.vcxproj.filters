@@ -250,9 +250,6 @@
     <Filter Include="SystemClass\Game\Manager\SceneManager\Scene\MainScene">
       <UniqueIdentifier>{04978916-19c3-45dc-8797-4f65963ccb16}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SystemClass\Game\Manager\SceneManager\Scene\MainScene\UI">
-      <UniqueIdentifier>{bda1169a-97dd-4892-9435-68aba3d33e80}</UniqueIdentifier>
-    </Filter>
     <Filter Include="SystemClass\Game\Manager\SceneManager\Scene\MainScene\FieldLayer">
       <UniqueIdentifier>{aa412dc6-e27b-414a-be3b-87c9208604e2}</UniqueIdentifier>
     </Filter>
@@ -270,6 +267,12 @@
     </Filter>
     <Filter Include="SystemClass\Game\Manager\SceneManager\Scene\ParticleLayer">
       <UniqueIdentifier>{c6642a86-02f2-4c43-9dde-f5f8095959b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\Game\Manager\SceneManager\Scene\MainScene\UILayer">
+      <UniqueIdentifier>{bda1169a-97dd-4892-9435-68aba3d33e80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemClass\Game\Object\Text">
+      <UniqueIdentifier>{b97111e4-644c-4c4e-97db-4ffe3995eb69}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -527,6 +530,12 @@
     </ClCompile>
     <ClCompile Include="..\SystemClass\ParticleLayer.cpp">
       <Filter>SystemClass\Game\Manager\SceneManager\Scene\ParticleLayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\UILayer.cpp">
+      <Filter>SystemClass\Game\Manager\SceneManager\Scene\MainScene\UILayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SystemClass\Text.cpp">
+      <Filter>SystemClass\Game\Object\Text</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1519,6 +1528,12 @@
     </ClInclude>
     <ClInclude Include="..\SystemClass\ParticleLayer.h">
       <Filter>SystemClass\Game\Manager\SceneManager\Scene\ParticleLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\UILayer.h">
+      <Filter>SystemClass\Game\Manager\SceneManager\Scene\MainScene\UILayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SystemClass\Text.h">
+      <Filter>SystemClass\Game\Object\Text</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

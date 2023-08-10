@@ -76,8 +76,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\HyunnJun Jeong\Documents\GitHub\Develop\DirectXTex\Bin\Desktop_2019_Win10\x64\Debug;$(SolutionDir)\SystemClass\lib;C:\Users\HyunnJun Jeong\Documents\GitHub\Develop\x64\Debug;$(LibraryPath)</LibraryPath>
-    <ExternalIncludePath>C:\Users\HyunnJun Jeong\Documents\GitHub\Develop\SystemClass\Physx\vc17win64\PhysX\include\characterkinematic;$(SolutionDir)\SystemClass\include;$(SolutionDir)\SystemClass\Physx\vc17win64\PhysX\include;$(SolutionDir)\SystemClass\Physx\vc17win64\PxShared\include;$(ExternalIncludePath)</ExternalIncludePath>
+    <LibraryPath>$(SolutionDir)\DirectXTex\Bin\Desktop_2019_Win10\x64\Debug;$(SolutionDir)\SystemClass\lib;$(SolutionDir)\x64\Debug;$(LibraryPath)</LibraryPath>
+    <ExternalIncludePath>$(SolutionDir)\SystemClass\Physx\vc17win64\PhysX\include\characterkinematic;$(SolutionDir)\SystemClass\include;$(SolutionDir)\SystemClass\Physx\vc17win64\PhysX\include;$(SolutionDir)\SystemClass\Physx\vc17win64\PxShared\include;$(ExternalIncludePath)</ExternalIncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -221,12 +221,14 @@
     <ClCompile Include="..\SystemClass\TerrainGraphicC.cpp" />
     <ClCompile Include="..\SystemClass\TerrainReflectionShaderClass.cpp" />
     <ClCompile Include="..\SystemClass\TerrainShaderClass.cpp" />
+    <ClCompile Include="..\SystemClass\Text.cpp" />
     <ClCompile Include="..\SystemClass\TextClass.cpp" />
     <ClCompile Include="..\SystemClass\TextureClass.cpp" />
     <ClCompile Include="..\SystemClass\TexturedGraphicC.cpp" />
     <ClCompile Include="..\SystemClass\TexturedObject.cpp" />
     <ClCompile Include="..\SystemClass\TextureShaderClass.cpp" />
     <ClCompile Include="..\SystemClass\TimerClass.cpp" />
+    <ClCompile Include="..\SystemClass\UILayer.cpp" />
     <ClCompile Include="..\SystemClass\WaterShaderClass.cpp" />
     <ClCompile Include="..\SystemClass\WModel.cpp" />
   </ItemGroup>
@@ -552,12 +554,14 @@
     <ClInclude Include="..\SystemClass\TerrainGraphicC.h" />
     <ClInclude Include="..\SystemClass\TerrainReflectionShaderClass.h" />
     <ClInclude Include="..\SystemClass\TerrainShaderClass.h" />
+    <ClInclude Include="..\SystemClass\Text.h" />
     <ClInclude Include="..\SystemClass\TextClass.h" />
     <ClInclude Include="..\SystemClass\TextureClass.h" />
     <ClInclude Include="..\SystemClass\TexturedGraphicC.h" />
     <ClInclude Include="..\SystemClass\TexturedObject.h" />
     <ClInclude Include="..\SystemClass\TextureShaderClass.h" />
     <ClInclude Include="..\SystemClass\TimerClass.h" />
+    <ClInclude Include="..\SystemClass\UILayer.h" />
     <ClInclude Include="..\SystemClass\WaterShaderClass.h" />
     <ClInclude Include="..\SystemClass\WModel.h" />
     <ClInclude Include="..\targetver.h" />
