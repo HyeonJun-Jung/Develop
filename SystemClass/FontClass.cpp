@@ -21,7 +21,6 @@ bool FontClass::Initialize(ID3D11Device* device, char* fontFilename, WCHAR* text
 	}
 
 	// Load the texture that has the font characters on it.
-
 	if (!LoadTexture(device, textureFilename))
 	{
 		return false;

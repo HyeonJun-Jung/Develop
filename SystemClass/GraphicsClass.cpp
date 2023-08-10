@@ -134,14 +134,7 @@ bool GraphicsClass::Frame(float fDeltaTime)
 }
 
 bool GraphicsClass::Update(float fDeltaTime)
-{
-    for (int i = 0; i < m_TexturedList.size(); i++)
-    {
-        if (!m_TexturedList[i]->UpdatePhysics(D3DClass::GetSingleton()->GetDeviceContext(), fDeltaTime))
-            return false;
-    }
-    
-    
+{   
     if (!SceneManager::GetSingleton()->Update(D3DClass::GetSingleton()->GetDeviceContext(), fDeltaTime))
         return false;
     
@@ -254,40 +247,6 @@ bool GraphicsClass::RenderScene()
     
     if (!SceneManager::GetSingleton()->Render(D3DClass::GetSingleton()->GetDeviceContext()))
        return false;
-        
-
-    for (int i = 0; i < m_TexturedList.size(); i++)
-    {
-        if (!m_TexturedList[i]->Render(D3DClass::GetSingleton()->GetDeviceContext()))
-            return false;
-    }
-
-    return true;
-}
-
-bool GraphicsClass::AddBox()
-{
-    string TexturedFileName = "../SystemClass/data/Box/Sci-fi Container Game Free.obj";
-
-    TexturedGraphicC* texturedGraphic = new TexturedGraphicC();
-    if (!texturedGraphic)
-        return false;
-    if (!texturedGraphic->Initialize(D3DClass::GetSingleton()->GetDevice()))
-        return false;
-
-    DynamicPhysicsC* physicsComponent = new DynamicPhysicsC();
-    PxTransform transform = PxTransform(PxVec3(30.f, 10.f, 0));
-    PxMaterial* material = PhysicsComponent::GetPhysics()->createMaterial(0.5, 0.5, 0.5);
-    if (!physicsComponent->Initialize(transform, PxBoxGeometry(10.f, 10.f, 10.f), material, 10.f, 10.f))
-        return false;
-
-    TexturedObject* Box = new TexturedObject();
-    if (!Box)
-        return false;
-    if (!Box->Initialize(TexturedFileName, texturedGraphic, physicsComponent))
-        return false;
-
-    m_TexturedList.push_back(Box);
 
     return true;
 }

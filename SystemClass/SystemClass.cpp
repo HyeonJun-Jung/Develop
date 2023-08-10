@@ -92,11 +92,6 @@ bool SystemClass::Frame()
         CameraClass::GetSingleton()->CameraMove(MD_RIGHT);
     }
 
-    if (m_Input->IsNumber1Pressed())
-    {
-        m_Graphics->AddBox();
-    }
-
     m_Graphics->Frame(m_Timer->GetTime());
 
 }

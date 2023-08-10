@@ -17,7 +17,7 @@ MainScene::~MainScene()
 bool MainScene::Initialize(ID3D11Device* dev)
 {
 	
-	
+	/*
 	FieldLayer* Field = new FieldLayer("Field", 1);
 	if (!Field)
 		return false;
@@ -25,15 +25,15 @@ bool MainScene::Initialize(ID3D11Device* dev)
 		return false;
 
 	m_LayerList.push_back(Field);
+	*/
 	
-	/*
 	ParticleLayer* particleLayer = new ParticleLayer("Particle", 1);
 	if (!particleLayer)
 		return false;
 	if (!particleLayer->Initialize(dev))
 		return false;
-		*/
-	//m_LayerList.push_back(particleLayer);
+		
+	m_LayerList.push_back(particleLayer);
 	
 	/*
 	Layer* defaultLayer = GetLayer("Default");
